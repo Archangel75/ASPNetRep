@@ -6,9 +6,14 @@ using System.Web;
 
 namespace Lesson1.Modules
 {
+    public class RequestTimerEventArgs : EventArgs
+    {
+        public float Duration { get; set; }
+    }
     public class TimerModule : IHttpModule
     {
         private Stopwatch timer;
+        public event EventHandler<RequestTimerEventArgs> RequestTimed;
         public void Init(HttpApplication app)
         {
             app.BeginRequest += HandleBeginRequest;
@@ -21,9 +26,14 @@ namespace Lesson1.Modules
         private void HandleEndRequest(object src, EventArgs args)
         {
             HttpContext context = HttpContext.Current;
+            float duration = ((float)timer.ElapsedTicks) / Stopwatch.Frequency;
             context.Response.Write(string.Format(
-                "<div style='color:red;'>Время обработки запроса: {0:F5} секунд</div>",
-                ((float)timer.ElapsedTicks) / Stopwatch.Frequency));
+                "<div style='color:red;'>Время обработки запроса: {0:F5} секунд</div>", duration));
+            if (RequestTimed != null)
+            {
+                RequestTimed(this,
+                new RequestTimerEventArgs { Duration = duration });
+            }
         }
 
         public void Dispose()

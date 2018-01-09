@@ -9,6 +9,7 @@ namespace Lesson1.Modules
     {
         private static float totalTime = 0;
         private static int requestCount = 0;
+
         public void Init(HttpApplication app)
         {
             IHttpModule module = app.Modules["Timer"];
@@ -19,11 +20,13 @@ namespace Lesson1.Modules
             }
             app.EndRequest += HandleEndRequest;
         }
+
         private void HandleRequestTimed(object src, RequestTimerEventArgs e)
         {
             totalTime += e.Duration;
             requestCount++;
         }
+
         private void HandleEndRequest(object src, EventArgs e)
         {
             HttpContext context = HttpContext.Current;
@@ -32,6 +35,7 @@ namespace Lesson1.Modules
             requestCount, totalTime);
             context.Response.Write(result);
         }
+
         public void Dispose()
         { }
     }
