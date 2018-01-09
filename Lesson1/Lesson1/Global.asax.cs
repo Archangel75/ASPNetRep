@@ -10,12 +10,18 @@ namespace Lesson1
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
+        public MvcApplication()
+        {
+            BeginRequest += (src, args) => AddEvent("BeginRequest");
+            AuthenticateRequest += (src, args) => AddEvent("AuthentucateRequest");
+            PreRequestHandlerExecute += (src, args) => AddEvent("PreRequestHandlerExecute");
+            ReleaseRequestState += (src, args) => AddEvent("ReleaseRequestState");
+            EndRequest += (src, args) => AddEvent("EndRequest");
+        }
 
         protected void Application_Start()
         {
-
-            logger.Info("Application Start");
             AreaRegistration.RegisterAllAreas();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -23,21 +29,7 @@ namespace Lesson1
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        // обработка события BeginRequest
-        protected void Application_BeginRequest()
-        {
-            AddEvent("BeginRequest");
-        }
-        // обработка события AuthenticateRequest
-        protected void Application_AuthenticateRequest()
-        {
-            AddEvent("AuthenticateRequest");
-        }
-        // обработка события PreRequestHandlerExecute
-        protected void Application_PreRequestHandlerExecute()
-        {
-            AddEvent("PreRequestHandlerExecute");
-        }
+       
         private void AddEvent(string name)
         {
             List<string> eventList = Application["events"] as List<string>;
