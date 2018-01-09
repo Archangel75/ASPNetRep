@@ -23,25 +23,29 @@ namespace Lesson1
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        public void Init1()
+        // обработка события BeginRequest
+        protected void Application_BeginRequest()
         {
-            logger.Info("Application Init");
+            AddEvent("BeginRequest");
         }
-
-        public void Dispose1()
+        // обработка события AuthenticateRequest
+        protected void Application_AuthenticateRequest()
         {
-            logger.Info("Application Dispose");
+            AddEvent("AuthenticateRequest");
         }
-
-        protected void Application_Error()
+        // обработка события PreRequestHandlerExecute
+        protected void Application_PreRequestHandlerExecute()
         {
-            logger.Info("Application Error");
+            AddEvent("PreRequestHandlerExecute");
         }
-
-
-        protected void Application_End()
+        private void AddEvent(string name)
         {
-            logger.Info("Application End");
+            List<string> eventList = Application["events"] as List<string>;
+            if (eventList == null)
+            {
+                Application["events"] = eventList = new List<string>();
+            }
+            eventList.Add(name);
         }
     }
 }

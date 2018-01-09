@@ -11,17 +11,14 @@ namespace Lesson1.Controllers
     
     public class HomeController : Controller
     {
-        [Inject]
-        private IWeapon weapon { get; set; }
-
-        public HomeController()
+        public string Index()
         {
-            weapon = DependencyResolver.Current.GetService<IWeapon>();
-        }
-
-        public ActionResult Index()
-        {
-            return View(weapon);
+            List<string> events = HttpContext.Application["events"] as List<string>;
+            string result = "<ul>";
+            foreach (string e in events)
+                result += "<li>" + e + "</li>";
+            result += "</ul>";
+            return result;
         }
     }
 }
