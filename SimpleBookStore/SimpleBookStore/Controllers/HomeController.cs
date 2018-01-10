@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleBookStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,34 @@ namespace SimpleBookStore.Controllers
 {
     public class HomeController : Controller
     {
+        BookContext context = new BookContext();
+
         public ActionResult Index()
         {
+            // получаем из бд все объекты Book
+            IEnumerable<Book> books = context.Books;
+            // передаем все объекты в динамическое свойство Books в ViewBag
+            ViewBag.Books = books;
+            // возвращаем представление
             return View();
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult Buy(int id)
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewBag.BookId = id;
             return View();
         }
-
-        public ActionResult Contact()
+        [HttpPost]
+        public ViewResult Buy(Purchase purchase)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            purchase.Date = DateTime.Now;
+            // добавляем информацию о покупке в базу данных
+            context.Purchases.Add(purchase);
+            // сохраняем в бд все изменения
+            context.SaveChanges();
+            ViewData["Name"] = purchase.Person;
+            return View("~/Views/Home/ThxForPurchase.cshtml");
         }
     }
 }

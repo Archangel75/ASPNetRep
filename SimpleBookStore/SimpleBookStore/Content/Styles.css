@@ -1,0 +1,49 @@
+﻿/*внешний шрифт. сначала подключить. потом использовать*/
+@font-face {
+    font-family: 'bignoodletoo';
+    src: url("../fonts/bignoodletoo.ttf")
+}
+
+p {
+    font-style: normal;
+    font-family: bignoodletoo;
+    line-height: 130%;
+    /*Свойство text-indent задает отступ первой строки абзаца. Для установки отступа могут применяться стандартные единицы измерения, например, em или пиксели:*/
+    text-indent: 35px;
+    font-size: 20px;
+}
+
+h3 {
+    font-style: normal;
+    font-family: bignoodletoo;
+    font-size : 70px;
+    line-height: 130%;
+    /*Свойство text-indent задает отступ первой строки абзаца. Для установки отступа могут применяться стандартные единицы измерения, например, em или пиксели:*/
+    text-indent: 35px;
+    margin: 10px;
+}
+
+
+p.lowercase {
+    text-transform: lowercase;
+}
+
+p.uppercase {
+    text-transform: uppercase;
+}
+
+p.capitalize {
+    text-transform: capitalize;
+}
+
+ul {
+    list-style-type: square;
+}
+
+    ul.outside {
+        list-style-position: outside;
+    }
+
+    ul.inside {
+        list-style-position: inside;
+    }

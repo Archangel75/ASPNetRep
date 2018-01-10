@@ -18,9 +18,9 @@ namespace SimpleBookStore.Models
     {
         protected override void Seed(BookContext context)
         {
-            context.Books.Add(new Book { Id = 1, Name = "451 градус", Author = "Бредберри", Price = 100 });
-            context.Books.Add(new Book { Id = 2, Name = "Вино из одуванов", Author = "Бредберри", Price = 100 });
-            context.Books.Add(new Book { Id = 3, Name = "Мор ученик смерти", Author = "Бредберри", Price = 100 });
+            context.Books.Add(new Book { Id = 1, Name = "451 farengheit", Author = "Bredberry", Price = 100 });
+            context.Books.Add(new Book { Id = 2, Name = "Vine from something", Author = "Bredberry", Price = 100 });
+            context.Books.Add(new Book { Id = 3, Name = "Mor, pupil of Death", Author = "Bredberry", Price = 100 });
 
             base.Seed(context);
         }
