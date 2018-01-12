@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MyReviewProject.Models
 {
-    public class Subjects
+    public class Subject
     {
         public int SubjectId { get; set; }
 

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MyReviewProject.Models
 {
-    public class Categories
+    public class Category
     {
         public int Id { get; set; }
 
