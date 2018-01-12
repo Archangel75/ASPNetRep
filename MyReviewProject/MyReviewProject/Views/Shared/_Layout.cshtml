@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – Главная</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Layout.css" />
+
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+                <li><a href="" class="current">Work</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Contact</a></li>
+        </ul>
+    </div>
+    <div class="menu-main">
+        <ul>
+            <li><a href="" class="current">Work</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Blog</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+        </footer>
+    </div>
+
+</body>
+</html>
