@@ -5,16 +5,12 @@ using System.Web;
 
 namespace MyReviewProject.Models
 {
-    public class Subject
+    public class SubCategory
     {
-        public int SubjectId { get; set; }
+        public int SubCategoryId { get; set; }
 
         public string Name { get; set; }
 
-        public int SubCategoryId { get; set; }
-
-        public int AverageRating { get; set; }
-
-
+        public int CategoryId { get; set; }
     }
 }

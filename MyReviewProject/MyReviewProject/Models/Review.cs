@@ -9,16 +9,16 @@ namespace MyReviewProject.Models
     {
         public int ReviewId { get; set; }
 
-        public string SubjectName { get; set; }
+        public int SubjectId { get; set; }
 
-        public string Author { get; set; }
+        //пользователь, создавший ревью
+        public int AuthorId { get; set; }
 
         public DateTime DateCreate { get; set; }
 
         public string Content { get; set; }
 
         public int Rating { get; set; }
-
-        public int CategoryId { get; set; }
+        
     }
 }
