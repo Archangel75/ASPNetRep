@@ -8,8 +8,6 @@ namespace MyReviewProject.Models
 {
     public class ReviewContext : DbContext
     {
-        public ReviewContext() : base("DefaultConnection") { }
-
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Subject> Subjects { get; set; }
