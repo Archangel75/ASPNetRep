@@ -19,16 +19,19 @@
             <li><a href="">Contact</a></li>
         </ul>
     </div>
+    
     <div class="menu-cat">
+        <div class="menu-cat-smaller">
+            <ul>
+                <li>@Html.ActionLink("Регистрация", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+        </div>
         <ul>
             @foreach (MyReviewProject.Models.Category c in Model)
-            {
-                <li><a href="">@c.Name</a></li>
-            }
-<!-- <li><a href="" class="current">Boopers</a></li>
-    <li><a href="">Shmoopers</a></li>
-    <li><a href="">Putin</a></li>
-    <li><a href="">Porn</a></li>-->
+        {
+            <li><a href="">@c.Name</a></li>
+    }
         </ul>
     </div>
     <div id="content">
