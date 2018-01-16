@@ -17,8 +17,6 @@ namespace MyReviewProject.Models
         public DbSet<SubCategory> SubCategories { get; set; }
 
         public DbSet<News> News { get; set; }
-
-
-        //https://metanit.com/sharp/mvc5/5.2.php
+        
     }
 }

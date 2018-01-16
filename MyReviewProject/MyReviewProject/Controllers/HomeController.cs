@@ -12,7 +12,8 @@ namespace MyReviewProject.Controllers
         ReviewContext db = new ReviewContext();
 
         public ActionResult Index()
-        {
+        {         
+
             return View(db.Categories);
         }
     }
