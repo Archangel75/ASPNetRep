@@ -1,28 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
 namespace MyReviewProject.Models
 {
-    public class LoginViewModel
+    public class UserModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты/Логин")]
-        [EmailAddress]
-        public string Login { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
-        public string Password { get; set; }
-
-        [Display(Name = "Запомнить меня")]
-        public bool RememberMe { get; set; }
-    }
-
-    public class RegisterViewModel
-    {
-        [Required]
-        [Display(Name = "Логин")]
+        [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required]
@@ -41,5 +28,4 @@ namespace MyReviewProject.Models
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
     }
-    
 }

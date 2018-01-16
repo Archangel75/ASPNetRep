@@ -2,7 +2,7 @@
 .menu-cat {
   list-style: none;
   margin: 0 5px;
-  padding: 25px 0 15px;
+  padding: 25px 0 5px;
   text-align: center;
   background: white;
   border: 5px solid #f1f1f1;
@@ -53,26 +53,3 @@
   margin: 0 30px;
 }
 }
-.menu-cat-smaller {
-    padding-top:0;
-    float: right;
-}
-
-.menu-cat-smaller li {
-        display: block;
-        border: 5px;
-        font-size: 50%;
-        padding-bottom: 5px;
-    }
-.menu-cat-smaller li:after {
-        content: none;
-        display: inline-block;
-        vertical-align: top;
-        
-    }
-
-.menu-cat-smaller a {
-        position: relative;
-        padding-bottom: 10px;
-        font-size: 10px;
-    }

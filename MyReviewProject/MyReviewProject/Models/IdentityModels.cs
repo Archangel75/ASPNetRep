@@ -21,7 +21,7 @@ namespace MyReviewProject.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ReviewContext", throwIfV1Schema: false)
         {
         }
 
