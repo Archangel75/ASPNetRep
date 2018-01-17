@@ -14,8 +14,7 @@ namespace MyReviewProject.Controllers
     {
         ReviewContext db = new ReviewContext();
 
-        List<string> boopers = new List<string>();
-        
+        List<string> boopers = new List<string>();        
         
         
         public ActionResult Index(ControllerContext context)

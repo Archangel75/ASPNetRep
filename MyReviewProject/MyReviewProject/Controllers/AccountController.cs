@@ -140,62 +140,100 @@ namespace MyReviewProject.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public ActionResult Delete()
+        //
+        // GET: /Account/ForgotPassword
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
         {
             return View();
         }
 
+        //
+        // POST: /Account/ForgotPassword
         [HttpPost]
-        [ActionName("Delete")]
-        public async Task<ActionResult> DeleteConfirmed()
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                IdentityResult result = await UserManager.DeleteAsync(user);
-                if (result.Succeeded)
+                var user = await UserManager.FindByNameAsync(model.Email);
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    return RedirectToAction("Logout", "Account");
+                    // Не показывать, что пользователь не существует или не подтвержден
+                    return View("ForgotPasswordConfirmation");
                 }
+
+                // Дополнительные сведения о включении подтверждения учетной записи и сброса пароля см. на странице https://go.microsoft.com/fwlink/?LinkID=320771.
+                // Отправка сообщения электронной почты с этой ссылкой
+                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
-            return RedirectToAction("Index", "Home");
+
+            // Появление этого сообщения означает наличие ошибки; повторное отображение формы
+            return View(model);
         }
 
-        public async Task<ActionResult> Edit()
+        //
+        // GET: /Account/ForgotPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordConfirmation()
         {
-            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
-            if (user != null)
+            return View();
+        }
+
+        //
+        // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string code)
+        {
+            return code == null ? View("Error") : View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
             {
-                EditModel model = new EditModel { UserName = user.UserName, Email = user.Email  };
                 return View(model);
             }
-            return RedirectToAction("Login", "Account");
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                // Не показывать, что пользователь не существует
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            AddErrors(result);
+            return View();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Edit(EditModel model)
+        //
+        // GET: /Account/ResetPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ResetPasswordConfirmation()
         {
-            ApplicationUser user = await UserManager.FindByEmailAsync(User.Identity.Name);
-            if (user != null)
-            {
-                user.UserName = model.UserName;
-                IdentityResult result = await UserManager.UpdateAsync(user);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Что-то пошло не так");
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Пользователь не найден");
-            }
+            return View();
+        }
 
-            return View(model);
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
         }
 
         #region Вспомогательные приложения

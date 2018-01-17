@@ -9,6 +9,15 @@
   background: #fff;
   border-radius: 5px;
 }
+
+.login {
+    display: inline-block
+}
+
+.login a {
+    font-size: 50%
+}
+
 .sidebar h3 {
   margin-bottom: 20px;
   text-align: center;
@@ -30,6 +39,8 @@
   margin-bottom: 0;
   padding-bottom: 0;
 }
+
+
 
 .sidebar a {
     text-decoration: none;
