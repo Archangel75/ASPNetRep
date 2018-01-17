@@ -1,4 +1,4 @@
-﻿
+﻿@using MyReviewProject.Models
 
 @{
     ViewBag.Title = "Home Page";
@@ -8,10 +8,10 @@
     <h3>Категории:</h3>
 
     <table>
-        @foreach (string c in ViewBag.Users)
+        @foreach (ApplicationUser u in ViewBag.Users)
         {
             <tr>
-               <td><p>@c.ToString()</p></td> 
+               <td><p>@u.UserName</p></td> 
             </tr>
         }
     </table>

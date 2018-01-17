@@ -11,16 +11,14 @@ namespace MyReviewProject.Controllers
 {
     
     public class HomeController : Controller
-    {
-        ReviewContext db = new ReviewContext();
-
-        List<string> boopers = new List<string>();        
+    { 
         
         
-        public ActionResult Index(ControllerContext context)
+        public ActionResult Index(ApplicationDbContext context)
         {
-            ApplicationUser user = new ApplicationUser();
-            ViewBag.users = user.Logins.ToList();
+            var users = context.Users.ToList();
+            
+            ViewBag.users = context.Users.ToList();
             return View();
         }
     }

@@ -7,7 +7,6 @@ namespace MyReviewProject.Models
     {
         [Required]
         [Display(Name = "Адрес электронной почты/Логин")]
-        [EmailAddress]
         public string Login { get; set; }
 
         [Required]
