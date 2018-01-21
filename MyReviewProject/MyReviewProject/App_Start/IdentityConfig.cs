@@ -41,7 +41,7 @@ namespace MyReviewProject
             {
                 RequiredLength = 4,
                 RequireNonLetterOrDigit = false,
-                RequireDigit = false,
+                RequireDigit = true,
                 RequireLowercase = false,
                 RequireUppercase = false,
             };

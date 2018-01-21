@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -40,6 +41,19 @@ namespace MyReviewProject.Models
         [Display(Name = "Подтверждение нового пароля")]
         [Compare("NewPassword", ErrorMessage = "Новый пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class ManageUsers
+    {
+        public string UserName { get; set; }
+
+        public DateTime DateCreate { get; set; }
+
+        public int CountOfReviews { get; set; }
+
+        public int CountOfComments { get; set; }
+
+        public string UserRole { get; set; }
     }
 
     /*

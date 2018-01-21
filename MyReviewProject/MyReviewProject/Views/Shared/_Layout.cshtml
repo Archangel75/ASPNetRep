@@ -22,6 +22,7 @@
                 {
 
                         <li>@Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                        <li>@Html.ActionLink("Выйти", "LogOff", "Account", routeValues: null, htmlAttributes: new { id = "Logoff"})</li>
                         
                 }
                 else

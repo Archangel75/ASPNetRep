@@ -1,8 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace MyReviewProject.Models
 {
@@ -15,6 +18,17 @@ namespace MyReviewProject.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Здесь добавьте утверждения пользователя
             return userIdentity;
+        }
+    }
+
+    public static class IdentityHelpers
+    {
+        public static MvcHtmlString GetUserName(this HtmlHelper html, string id)
+        {
+            ApplicationUserManager mgr = HttpContext.Current
+                .GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            return new MvcHtmlString(mgr.FindByIdAsync(id).Result.UserName);
         }
     }
 

@@ -58,6 +58,10 @@ namespace MyReviewProject.Controllers
         public ActionResult Login(string returnUrl)
         {
             //адрес возврата
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return View("Error", new string[] { "В доступе отказано" });
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -71,7 +75,7 @@ namespace MyReviewProject.Controllers
         {
             if (ModelState.IsValid)
             {         
-                //определеяем что введено
+                //определяем что введено
                 //если есть собака, то мыло, если нет собаки, то логин.
                 ApplicationUser user;
                 var userName = model.Login;
@@ -125,6 +129,7 @@ namespace MyReviewProject.Controllers
 
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     return RedirectToAction("Login", "Account");
                 }
                 else

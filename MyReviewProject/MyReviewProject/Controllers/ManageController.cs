@@ -11,6 +11,7 @@ using MyReviewProject.Models;
 namespace MyReviewProject.Controllers
 {
     [Authorize]
+    //[Authorize(Roles = "User")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

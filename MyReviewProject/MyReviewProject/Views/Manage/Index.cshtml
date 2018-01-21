@@ -15,4 +15,19 @@
         <dd>@Html.ActionLink("Изменить данные", "EditUser")</dd>
         <hr />
     </dl>
+
+    <hr />
+
+    <div>
+        <h4>Изменение параметров ролей</h4>
+        <dd>@Html.ActionLink("Изменить роли", "Index", "Role")</dd>
+    </div>
+
+    @if (User.IsInRole("User"))
+    {
+        <div>
+            <h4>Изменение параметров ролей</h4>
+            <dd>@Html.ActionLink("Изменить роли", "Index", "Role")</dd>
+        </div>
+    }
 </div>
