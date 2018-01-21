@@ -6,11 +6,13 @@
 {
     @Html.AntiForgeryToken()
 
-    <div>
-        @Html.ValidationSummary(true, "")
-        <p>Название:  @Html.EditorFor(model => model.Name)</p>
-        <hr />
-        <p>Описание: @Html.EditorFor(model => model.Description)</p>
-        <p><input type="submit" value="Добавить" /></p>
-    </div>
+<div>
+    @Html.ValidationSummary(true, "")
+    <p>Название:  @Html.EditorFor(model => model.Name)</p>
+    <hr />
+    <p>Описание: @Html.EditorFor(model => model.Description)</p>
+    <p><input type="submit" value="Добавить" /></p>
+
+    @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-default" })
+</div>
 }

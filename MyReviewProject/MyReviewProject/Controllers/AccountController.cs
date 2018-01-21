@@ -28,6 +28,14 @@ namespace MyReviewProject.Controllers
             SignInManager = signInManager;
         }
 
+        private ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+        }
+
         public ApplicationSignInManager SignInManager
         {
             get
@@ -129,11 +137,13 @@ namespace MyReviewProject.Controllers
 
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "User");
+                    if (RoleManager.FindByName("User") != null)
+                        await UserManager.AddToRoleAsync(user.Id, "User");
                     return RedirectToAction("Login", "Account");
                 }
                 else
                 {
+                    await UserManager.DeleteAsync(user);
                     foreach (string error in result.Errors)
                     {
                         ModelState.AddModelError("", error);
@@ -232,9 +242,7 @@ namespace MyReviewProject.Controllers
         }
 
         //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // POST: /Account/LogOff       
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

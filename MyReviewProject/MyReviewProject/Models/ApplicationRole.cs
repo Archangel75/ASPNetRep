@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,16 +12,21 @@ namespace MyReviewProject.Models
     {
         public ApplicationRole(): base() { }
 
+        public ApplicationRole(string name)
+            : base(name)
+        { }        
+
         public string Description { get; set; }
     }
 
     public class EditRoleModel
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public ApplicationRole Role { get; set; }
+
         public string Description { get; set; }
 
         public IEnumerable<ApplicationUser> Members { get; set; }
+
         public IEnumerable<ApplicationUser> NonMembers { get; set; }
     }
 
@@ -37,6 +43,7 @@ namespace MyReviewProject.Models
 
     public class CreateRoleModel
     {
+        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
     }

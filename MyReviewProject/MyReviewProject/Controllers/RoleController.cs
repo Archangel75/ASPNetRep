@@ -27,40 +27,61 @@ namespace MyReviewProject.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
+                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
 
         public ActionResult Index()
         {
+            
+            var roles = RoleManager.Roles;
+            Dictionary<string, string> usersDic = new Dictionary<string, string>();
+
+            foreach (ApplicationRole role in roles)
+            {                
+                if (role.Users == null || role.Users.Count() == 0)
+                {
+                    usersDic.Add(role.Name, "Нет пользователей в этой роли");
+                }
+                else
+                {
+                    usersDic.Add(role.Name, string.Join(", ", role.Users.Select(x => UserManager.FindById(x.UserId).UserName)));
+                }
+            }
+
+            ViewBag.UserDic = usersDic;
+
             return View(RoleManager.Roles);
         }
 
+        
         public ActionResult Create()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<ActionResult> Create(CreateRoleModel model)
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result = await RoleManager.CreateAsync(new ApplicationRole
+                var result = await RoleManager.CreateAsync(new ApplicationRole
                 {
                     Name = model.Name,
                     Description = model.Description
                 });
+
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Что-то пошло не так");
+                    await RoleManager.DeleteAsync(RoleManager.FindByName(model.Name));
+                    foreach (string error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
                 }
             }
             return View(model);
@@ -78,7 +99,7 @@ namespace MyReviewProject.Controllers
 
                 IEnumerable<ApplicationUser> nonMembers = UserManager.Users.Except(members);
 
-                return View(new EditRoleModel { Id = role.Id, Name = role.Name, Description = role.Description, Members = members, NonMembers = nonMembers });
+                return View(new EditRoleModel {Role = role, Description = role.Description, Members = members, NonMembers = nonMembers });
             }
             return RedirectToAction("Index");
         }
@@ -94,7 +115,7 @@ namespace MyReviewProject.Controllers
                 if (role != null)
                 { 
                     role.Description = model.Description;
-                    role.Name = model.Name;
+                    role.Name = model.RoleName;
 
                     foreach (string userId in model.IdsToAdd ?? new string[] { })
                     {
@@ -102,7 +123,10 @@ namespace MyReviewProject.Controllers
 
                         if (!result.Succeeded)
                         {
-                            return View("Error", result.Errors);
+                            foreach (string error in result.Errors)
+                            {
+                                ModelState.AddModelError("", error);
+                            }
                         }
                     }
 
@@ -113,7 +137,10 @@ namespace MyReviewProject.Controllers
 
                         if (!result.Succeeded)
                         {
-                            return View("Error", result.Errors);
+                            foreach (string error in result.Errors)
+                            {
+                                ModelState.AddModelError("", error);
+                            }
                         }
                     }
                     return RedirectToAction("Index");
