@@ -43,8 +43,9 @@ namespace MyReviewProject.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class ManageUsers
+   /* public class ManageUsers
     {
+
         public string UserName { get; set; }
 
         public DateTime DateCreate { get; set; }
@@ -54,7 +55,7 @@ namespace MyReviewProject.Models
         public int CountOfComments { get; set; }
 
         public string UserRole { get; set; }
-    }
+    }*/
 
     /*
     public class SetPasswordViewModel

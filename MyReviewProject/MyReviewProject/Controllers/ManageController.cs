@@ -11,16 +11,14 @@ using MyReviewProject.Models;
 namespace MyReviewProject.Controllers
 {
     [Authorize]
-    //[Authorize(Roles = "User")]
+    [Authorize(Roles = "Users")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
         public ManageController()
         {
         }
-
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
@@ -53,6 +51,7 @@ namespace MyReviewProject.Controllers
 
         //
         // GET: /Manage/Index
+        [Authorize]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -71,10 +70,12 @@ namespace MyReviewProject.Controllers
             };
             return View(model);
         }
+        
 
         //
         // GET: /Manage/EditUser
         [HttpGet]
+        [Authorize]
         public ActionResult EditUser()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
@@ -89,6 +90,7 @@ namespace MyReviewProject.Controllers
         //
         // POST: /Manage/EditUser
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditUser(EditUserViewModel model)
         {
@@ -145,6 +147,7 @@ namespace MyReviewProject.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.EditSucceed });
             return View(model);
         }
+
 
         /*
         //

@@ -18,16 +18,11 @@
 
     <hr />
 
-    <div>
-        <h4>Изменение параметров ролей</h4>
-        <dd>@Html.ActionLink("Изменить роли", "Index", "Role")</dd>
-    </div>
-
-    @if (User.IsInRole("User"))
+    @if (User.IsInRole("Admin"))
     {
-        <div>
-            <h4>Изменение параметров ролей</h4>
-            <dd>@Html.ActionLink("Изменить роли", "Index", "Role")</dd>
-        </div>
+    <div>
+        <h4>Войти в капище</h4>
+        <dd>@Html.ActionLink("Капище","Index", "Admin")</dd>
+    </div>        
     }
 </div>
