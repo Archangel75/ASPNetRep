@@ -1,18 +1,25 @@
 ﻿@model MyReviewProject.Models.CreateRoleModel
+<head>
+    @{ ViewBag.Title = "Добавление роли";}
+    <link rel="stylesheet" type="text/css" href="~/Content/AdminPanels.css" />
+</head>
+<body>
+    
 
-<h2>Добавление роли</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-<div>
-    @Html.ValidationSummary(true, "")
-    <p>Название:  @Html.EditorFor(model => model.Name)</p>
-    <hr />
-    <p>Описание: @Html.EditorFor(model => model.Description)</p>
-    <p><input type="submit" value="Добавить" /></p>
-
-    @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-default" })
-</div>
-}
+    <div class="admin">
+        <h2>Добавление роли</h2>
+        @Html.ValidationSummary(true, "")
+        <p>Название:  @Html.EditorFor(model => model.Name)</p>
+        <hr />
+        <p>Описание: @Html.EditorFor(model => model.Description)</p>
+        <p>
+            <input type="submit" value="Добавить" />
+            @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-default" })
+        </p>        
+    </div>
+    }
+</body>

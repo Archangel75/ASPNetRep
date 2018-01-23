@@ -1,15 +1,17 @@
 ﻿@using MyReviewProject.Models
+@using Microsoft.AspNet.Identity
 @model IEnumerable<ApplicationUser>
 
-@{
-    ViewBag.Title = "ASP.NET Identity";
-}
+<head>
+    @{
+        ViewBag.Title = "Учетные записи пользователей";
+    }
+    <link rel="stylesheet" type="text/css" href="~/Content/AdminPanels.css" />
+</head>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        Учетные записи
-    </div>
-    <table class="table table-striped">
+<div class="admin">
+    <h2>Учетные записи пользователей</h2>
+    <table>
         <tr>
             <th>Id</th>
             <th>Имя</th>
@@ -26,28 +28,19 @@
         {
             foreach (ApplicationUser user in Model)
             {
-                <tr>
-                    <td>@user.Id</td>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>
-                        @using (Html.BeginForm("Delete", "Admin", new { id = user.Id }))
-                        {
-                            @Html.ActionLink("Изменить", "Edit", new { id = user.Id },
-                                     new { @class = "btn btn-primary btn-xs", style = "float: left; margin-right: 10px" })
-                            <button class="btn btn-danger btn-xs" type="submit">Удалить</button>
-                        }
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>               
+                <td>
+                    @Html.ActionLink("Изменить", "Edit", new { id = user.Id })
+                    @Html.ActionLink("Удалить", "Delete", new { id = user.Id })
+                    
+                </td>
+            </tr>
         }
+    }
     </table>
+    @Html.ActionLink("Роли", "Index", "Role")
 </div>
 
-@Html.ActionLink("Создать", "Create", null, new { @class = "btn btn-primary" })
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        @Html.ActionLink("Роли", "Index", "Role")
-    </div>    
-</div>

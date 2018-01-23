@@ -88,7 +88,10 @@ namespace MyReviewProject.Controllers
                 ApplicationUser user;
                 var userName = model.Login;
                 if (userName.IndexOf('@') > -1)
+                {
                     user = await UserManager.FindByEmailAsync(model.Login);
+                    user = await UserManager.FindAsync(user.UserName, model.Password);
+                }
                 else
                     user = await UserManager.FindAsync(model.Login, model.Password);
 

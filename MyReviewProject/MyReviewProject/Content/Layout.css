@@ -1,5 +1,6 @@
 @import "Categories.css";
 @import "Menu.css";
+@import "AdminPanels.css";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css";
 
 * {
@@ -15,7 +16,6 @@ body {
     padding-bottom: 20px;
     background-image: url(Images/background-site.jpg);
     margin: 0; /* Отступы на странице */
-    padding: 0;
 }
 
 /* Set padding to keep content from hitting the edges */

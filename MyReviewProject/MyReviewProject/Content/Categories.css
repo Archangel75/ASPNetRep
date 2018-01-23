@@ -52,12 +52,10 @@
 }
 
 .login {
-    padding: 5px 0 5px 0;
+    padding: 17px 0 5px 0;
     position: fixed;
-    right: 0px;
-    display: inline-block;
-    font-size: 35px;
-   
+    right: 50px;
+    display: inline-block;   
 }
 
 
@@ -70,8 +68,7 @@
     display: inline-block;
 }
 
-.dropbtn {
-    
+.dropbtn {    
     position: relative;
     height: 50px;
     width: 50px;
