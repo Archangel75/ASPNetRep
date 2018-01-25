@@ -35,14 +35,15 @@
                 </td>
                 <td>
                     @Html.ActionLink("Изменить", "Edit", new { id = role.Id })
-                     @Html.ActionLink("Удалить", "Delete", new { id = role.Id })
-                
+                    @Html.ActionLink("Удалить", "Delete", new { id = role.Id })
+
                 </td>
             </tr>
     }
 }
         </table>
         @Html.ActionLink("Создать", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Назад", "Index", "Admin")
     </div>
     
 </body>

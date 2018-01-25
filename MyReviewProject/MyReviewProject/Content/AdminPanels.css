@@ -33,6 +33,13 @@
         font-weight: 500;
     }
 
+    .admin h3 {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+        color: #f44336;
+        font-weight: 500;
+    }
+
     .admin h4 {
         font-size: 1.5rem;
         letter-spacing: 2px;
@@ -67,10 +74,10 @@
         color: white;
     }
 
-    .admin a:link, a:visited, input[type=submit] {
+    .admin a:link, a:visited, input[type=submit], button[type=submit] {
         background-color: #f44336;
         color: white;
-        padding: 10px 20px;
+        padding: 10px 10px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -349,7 +356,7 @@ a.text-danger:hover, a.text-danger:focus {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    width:500px
+    width:400px
 }
 
     .form-control::-ms-expand {
