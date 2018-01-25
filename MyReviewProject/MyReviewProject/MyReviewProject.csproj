@@ -410,7 +410,11 @@
     <Content Include="Content\Images\background-site.jpg" />
     <Content Include="Content\Images\login.jpg" />
     <Content Include="Content\Images\Menu-512.png" />
+    <Content Include="Content\Images\test\862478.jpg" />
+    <Content Include="Content\Images\test\mercy_overwatch_fan_art.jpg" />
+    <Content Include="Content\Images\test\overwatch_tracer_blizzard_entertainment_109504_2560x1080.jpg" />
     <Content Include="Content\Images\profile.jpg" />
+    <Content Include="Content\Images\test\wallpapersden.com_dva-overwatch-artwork_2560x1080.jpg" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\Menu.css" />
     <Content Include="favicon.ico" />
