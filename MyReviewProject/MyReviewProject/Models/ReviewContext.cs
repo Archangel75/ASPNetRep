@@ -17,6 +17,12 @@ namespace MyReviewProject.Models
         public DbSet<SubCategory> SubCategories { get; set; }
 
         public DbSet<News> News { get; set; }
-        
+
+        protected override void Dispose(bool disposing)
+        {            
+            base.Dispose(disposing);
+        }
     }
+
+    
 }

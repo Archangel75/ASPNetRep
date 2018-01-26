@@ -26,9 +26,20 @@ p{
     text-justify: inter-word;
     text-overflow: ellipsis;
     color: #f44336;
-    text-shadow: white 1px 1px 0;
+    text-shadow: #000000 1px 1px 0;
     height:335px;
     background:rgba(129, 113, 113, 0.70)
+}
+
+a.Review {
+    position: relative;    
+    left:0;
+    top:0;
+    height:400px;
+    width:100px;
+    text-decoration: none;
+    z-index: 99;
+    overflow: unset;
 }
 
 #Header {
@@ -44,12 +55,6 @@ p{
     min-height: 30px;
 }
 
-/*#picture {
-    float: right;
-    max-height: 60%;
-    max-width: 45%;
-    border: 2px inset #f44336;
-}*/
 
 #picture img{
     width:100%;
@@ -99,17 +104,32 @@ p{
 
     .col-sm-4 {
         margin: 1%;
-        background-color: rgba(0,0,0,0.85);  
+        background-color: rgba(0,0,0,0.85);
         flex: 30%;
         padding: 3px;
         max-width: 30%;
         height: 400px;
         min-width: 20%;
         box-shadow: 8px 8px 5px 0 rgba( 0, 0, 0, 0.3);
-    }
-    
+        transition: 1s ease;
+    }    
 
-    .col-sm-5 {
+        .col-sm-4:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 1s ease;
+            z-index:2;
+        }
+
+        .col-sm-4:link {
+            text-decoration: none;
+        }
+
+        .col-sm-4:visited {
+            text-decoration: none;
+        }    
+            .col-sm-5 {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 41.666667%;
         flex: 0 0 41.666667%;
