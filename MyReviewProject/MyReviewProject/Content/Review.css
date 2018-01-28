@@ -1,19 +1,16 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Raleway:700');
+﻿@import url('https://fonts.googleapis.com/css?family=Gabriela|Raleway:500,700&subset=latin-ext');
 @import url('StarRating.css');
 
 .linerow {
-    font: 600;
-    font-family: 'Raleway', regular;
-    font-weight: 500;
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    padding: 10px 15px 0 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .linerow-smaller {
     font: 600;
-    font-family: 'Raleway', regular;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Gabriela', serif;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -22,40 +19,44 @@
     margin-top: 10px;
 }
 
-label {
-    font-family: 'Raleway', regular;
+h1, h2, h3, h4, h5, .field-positive-label {
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Gabriela', serif;
+    font-size: 18px;
     font-weight: 500;
 }
 
 .col-25 {
     float: left;
-    width: 25%;
+    width: 35%;
     margin-top: 6px;
 }
 
 .col-75 {
     float: left;
-    width: 75%;
+    width: 65%;
     margin-top: 6px;
 }
 
 
-
 textarea {
     width: 100%;
+    font-family: 'Gabriela', serif;
+    font-size: 15px;
     padding: 12px;
-    border: 1px solid #f8a42e;
+    border: 1px solid #f7603e;
     border-radius: 4px;
     box-sizing: border-box;
     overflow: hidden;
     word-wrap: break-word;
     resize: none;
     height: 107px;
-    max-width:none;
+    max-width: none;
 }
-    textarea:focus {
-        outline: 2px solid #f8a42e;
-    }
+
+textarea:focus {
+    outline: 2px solid #f44336;
+}
 
 .Review-product-fields {
     display:block;
@@ -67,7 +68,7 @@ textarea {
     box-sizing: border-box;
     vertical-align: top;
     width:100%;
-    margin-bottom:26px;
+    margin-bottom:16px;
 }
 
 .input-box {
@@ -105,24 +106,32 @@ textarea {
     height: 107px;
 }
 
-.experience {
-    display: inline-block;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    font-family: inherit;
-    line-height: 30px;
+
+.radio-button__text {
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Gabriela', serif;
     font-size: 15px;
-}
-.radio-button {    
-    cursor: pointer;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    position: relative;
-    z-index: 2;
     display: inline-block;
-    margin: 0 -1px 0 0;
-    user-select: none;
-    text-align: center;
-    outline: 0;
-    touch-action: manipulation;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 20px;
 }
+
+.radio-group {
+    border: solid 3px #f7603e;
+    display: inline-block;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.radio-button__control {
+    position: absolute;
+    visibility: hidden;
+    display: none;
+}
+
+.radio-button__control:checked + .radio-button__text {
+    background: #c6c6c6;
+}
+
