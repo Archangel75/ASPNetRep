@@ -1,0 +1,104 @@
+﻿@Styles.Render("~/Content/Review.css")
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+</head>
+<body>
+    <div class="create-header">
+        <h2> Мой отзыв</h2>
+
+        <hr />
+    </div>
+    <div class="create-content">
+        <div class="linerow-smaller">
+            <div class="col-25">
+                <h4>Общая оценка</h4>
+            </div>
+            <div class="col-75">
+                <fieldset>
+                    <span class="star-cb-group">
+                        <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+                        <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
+                        <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+                        <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+                        <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+                        <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+                    </span>
+                    </fieldset>
+                    <script>
+                        var logID = 'log',
+                            log = $('<div id="' + logID + '"></div>');
+                        $('body').append(log);
+                        $('[type*="radio"]').change(function () {
+                            var me = $(this);
+                            log.html(me.attr('value'));
+                        });
+                    </script>
+            </div>
+        </div>
+        <div class="linerow">
+            <div class="col-25">Опыт использования</div>
+            <div class="col-75">
+                <span class="experience">
+                    <label class="radio-button">Меньше месяца</label>
+                    <label class="radio-button">Несколько месяцев</label>
+                    <label class="radio-button">Больше года</label>
+                </span>
+            </div>            
+        </div>
+        <div class="linerow">
+            <div class="col-25">"Порекомендовали бы" <br /> "товар друзьям?"</div>
+            <div class="col-75">
+                <span class="recomendations">
+                    <label class="radio-button">Да</label>
+                    <label class="radio-button">Нет</label>
+                </span>
+            </div>
+        </div>
+            
+        <div class="Review-product-fields">
+                <div class="fields-item">
+                    <div class="col-25">
+                        <label class="field-positive-label">Достоинства</label>
+                    </div>
+                    <div class="col-75">
+                        <span class="input-box">
+                            <textarea id="Like" placeholder="Что вам понравилось"></textarea>
+                        </span>
+                        <span class="input-clear"></span>
+                    </div>
+                </div>
+                <div class="fields-item">
+                    <div class="col-25">
+                        <label class="field-positive-label">Недостатки</label>
+                    </div>
+                    <div class="col-75">
+                        <span class="input-box">
+                            <textarea id="Dislike" placeholder="Что вам не понравилось"></textarea>
+                        </span>
+                        <span class="input-clear"></span>
+                    </div>             
+                   
+                    
+                </div>
+                <div class="fields-item">
+                    <div class="col-25">
+                        <label class="field-positive-label">Комментарии</label>
+                    </div>
+                    <div class="col-75">
+                        <span class="input-box">
+                            <textarea id="Comments" placeholder="Другие впечатления"></textarea>
+                        </span>
+                        <span class="input-clear"></span>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    <div class="create-footer">
+
+    </div>
+</body>

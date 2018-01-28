@@ -418,6 +418,8 @@
     <Content Include="Content\Images\test\wallpapersden.com_dva-overwatch-artwork_2560x1080.jpg" />
     <Content Include="Content\Layout.css" />
     <Content Include="Content\Menu.css" />
+    <Content Include="Content\Review.css" />
+    <Content Include="Content\StarRating.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -504,6 +506,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Review\Review.cshtml" />
+    <Content Include="Views\Review\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

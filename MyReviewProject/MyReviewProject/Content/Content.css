@@ -25,8 +25,9 @@ p{
     word-wrap: break-word;
     text-justify: inter-word;
     text-overflow: ellipsis;
-    color: #f44336;
-    text-shadow: #000000 1px 1px 0;
+    color: white;
+    /*color: #f44336;*/
+    /*text-shadow: #000000 1px 1px 0;*/
     height:335px;
     background:rgba(129, 113, 113, 0.70)
 }
