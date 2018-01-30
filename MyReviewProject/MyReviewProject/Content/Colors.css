@@ -1,6 +1,7 @@
 ﻿:root {
     --lightgray: #ccc6c2;
     --lightgrayblue: #a2aab0;
+    --lightgraybluehalftransparent: rgba(162, 170, 176, 0.52);
     --bordercolor: #4c5970;
     --almostwhite: #ebeced;
     --darkgray: #3d3d3a;
@@ -10,4 +11,15 @@
     --nocolor:;
     --brhardtonotice: #4d4d48;
     --brorange: #feb386;
+    --buttons: #ffd6a0;
+    --peachy: #ffbc67;
+    --lightviolet: #685c79;
+    --redviolet: #ac6c82;
+    --plumy:#455c7b;
 }
+
+/*
+    https://color.adobe.com/ru/Copy-of-Copie-de-QB-Studio-website-Project-3-color-theme-10406981/
+    https://color.adobe.com/ru/Professional-(D)-color-theme-10419991/
+    https://color.adobe.com/ru/Copia-de-Copy-of-Sunset-Camping-color-theme-10410319/
+*/
