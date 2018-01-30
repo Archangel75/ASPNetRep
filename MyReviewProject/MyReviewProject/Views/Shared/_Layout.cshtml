@@ -14,18 +14,24 @@
     <div class="sidebar">
         <ul>
             <li><a href="~/Home/Index" class="current">Main</a></li>
+            <hr />
             <li><a href="">About</a></li>
+            <hr />
             <li><a href="">Blog</a></li>
+            <hr />
             <li><a href="">Contact</a></li>
         </ul>
     </div>
     <div class="menu-cat">
-        <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn"></button>
-            <div id="myDropdown" class="dropdown-content">
+        <div class="dropmenudown">
+            <button onclick="myFunction()" class="dropmenubtn"></button>
+            <div id="myDropdown" class="dropmenudown-content">
                 <a href="#home">Boopers</a>
+                <hr />
                 <a href="#about">Shmoopers</a>
+                <hr />
                 <a href="#contact">Putin</a>
+                <hr />
                 <a href="#contact">Porn</a>
             </div>
         </div>
@@ -52,9 +58,9 @@
                 document.getElementById("myDropdown").classList.toggle("show");
             }// Close the dropdown if the user clicks outside of it
             window.onclick = function (event) {
-                if (!event.target.matches('.dropbtn')) {
+                if (!event.target.matches('.dropmenubtn')) {
 
-                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var dropdowns = document.getElementsByClassName("dropmenudown-content");
                     var i;
                     for (i = 0; i < dropdowns.length; i++) {
                         var openDropdown = dropdowns[i];

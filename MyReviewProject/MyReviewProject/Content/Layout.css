@@ -1,6 +1,7 @@
 @import "Categories.css";
 @import "Menu.css";
 @import "AdminPanels.css";
+@import "Colors.css";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css";
 
 * {
@@ -14,7 +15,7 @@
 
 body {
     padding-bottom: 20px;
-    background-image: url(Images/background-site.jpg);
+    background-image: url(Images/2.png);
     margin: 0; /* Отступы на странице */
 }
 
@@ -31,9 +32,9 @@ body {
    }
 
    #footer { /* Нижний блок */
-    background: #333; /* Цвет фона */
+    background: var(--testborder); /* Цвет фона */
     padding: 5px; /* Поля вокруг текста */
-    color: #fff; /* Цвет текста */
+    color: var(--text); /* Цвет текста */
     clear: left; /* Отменяем действие float */
    }
    
@@ -42,11 +43,4 @@ body {
 */
 .dl-horizontal dt {
     white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
 }

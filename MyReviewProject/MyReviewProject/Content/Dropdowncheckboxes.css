@@ -1,0 +1,93 @@
+:root {
+    --lightbluegray:#4F6877;
+}
+
+
+
+.dropdownCat, .dropdownSub {
+    position: relative;
+}
+    .dropdownCat dd,
+    .dropdownCat dt, 
+    .dropdownSub dd, 
+    .dropdownSub dt {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .dropdownCat ul, .dropdownSub ul {
+        margin: -1px 0 0 0;
+    }
+
+    .dropdownCat dd, .dropdownSub dd {
+        position: relative;
+    }
+
+    .dropdownCat a,
+    .dropdownCat a:visited, 
+    .dropdownSub a,
+    .dropdownSub a:visited {
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+        font-size: 12px;
+    }
+
+    .dropdownCat dt a, 
+    .dropdownSub dt a {
+        background-color: var(--lightbluegray);
+        display: block;
+        padding: 8px 20px 5px 10px;
+        min-height: 25px;
+        line-height: 24px;
+        overflow: hidden;
+        border: 0;
+        width: 272px;
+    }
+
+    .dropdownCat input[type=radio],
+    .dropdownSub input[type=radio]{
+        display:none
+    }
+
+
+        .dropdownCat dt a span,
+        .multiSelCat span, 
+        .dropdownSub dt a span,
+        .multiSelSub span {
+            cursor: pointer;
+            display: inline-block;
+            padding: 0 3px 2px 0;
+        }
+
+    .dropdownCat dd ul, 
+    .dropdownSub dd ul {
+        background-color: #4F6877;
+        border: 0;
+        color: #fff;
+        display: none;
+        left: 0px;
+        padding: 2px 15px 2px 5px;
+        position: absolute;
+        top: 2px;
+        width: 280px;
+        list-style: none;
+        height: 100px;
+        overflow: auto;
+    }
+
+    .dropdownCat span.value,
+    .dropdownSub span.value {
+        display: none;
+    }
+
+    .dropdownCat dd ul li a,
+    .dropdownSub dd ul li a {
+        padding: 5px;
+        display: block;
+    }
+
+        .dropdownCat dd ul li a:hover,
+        .dropdownSub dd ul li a:hover {
+            background-color: #fff;
+        }

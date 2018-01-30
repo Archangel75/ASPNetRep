@@ -5,16 +5,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<head>
-
-</head>
+    <head>        
+    </head>
 <body>
     <div class="create-header">
         <h2> Мой отзыв</h2>
-
         <hr />
     </div>
     <div class="create-content">
+        <div class="linerow-smaller" style="margin-right:40px">
+            <div class="col-50">
+                <dl class="dropdownCat">
+                    <dt>
+                        <a href="#">
+                            <span class="hidaCat">Select</span>
+                            <p class="multiSelCat"></p>
+                        </a>
+                    </dt>
+                    <dd>
+                        <div class="mutliSelectCat">
+                            <ul>
+                                <li>
+                                    <input name="chooseCat" type="radio" id="Cat1" value="Cat1" />
+                                    <label for="Cat1">Apple</label>
+                                </li>
+                                <li>
+                                    <input name="chooseCat" type="radio" id="Cat2" value="Blackberry" />
+                                    <label for="Cat2">BlackBerry</label>
+                                </li>
+                                <li>
+                                    <input name="chooseCat" type="radio" id="Cat3" value="HTC" />
+                                    <label for="Cat3">Apple</label>
+                                </li>
+                                <li>
+                                    <input name="chooseCat" type="radio" id="Cat4" value="Sony Ericson" />
+                                    <label for="Cat4">Apple</label>
+                                </li>
+                                <li>
+                                    <input name="chooseCat" type="radio" id="Cat5" value="Motorola" />
+                                    <label for="Cat5">Apple</label>
+                                </li>
+                                <li>
+                                    <input name="chooseCat" type="radio" id="Cat6" value="Nokia" />Nokia
+                                    <label for="Cat6">Apple</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="col-50">
+                <dl class="dropdownSub">
+                    <dt>
+                        <a href="#">
+                            <span class="hidaSub">Select</span>
+                            <p class="multiSelSub"></p>
+                        </a>
+                    </dt>
+                    <dd>
+                        <div class="mutliSelectSub">
+                            <ul>
+                                <li>
+                                    <input name="choosesub" type="radio" value="Apple" />Apple
+                                </li>
+                                <li>
+                                    <input name="choosesub" type="radio" value="Blackberry" />Blackberry
+                                </li>
+                                <li>
+                                    <input name="choosesub" type="radio" value="HTC" />HTC
+                                </li>
+                                <li>
+                                    <input name="choosesub" type="radio" value="Sony Ericson" />Sony Ericson
+                                </li>
+                                <li>
+                                    <input name="choosesub" type="radio" value="Motorola" />Motorola
+                                </li>
+                                <li>
+                                    <input name="choosesub" type="radio" value="Nokia" />Nokia
+                                </li>
+                            </ul>
+                        </div>
+                    </dd>
+                </dl>
+
+            </div>
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+            <script src="~/Scripts/Dropdowncheckboxes.js"></script>
+        </div>
+
         <div class="linerow-smaller">
             <div class="col-25">
                 <h4>Общая оценка</h4>
@@ -66,43 +145,43 @@
             </div>
         </div>
 
-    <div class="Review-product-fields">
-        <div class="fields-item">
-            <div class="col-25">
-                <label class="field-positive-label">Достоинства</label>
+        <div class="Review-product-fields">
+            <div class="fields-item">
+                <div class="col-25">
+                    <label class="field-positive-label">Достоинства</label>
+                </div>
+                <div class="col-75">
+                    <span class="input-box">
+                        <textarea id="Like" placeholder="Что вам понравилось"></textarea>
+                    </span>
+                    <span class="input-clear"></span>
+                </div>
             </div>
-            <div class="col-75">
-                <span class="input-box">
-                    <textarea id="Like" placeholder="Что вам понравилось"></textarea>
-                </span>
-                <span class="input-clear"></span>
-            </div>
-        </div>
-        <div class="fields-item">
-            <div class="col-25">
-                <label class="field-positive-label">Недостатки</label>
-            </div>
-            <div class="col-75">
-                <span class="input-box">
-                    <textarea id="Dislike" placeholder="Что вам не понравилось"></textarea>
-                </span>
-                <span class="input-clear"></span>
-            </div>
+            <div class="fields-item">
+                <div class="col-25">
+                    <label class="field-positive-label">Недостатки</label>
+                </div>
+                <div class="col-75">
+                    <span class="input-box">
+                        <textarea id="Dislike" placeholder="Что вам не понравилось"></textarea>
+                    </span>
+                    <span class="input-clear"></span>
+                </div>
 
 
-        </div>
-        <div class="fields-item">
-            <div class="col-25">
-                <label class="field-positive-label">Комментарии</label>
             </div>
-            <div class="col-75">
-                <span class="input-box">
-                    <textarea id="Comments" placeholder="Другие впечатления"></textarea>
-                </span>
-                <span class="input-clear"></span>
+            <div class="fields-item">
+                <div class="col-25">
+                    <label class="field-positive-label">Комментарии</label>
+                </div>
+                <div class="col-75">
+                    <span class="input-box">
+                        <textarea id="Comments" placeholder="Другие впечатления"></textarea>
+                    </span>
+                    <span class="input-clear"></span>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="create-footer">
 
