@@ -1,0 +1,8 @@
+select c.Name from customers c
+  join purchases p1 on c.CustomerId = p1.CustomerId
+where  p1.ProductName = 'Молоко'       
+except select c.Name from customers c 
+  join puchases p2 on c.CustomerId = p2.CustomerId
+ where p2.ProductName = 'Сметана'
+   and Month(p2.PurchaiseDatetime) = Month(Now())
+   and Year(p2.PurchaseDatetime) = Year(Now())
