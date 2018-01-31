@@ -33,6 +33,7 @@ h1, h2, h3, h4, h5, .field-positive-label {
     font-family: 'Gabriela', serif;
     font-size: 18px;
     font-weight: 500;
+    color:var(--brorange);
 }
 
 .col-25 {
@@ -59,7 +60,7 @@ textarea {
     font-family: 'Gabriela', serif;
     font-size: 15px;
     padding: 12px;
-    border: 1px solid var(--orange);
+    border: 2px solid var(--plumy);
     border-radius: 4px;
     box-sizing: border-box;
     overflow: hidden;
@@ -70,7 +71,7 @@ textarea {
 }
 
 textarea:focus {
-    outline: 2px solid var(---darkorange);
+    outline: 4px solid var(--hovertext);
 }
 
 .Review-product-fields {
@@ -111,7 +112,7 @@ textarea:focus {
     width: 100%;
     min-height: 107px;
     resize: none;
-    color: var(---bordercolor);
+    color: var(--bordercolor);
     outline: 0;
     font-size: 15px;
     line-height: 18px;
@@ -130,10 +131,11 @@ textarea:focus {
     cursor: pointer;
     font-weight: bold;
     padding: 5px 20px;
+    color:var(--text);
 }
 
 .radio-group {
-    border: solid 3px var(--orange);
+    border: solid 3px var(--peachy);    
     display: inline-block;
     margin: 20px 0;
     border-radius: 10px;
@@ -146,7 +148,8 @@ textarea:focus {
     display: none;
 }
 
-.radio-button__control:checked + .radio-button__text {
-    background: #c6c6c6;
-}
+    .radio-button__control:checked + .radio-button__text {
+        background: var(--lightgray);
+        color: var(--darkgray);
+    }
 

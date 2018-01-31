@@ -68,7 +68,7 @@
     }
 
     .admin tr:hover {
-        background-color: var(--lightgraybluehalftransparent);
+        background-color: var(--lightgraybluetransparent50);
     }
 
     .admin th {
@@ -365,7 +365,7 @@ a.text-danger:hover, a.text-danger:focus {
     font-size: 1rem;
     line-height: 1.5;
     color: var(--lightgray);
-    background-color: var(--almostwhite);
+    background-color: var(--whitetext);
     background-clip: padding-box;
     border: 1px solid var(--lightgrayblue);
     border-radius: 0.25rem;

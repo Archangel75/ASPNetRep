@@ -1,11 +1,10 @@
-:root {
-    --lightbluegray:#4F6877;
-}
+@import "Colors.css";
 
 
 
 .dropdownCat, .dropdownSub {
     position: relative;
+    font-size: 15px;
 }
     .dropdownCat dd,
     .dropdownCat dt, 
@@ -27,7 +26,7 @@
     .dropdownCat a:visited, 
     .dropdownSub a,
     .dropdownSub a:visited {
-        color: #fff;
+        color: var(--whitetext);
         text-decoration: none;
         outline: none;
         font-size: 12px;
@@ -35,14 +34,14 @@
 
     .dropdownCat dt a, 
     .dropdownSub dt a {
-        background-color: var(--lightbluegray);
+        background-color: var(--brhardtonotice);
         display: block;
         padding: 8px 20px 5px 10px;
         min-height: 25px;
         line-height: 24px;
         overflow: hidden;
         border: 0;
-        width: 272px;
+        width: 75%;
     }
 
     .dropdownCat input[type=radio],
@@ -62,17 +61,17 @@
 
     .dropdownCat dd ul, 
     .dropdownSub dd ul {
-        background-color: #4F6877;
+        background-color: var(--brhardtonotice);
         border: 0;
-        color: #fff;
+        color: var(--whitetext);
         display: none;
         left: 0px;
         padding: 2px 15px 2px 5px;
         position: absolute;
         top: 2px;
-        width: 280px;
+        width: 75%;
         list-style: none;
-        height: 100px;
+        height: 150px;
         overflow: auto;
     }
 
@@ -87,7 +86,3 @@
         display: block;
     }
 
-        .dropdownCat dd ul li a:hover,
-        .dropdownSub dd ul li a:hover {
-            background-color: #fff;
-        }
