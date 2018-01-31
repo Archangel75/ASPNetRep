@@ -28,14 +28,21 @@ namespace MyReviewProject.Models
 
         [Required]
         public int Rating { get; set; }
+
         [Required]
         public bool Recomendations { get; set; }
+
+        [Required]
+        public int Experience { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "Пожалуйста, изложите плюсы вкратце.")]
         public string Like { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "Пожалуйста, изложите минусы вкратце.")]
         public string Dislike { get; set; }
+
         [Required]
         public string Comment { get; set; }
 

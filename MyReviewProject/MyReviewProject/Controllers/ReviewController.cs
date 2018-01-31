@@ -43,6 +43,8 @@ namespace MyReviewProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                review.Rating = content.Rating;
+                review.Recomendation = content.Recomendations ? 1 : 0;
 
 
                 if (uploadImage != null)
