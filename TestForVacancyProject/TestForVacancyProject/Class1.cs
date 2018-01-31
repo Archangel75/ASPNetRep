@@ -30,7 +30,7 @@ namespace TestForVacancyProject
         ///</summary>
         public override double Perimeter()
         {
-            return (a + b + c) / 2;
+            return Math.Round((a + b + c) / 2, 2);
         }
 
         ///<summary>
@@ -39,14 +39,14 @@ namespace TestForVacancyProject
         public override double Area()
         {
             double p = Perimeter();
-            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            return Math.Round(Math.Sqrt(p * (p - a) * (p - b) * (p - c)), 2);
         }
 
     }
-    public class RoundAreaCounter: AreaCount
+    public class RoundArea: AreaCount
     {
         double radius;
-        public RoundAreaCounter(double r)
+        public RoundArea(double r)
         {
             this.radius = r;
         }
@@ -56,7 +56,7 @@ namespace TestForVacancyProject
         ///</summary>
         public override double Area()
         {
-            return (Math.Pow(Convert.ToDouble(radius), 2)) * 3.1415;
+            return Math.Round((Math.Pow(Convert.ToDouble(radius), 2)) * 3.1415, 2);
         }
 
         ///<summary>
@@ -64,7 +64,7 @@ namespace TestForVacancyProject
         ///</summary>
         public override double Perimeter()
         {
-            return radius * 2 * 3.1415;
+            return Math.Round(radius * 2 * 3.1415, 2);
         }
     }
 
@@ -88,7 +88,7 @@ namespace TestForVacancyProject
             {
                 per += Math.Sqrt(Math.Pow(dots[i + 1].X - dots[i].X, 2) + Math.Pow(dots[i + 1].Y - dots[i].Y, 2));
             }
-            return per;
+            return Math.Round(per, 2);
         }
 
         ///<summary>
@@ -102,10 +102,13 @@ namespace TestForVacancyProject
             {
                 area += dots[i].X * dots[i + 1].Y - dots[i + 1].X * dots[i].Y;
             }
+            //1*3 - 2*1=1
+            //2*4 - 5*3=-7
+            //5*2 - 4*4=-6
+            //4*1 - 1*2 = 2
+            area += dots[dots.Length-1].X * dots[0].Y - dots[dots.Length-1].Y * dots[0].X;
 
-            area += dots[dots.Length - 1].X * dots[0].Y - dots[dots.Length - 1].Y * dots[0].X;
-
-            return Math.Abs(area / 2);
+            return Math.Round(Math.Abs(area / 2), 2);
         }
     }
 }

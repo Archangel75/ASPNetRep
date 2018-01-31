@@ -6,16 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestForVacancyProject;
 
 namespace MyReviewProject.Controllers
-{
-    
+{   
+
     public class HomeController : Controller
-    { 
-        
+    {
+        RoundAreaCounter counter = new RoundAreaCounter(5);
         
         public ActionResult Index(ApplicationDbContext context)
         {
+            var a = counter.Area();
+            ViewBag.Area = a;
+
+
             var users = context.Users.ToList();
             
             ViewBag.users = context.Users.ToList();
