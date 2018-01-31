@@ -61,14 +61,7 @@ namespace TestForVacancyProject.Tests
 
     [TestClass]
     public class AnyAreaTest
-    {
-        //Point[] points =
-        //    {
-        //        new Point(1, 1),
-        //        new Point(2, 3),
-        //        new Point(5, 4),
-        //        new Point(4, 2)
-        //    };
+    {        
         AnyArea AnyArea = new AnyArea(new Point[]{new Point(1, 1),
                 new Point(2, 3),
                 new Point(5, 4),

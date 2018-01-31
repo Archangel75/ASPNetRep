@@ -102,10 +102,6 @@ namespace TestForVacancyProject
             {
                 area += dots[i].X * dots[i + 1].Y - dots[i + 1].X * dots[i].Y;
             }
-            //1*3 - 2*1=1
-            //2*4 - 5*3=-7
-            //5*2 - 4*4=-6
-            //4*1 - 1*2 = 2
             area += dots[dots.Length-1].X * dots[0].Y - dots[dots.Length-1].Y * dots[0].X;
 
             return Math.Round(Math.Abs(area / 2), 2);
