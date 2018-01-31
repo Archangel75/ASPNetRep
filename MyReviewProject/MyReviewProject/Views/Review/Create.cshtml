@@ -1,189 +1,207 @@
-﻿@Styles.Render("~/Content/Review.css")
+﻿@model MyReviewProject.Models.CreateReviewViewModel
+
+@Styles.Render("~/Content/Review.css")
 @{
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&amp;subset=latin-ext" rel="stylesheet">
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <head>        
-    </head>
-<body>
-    <div class="create-header">
-        <h2> Мой отзыв</h2>
-        <hr />
-    </div>
-    <div class="create-content">
-        <div class="linerow-smaller" style="margin-right:40px">
-            <div class="col-50">
-                <dl class="dropdownCat">
-                    <dt>
-                        <a href="#">
-                            <span class="hidaCat">Select</span>
-                            <p class="multiSelCat"></p>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="mutliSelectCat">
-                            <ul>
-                                <li>
-                                    <input name="chooseCat" type="radio" id="Cat1" value="Cat1" />
-                                    <label for="Cat1">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="chooseCat" type="radio" id="Cat2" value="Blackberry" />
-                                    <label for="Cat2">BlackBerry</label>
-                                </li>
-                                <li>
-                                    <input name="chooseCat" type="radio" id="Cat3" value="HTC" />
-                                    <label for="Cat3">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="chooseCat" type="radio" id="Cat4" value="Sony Ericson" />
-                                    <label for="Cat4">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="chooseCat" type="radio" id="Cat5" value="Motorola" />
-                                    <label for="Cat5">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="chooseCat" type="radio" id="Cat6" value="Nokia" />Nokia
-                                    <label for="Cat6">Apple</label>
-                                </li>
-                            </ul>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
 
-            <div class="col-50">
-                <dl class="dropdownSub">
-                    <dt>
-                        <a href="#">
-                            <span class="hidaSub">Select</span>
-                            <p class="multiSelSub"></p>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="mutliSelectSub">
-                            <ul>
-                                <li>
-                                    <input name="choosesub" type="radio" value="Apple" />Apple
-                                </li>
-                                <li>
-                                    <input name="choosesub" type="radio" value="Blackberry" />Blackberry
-                                </li>
-                                <li>
-                                    <input name="choosesub" type="radio" value="HTC" />HTC
-                                </li>
-                                <li>
-                                    <input name="choosesub" type="radio" value="Sony Ericson" />Sony Ericson
-                                </li>
-                                <li>
-                                    <input name="choosesub" type="radio" value="Motorola" />Motorola
-                                </li>
-                                <li>
-                                    <input name="choosesub" type="radio" value="Nokia" />Nokia
-                                </li>
-                            </ul>
-                        </div>
-                    </dd>
-                </dl>
+@using (Html.BeginForm("Create", "Review", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
 
-            </div>
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-            <script src="~/Scripts/Dropdowncheckboxes.js"></script>
+        <div class="create-header">
+            <h2> Мой отзыв</h2>
+            <hr />
         </div>
+        <div class="create-content">
+            <div class="linerow-smaller" style="margin-right:40px">
+                <div class="col-50">
+                    <dl class="dropdownCat">
+                        <dt>
+                            <a href="#">
+                                <span class="hidaCat">Select</span>
+                                <p class="multiSelCat"></p>
+                            </a>
+                        </dt>
+                        <dd>
+                            <div class="mutliSelectCat">
+                                <ul>
+                                    @*<li>
+                                        <input name="chooseCat" type="radio" id="Cat1" value="Cat1" />
+                                        <label for="Cat1">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="chooseCat" type="radio" id="Cat2" value="Blackberry" />
+                                        <label for="Cat2">BlackBerry</label>
+                                    </li>
+                                    <li>
+                                        <input name="chooseCat" type="radio" id="Cat3" value="HTC" />
+                                        <label for="Cat3">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="chooseCat" type="radio" id="Cat4" value="Sony Ericson" />
+                                        <label for="Cat4">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="chooseCat" type="radio" id="Cat5" value="Motorola" />
+                                        <label for="Cat5">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="chooseCat" type="radio" id="Cat6" value="Nokia" />Nokia
+                                        <label for="Cat6">Apple</label>
+                                    </li>*@
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
 
-        <div class="linerow-smaller">
+                <div class="col-50">
+                    <dl class="dropdownSub">
+                        <dt>
+                            <a href="#">
+                                <span class="hidaSub">Select</span>
+                                <p class="multiSelSub"></p>
+                            </a>
+                        </dt>
+                        <dd>
+                            <div class="mutliSelectSub">
+                                <ul>
+                                    <li>
+                                        <input name="choosesub" type="radio" value="Apple" />Apple
+                                    </li>
+                                    <li>
+                                        <input name="choosesub" type="radio" value="Blackberry" />Blackberry
+                                    </li>
+                                    <li>
+                                        <input name="choosesub" type="radio" value="HTC" />HTC
+                                    </li>
+                                    <li>
+                                        <input name="choosesub" type="radio" value="Sony Ericson" />Sony Ericson
+                                    </li>
+                                    <li>
+                                        <input name="choosesub" type="radio" value="Motorola" />Motorola
+                                    </li>
+                                    <li>
+                                        <input name="choosesub" type="radio" value="Nokia" />Nokia
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+
+                </div>
+                <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+                <script src="~/Scripts/Dropdowncheckboxes.js"></script>
+            </div>
+
+            <div class="linerow-smaller">
+                <div class="col-25">
+                    <h4>Общая оценка</h4>
+                </div>
+                <div class="col-75">
+                    <fieldset>
+                        <span class="star-cb-group">
+                            <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+                            <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
+                            <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+                            <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+                            <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+                            <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+                        </span>
+                    </fieldset>
+                    <script>
+                        var logID = 'log',
+                            log = $('<div id="' + logID + '"></div>');
+                        $('body').append(log);
+                        $('[type*="radio"]').change(function () {
+                            var me = $(this);
+                            log.html(me.attr('value'));
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="linerow">
+                <div class="col-25"><h3>Опыт использования</h3></div>
+                <div class="col-75">
+                    <div class="radio-group">
+                        <input class="radio-button__control" id="radio-exp-no" type="radio" name="usage" value="0" />
+                        <label class="radio-button__text" for="radio-exp-no">Нет</label>
+                        <input class="radio-button__control" id="radio-exp-lessmonth" type="radio" name="usage" value="1" />
+                        <label class="radio-button__text" for="radio-exp-lessmonth">меньше месяца</label>
+                        <input class="radio-button__control" id="radio-exp-months" type="radio" name="usage" value="2" />
+                        <label class="radio-button__text" for="radio-exp-months">несколько месяцев</label>
+                        <input class="radio-button__control" id="radio-exp-years" type="radio" name="usage" value="3" />
+                        <label class="radio-button__text" for="radio-exp-years">больше года</label>
+                    </div>
+                </div>
+            </div>
+            <div class="linerow">
+                <div class="col-25"><h3>Порекомендовали<br />бы товар друзьям?</h3></div>
+                <div class="col-75">
+                    <div class="radio-group">
+                        <input class="radio-button__control" id="radio-recom-yes" type="radio" name="recommend" value="true" />
+                        <label class="radio-button__text" for="radio-recom-yes">да</label>
+                        <input class="radio-button__control" id="radio-recom-no" type="radio" name="recommend" value="false" />
+                        <label class="radio-button__text" for="radio-recom-no">нет</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Review-product-fields">
+                <div class="fields-item">
+                    <div class="col-25">
+                        <label class="field-positive-label">Достоинства</label>
+                    </div>
+                    <div class="col-75">
+                        <span class="input-box">
+                            <textarea id="Like" placeholder="Кратко о том, что вам понравилось"></textarea>
+                        </span>
+                        <span class="input-clear"></span>
+                    </div>
+                </div>
+                <div class="fields-item">
+                    <div class="col-25">
+                        <label class="field-positive-label">Недостатки</label>
+                    </div>
+                    <div class="col-75">
+                        <span class="input-box">
+                            <textarea id="Dislike" placeholder="Кратко о том, что вам не понравилось"></textarea>
+                        </span>
+                        <span class="input-clear"></span>
+                    </div>
+
+                </div>
+                <div class="fields-item">
+                    <div class="col-25">
+                        <label class="field-positive-label">Комментарии</label>
+                    </div>
+                    <div class="col-75">
+                        <span class="input-box">
+                            <textarea id="Comments" placeholder="Развёрнуто о ваших впечатлениях"></textarea>
+                        </span>
+                        <span class="input-clear"></span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="create-footer">
             <div class="col-25">
-                <h4>Общая оценка</h4>
+                
             </div>
             <div class="col-75">
-                <fieldset>
-                    <span class="star-cb-group">
-                        <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
-                        <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
-                        <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
-                        <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
-                        <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
-                        <input type="radio" id="rating-0" name="rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
-                    </span>
-                </fieldset>
-                <script>
-                    var logID = 'log',
-                        log = $('<div id="' + logID + '"></div>');
-                    $('body').append(log);
-                    $('[type*="radio"]').change(function () {
-                        var me = $(this);
-                        log.html(me.attr('value'));
-                    });
-                </script>
+                <a class='btn'>
+                    <input id="image" type="file" name="uploadImage" onchange='$("#upload-file-info").html($(this).val());' />
+                </a>
+                <span class='label label-info' id="upload-file-info"></span>
             </div>
-        </div>
-        <div class="linerow">
-            <div class="col-25"><h3>Опыт использования</h3></div>
-            <div class="col-75">
-                <div class="radio-group">
-                    <input class="radio-button__control" id="radio-exp-lessmonth" type="radio" name="usage" value="0" />
-                    <label class="radio-button__text" for="radio-exp-lessmonth">меньше месяца</label>
-                    <input class="radio-button__control" id="radio-exp-months" type="radio" name="usage" value="1" />
-                    <label class="radio-button__text" for="radio-exp-months">несколько месяцев</label>
-                    <input class="radio-button__control" id="radio-exp-years" type="radio" name="usage" value="2" />
-                    <label class="radio-button__text" for="radio-exp-years">больше года</label>
-                </div>
-            </div>
-        </div>
-        <div class="linerow">
-            <div class="col-25"><h3>Порекомендовали<br />бы товар друзьям?</h3></div>
-            <div class="col-75">
-                <div class="radio-group">
-                    <input class="radio-button__control" id="radio-recom-yes" type="radio" name="recommend" value="true" />
-                    <label class="radio-button__text" for="radio-recom-yes">да</label>
-                    <input class="radio-button__control" id="radio-recom-no" type="radio" name="recommend" value="false" />
-                    <label class="radio-button__text" for="radio-recom-no">нет</label>
-                </div>
-            </div>
-        </div>
 
-        <div class="Review-product-fields">
-            <div class="fields-item">
-                <div class="col-25">
-                    <label class="field-positive-label">Достоинства</label>
-                </div>
-                <div class="col-75">
-                    <span class="input-box">
-                        <textarea id="Like" placeholder="Что вам понравилось"></textarea>
-                    </span>
-                    <span class="input-clear"></span>
-                </div>
-            </div>
-            <div class="fields-item">
-                <div class="col-25">
-                    <label class="field-positive-label">Недостатки</label>
-                </div>
-                <div class="col-75">
-                    <span class="input-box">
-                        <textarea id="Dislike" placeholder="Что вам не понравилось"></textarea>
-                    </span>
-                    <span class="input-clear"></span>
-                </div>
-
-
-            </div>
-            <div class="fields-item">
-                <div class="col-25">
-                    <label class="field-positive-label">Комментарии</label>
-                </div>
-                <div class="col-75">
-                    <span class="input-box">
-                        <textarea id="Comments" placeholder="Другие впечатления"></textarea>
-                    </span>
-                    <span class="input-clear"></span>
-                </div>
-            </div>
+            <br />
+            <input type="submit" value="Опубликовать" />
         </div>
-    </div>
-    <div class="create-footer">
+}
 
-    </div>
-</body>

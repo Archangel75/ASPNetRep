@@ -16,6 +16,14 @@ namespace MyReviewProject.Models
         public string Content { get; set; }
 
         public int Rating { get; set; }
+
+        public int Recomendation { get; set; }
+
+        public int Experience { get; set; }
+
+        public int ImageId { get; set; }
+
+        public byte[] Image { get; set; }
         
     }
 }

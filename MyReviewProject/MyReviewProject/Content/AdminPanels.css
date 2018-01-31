@@ -83,7 +83,7 @@
         color:var(--darkgray)
     }
     .admin a:link, input[type=submit], button[type=submit] {
-        background-color: var(--peachy);
+        background-color: var(--lightgray);
         color: var(--darkgray);
         padding: 10px 10px;
         text-align: center;
