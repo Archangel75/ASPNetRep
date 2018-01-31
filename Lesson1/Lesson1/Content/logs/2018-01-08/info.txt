@@ -1,3 +1,0 @@
-2018-01-08 13:05:26.4961|INFO|Lesson1.MvcApplication|Application Start
-2018-01-08 13:36:41.8176|INFO|Lesson1.MvcApplication|Application Start
-2018-01-08 13:38:33.9407|INFO|Lesson1.MvcApplication|Application Start

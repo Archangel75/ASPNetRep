@@ -77,6 +77,9 @@ namespace TestForVacancyProject
             this.dots = dots;
         }
 
+        ///<summary>
+        ///<para> Возвращает периметр произвольной фигуры.</para>
+        ///</summary>
         public override double Perimeter()
         {
             double per = default(double);
@@ -88,6 +91,9 @@ namespace TestForVacancyProject
             return per;
         }
 
+        ///<summary>
+        ///<para> Возвращает площадь произвольной фигуры.</para>
+        ///</summary>
         public override double Area()
         {
             double area = default(double);
