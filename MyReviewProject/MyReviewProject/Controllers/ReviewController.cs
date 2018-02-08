@@ -41,13 +41,13 @@ namespace MyReviewProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var catId = db.Categories.Where(c => c.Name.ToLower() == content.Category.ToLower()).Select(c => c.Id).FirstOrDefault();
-                var subId = db.SubCategories.Where(s => s.CategoryId== catId).Select(s=>s.SubCategoryId).FirstOrDefault();
-                var subject = db.Subjects.Where(s => s.SubCategoryId == subId && s.Name.ToLower() == content.Objectname.ToLower());
-                if (subject == null)
-                {
-                    db.Subjects.Add(new Subject {Name=content.Objectname, SubCategoryId = Convert.ToInt32(subId) });
-                }
+                //var catId = db.Categories.Where(c => c.Name.ToLower() == content.Category.ToLower())
+                //                         .Select(c => c.Id).FirstOrDefault(0);
+                //var subId = db.SubCategories.Where(s => s.CategoryId== catId)
+                //                            .Select(s=>s.SubCategoryId).FirstOrDefault(0);
+                var subjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault(0);
+
+                review.SubjectId = subjectId;
 
                 review.Rating = content.Rating;
                 review.Recomendation = content.Recomendations ? 1 : 0;
