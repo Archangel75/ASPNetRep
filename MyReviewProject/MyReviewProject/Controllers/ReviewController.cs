@@ -10,8 +10,6 @@ using System.Web.Mvc;
 
 namespace MyReviewProject.Controllers
 {
-    [Authorize]
-    [Authorize(Roles = "Users")]
     public class ReviewController : Controller
     {
         ReviewContext db = new ReviewContext();
@@ -43,8 +41,18 @@ namespace MyReviewProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var catId = db.Categories.Where(c => c.Name.ToLower() == content.Category.ToLower()).Select(c => c.Id).FirstOrDefault();
+                var subId = db.SubCategories.Where(s => s.CategoryId== catId).Select(s=>s.SubCategoryId).FirstOrDefault();
+                var subject = db.Subjects.Where(s => s.SubCategoryId == subId && s.Name.ToLower() == content.Objectname.ToLower());
+                if (subject == null)
+                {
+                    db.Subjects.Add(new Subject {Name=content.Objectname, SubCategoryId = Convert.ToInt32(subId) });
+                }
+
                 review.Rating = content.Rating;
                 review.Recomendation = content.Recomendations ? 1 : 0;
+                review.Experience = content.Experience;
+
 
 
                 if (uploadImage != null)

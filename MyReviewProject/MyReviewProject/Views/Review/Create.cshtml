@@ -13,8 +13,9 @@
         @Html.ValidationSummary(true)
 
         <div class="create-header">
-            <h2> Мой отзыв</h2>
+            <h2 style="text-align:center; padding-right: 70px;"> Мой отзыв</h2>
             <hr />
+            
         </div>
         <div class="create-content">
             <div class="linerow-smaller" style="margin-right:40px">
@@ -30,27 +31,27 @@
                             <div class="mutliSelectCat">
                                 <ul>
                                     <li>
-                                        <input name="chooseCat" type="radio" id="Cat1" value="Cat1" />
+                                        <input name="Category" type="radio" id="Cat1" value="Cat1" />
                                         <label for="Cat1">Apple</label>
                                     </li>
                                     <li>
-                                        <input name="chooseCat" type="radio" id="Cat2" value="Blackberry" />
+                                        <input name="Category" type="radio" id="Cat2" value="Blackberry" />
                                         <label for="Cat2">BlackBerry</label>
                                     </li>
                                     <li>
-                                        <input name="chooseCat" type="radio" id="Cat3" value="HTC" />
+                                        <input name="Category" type="radio" id="Cat3" value="HTC" />
                                         <label for="Cat3">Apple</label>
                                     </li>
                                     <li>
-                                        <input name="chooseCat" type="radio" id="Cat4" value="Sony Ericson" />
+                                        <input name="Category" type="radio" id="Cat4" value="Sony Ericson" />
                                         <label for="Cat4">Apple</label>
                                     </li>
                                     <li>
-                                        <input name="chooseCat" type="radio" id="Cat5" value="Motorola" />
+                                        <input name="Category" type="radio" id="Cat5" value="Motorola" />
                                         <label for="Cat5">Apple</label>
                                     </li>
                                     <li>
-                                        <input name="chooseCat" type="radio" id="Cat6" value="Nokia" />Nokia
+                                        <input name="Category" type="radio" id="Cat6" value="Nokia" />Nokia
                                         <label for="Cat6">Apple</label>
                                     </li>
                                 </ul>
@@ -71,22 +72,28 @@
                             <div class="mutliSelectSub">
                                 <ul>
                                     <li>
-                                        <input name="choosesub" type="radio" value="Apple" />Apple
+                                        <input name="subCategory" type="radio" id="sub1" value="Apple" />
+                                        <label for="sub1">Apple</label>
                                     </li>
                                     <li>
-                                        <input name="choosesub" type="radio" value="Blackberry" />Blackberry
+                                        <input name="subCategory" type="radio" id="sub2" value="Blackberry" />
+                                        <label for="sub2">Blackberry</label>
                                     </li>
                                     <li>
-                                        <input name="choosesub" type="radio" value="HTC" />HTC
+                                        <input name="subCategory" type="radio" id="sub3" value="HTC" />
+                                        <label for="sub3">HTC</label>
                                     </li>
                                     <li>
-                                        <input name="choosesub" type="radio" value="Sony Ericson" />Sony Ericson
+                                        <input name="subCategory" type="radio" id="sub4" value="Sony Ericson" />
+                                        <label for="sub4">Ericson</label>
                                     </li>
                                     <li>
-                                        <input name="choosesub" type="radio" value="Motorola" />Motorola
+                                        <input name="subCategory" type="radio" id="sub5" value="Motorola" />
+                                        <label for="sub5">Motorola</label>
                                     </li>
                                     <li>
-                                        <input name="choosesub" type="radio" value="Nokia" />Nokia
+                                        <input name="subCategory" type="radio" id="sub6" value="Nokia" />
+                                        <label for="sub6">Nokia</label>
                                     </li>
                                 </ul>
                             </div>
@@ -96,6 +103,13 @@
                 </div>
                 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
                 <script src="~/Scripts/Dropdowncheckboxes.js"></script>
+            </div>
+
+            <div class="linerow" style="margin-top:10px">
+                <div class="col-25"><h3>Наименование</h3></div>
+                <div class="col-75">
+                    <input type="text" name="Objectname" placeholder="Название обозреваемой штуковины"/>
+                </div>
             </div>
 
             <div class="linerow-smaller">
@@ -124,6 +138,7 @@
                     </script>
                 </div>
             </div>
+
             <div class="linerow">
                 <div class="col-25"><h3>Опыт использования</h3></div>
                 <div class="col-75">
@@ -139,6 +154,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="linerow">
                 <div class="col-25"><h3>Порекомендовали<br />бы товар друзьям?</h3></div>
                 <div class="col-75">
@@ -151,6 +167,8 @@
                 </div>
             </div>
 
+
+
             <div class="Review-product-fields">
                 <div class="fields-item">
                     <div class="col-25">
@@ -158,7 +176,7 @@
                     </div>
                     <div class="col-75">
                         <span class="input-box">
-                            <textarea id="Like" placeholder="Кратко о том, что вам понравилось"></textarea>
+                            <textarea id="Like" name="Like" placeholder="Кратко о том, что вам понравилось"></textarea>
                         </span>
                         <span class="input-clear"></span>
                     </div>
@@ -169,7 +187,7 @@
                     </div>
                     <div class="col-75">
                         <span class="input-box">
-                            <textarea id="Dislike" placeholder="Кратко о том, что вам не понравилось"></textarea>
+                            <textarea id="Dislike" name="Dislike" placeholder="Кратко о том, что вам не понравилось"></textarea>
                         </span>
                         <span class="input-clear"></span>
                     </div>
@@ -181,13 +199,13 @@
                     </div>
                     <div class="col-75">
                         <span class="input-box">
-                            <textarea id="Comments" placeholder="Развёрнуто о ваших впечатлениях"></textarea>
+                            <textarea id="Comments" name="Comment" placeholder="Развёрнуто о ваших впечатлениях"></textarea>
                         </span>
                         <span class="input-clear"></span>
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <div class="create-footer">
             <div class="col-25">

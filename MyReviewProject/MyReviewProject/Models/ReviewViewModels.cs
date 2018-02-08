@@ -23,7 +23,12 @@ namespace MyReviewProject.Models
 
         public List<SubCategory> subCategories { get; set; }
 
+        [Required]
+        public string Objectname { get; set; }
+
+        [Required]
         public string Category { get; set; }
+        [Required]
         public string subCategory { get; set; }
 
         [Required]

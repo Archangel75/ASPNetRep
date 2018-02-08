@@ -511,6 +511,7 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Review\Review.cshtml" />
     <Content Include="Views\Review\Create.cshtml" />
+    <Content Include="Views\Review\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
