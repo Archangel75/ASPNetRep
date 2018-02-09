@@ -45,9 +45,9 @@ namespace MyReviewProject.Controllers
                 //                         .Select(c => c.Id).FirstOrDefault(0);
                 //var subId = db.SubCategories.Where(s => s.CategoryId== catId)
                 //                            .Select(s=>s.SubCategoryId).FirstOrDefault(0);
-                var subjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault(0);
+                //var subjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault(0);
 
-                review.SubjectId = subjectId;
+                //review.SubjectId = subjectId;
 
                 review.Rating = content.Rating;
                 review.Recomendation = content.Recomendations ? 1 : 0;
@@ -77,6 +77,28 @@ namespace MyReviewProject.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+
+        public  ActionResult AutocompleteSearch(string term)
+        {
+
+            var models = db.Subjects.Where(a => a.Name.Contains(term))
+                            .Select(a => new { value = a.Name })
+                            .Distinct();
+
+            return Json(models, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult CheckExistSubject(string term)
+        {
+            var subjectId = db.Subjects.Where(s => s.Name.ToLower() == term.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
+
+            if (subjectId > 0)            
+                return ViewBag.NoName = "";            
+            else           
+                return ViewBag.NoName = "Похоже никто ещё не делал обзор на это.";
+            
         }
     }
 }

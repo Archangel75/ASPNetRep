@@ -22,7 +22,7 @@
   color:  var(--text);
 }
 
-.sidebar ul {
+/*.sidebar ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -31,7 +31,26 @@
 .sidebar li {
   padding-bottom: 7px;
   padding-top:7px;
+}*/
+
+#sidebarli {
+    padding-bottom: 7px;
+    padding-top: 7px;
 }
+
+#sidebarul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+#sidebarli:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
 .sidebar li:last-child {
   border-bottom: none;
   margin-bottom: 0;

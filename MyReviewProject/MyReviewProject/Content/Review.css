@@ -1,6 +1,6 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Gabriela|Raleway:500,700&subset=latin-ext');
-@import url('StarRating.css');
-@import url('Dropdowncheckboxes.css');
+@import 'StarRating.css';
+@import 'Dropdowncheckboxes.css';
 @import "Colors.css";
 
 .fields-item {
@@ -55,6 +55,41 @@ h1, h2, h3, h4, h5, .field-positive-label {
     margin-top:6px;
 }
 
+#ui-id-1{
+        background-color: var(--brhardtonotice);
+        border: 0;
+        color: var(--whitetext);
+        display: none;
+        left: 0px;
+        padding: 2px 15px 2px 5px;
+        position: absolute;
+        top: 2px;
+        max-width: 500px;
+        list-style: none;
+        overflow: auto;
+    }
+
+#buttoncreate{
+    margin: 0 20px 0 20px;
+    padding: 0 30px 0 30px;
+    width: 150px;
+}    
+
+.divhide{
+    display:none;
+}
+
+input[type=submit], input[type=button] {
+    background-color: var(--lightgray);
+    color: var(--darkgray);
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 5px 5px 0px;
+    cursor: pointer;
+    min-width:150px;
+}
 
 textarea{
     width: 100%;
@@ -72,8 +107,8 @@ textarea{
 }
 
 input[type=text] {
-    min-width:500px;
-    width:500px;
+    min-width:250px;
+    width:100%;
     font-family: 'Gabriela', serif;
     font-size: 15px;
     padding: 12px;
@@ -84,6 +119,8 @@ input[type=text] {
     max-width: none;
 }
 
+
+
 textarea:focus, input[type=text]:focus {
     outline: 4px solid var(--hovertext);
     
@@ -93,8 +130,6 @@ textarea:focus, input[type=text]:focus {
     display:block;
     padding-top:10px;
 }
-
-
 
 .input-box {
     display:block;
