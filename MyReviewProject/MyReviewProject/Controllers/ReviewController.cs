@@ -32,8 +32,17 @@ namespace MyReviewProject.Controllers
         public ActionResult Create(CreateReviewViewModel review)
         {
             review.Categories = db.Categories.ToList();
-            review.subCategories = db.SubCategories.ToList();
-            return View();
+            ViewBag.selCat = "";
+            return View(review);
+        }
+
+        public ActionResult GetSubCategories(string catname)
+        {
+            var catId = db.Categories.Where(c => c.Name.ToLower() == catname.ToLower())
+                                    .Select(c => c.Id).FirstOrDefault();
+            ViewBag.subs = db.SubCategories.Where(s => s.CategoryId == catId);
+            ViewBag.selCat = catname;
+            return View(ViewBag);
         }
 
         [HttpPost]

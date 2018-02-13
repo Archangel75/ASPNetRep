@@ -21,16 +21,19 @@ function getSelectedCatValue(id) {
 $(document).bind("click", function(e) {
   var $clicked = $(e.target);
   if (!$clicked.parents().hasClass("dropdownCat")) $(".dropdownCat dd ul").hide();
+  
 });
 
 //Categories
 $('.mutliSelectCat input').on('click', function () {
         var title = $(this).closest('.mutliSelectCat').find('input').val(),
-            title = $(this).val();
+        title = $(this).val();
+        $.get("/Review/GetSubCategories", { catname: title }, function (data) { });
         $('.multiSelCat span').remove();
         var html = '<span title="' + title + '">' + title + '</span>';
         $('.multiSelCat').append(html);
         $(".hidaCat").hide();
+        
 });
 
 //SubCategories
