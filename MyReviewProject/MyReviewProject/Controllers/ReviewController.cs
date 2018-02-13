@@ -94,11 +94,13 @@ namespace MyReviewProject.Controllers
         {
             var subjectId = db.Subjects.Where(s => s.Name.ToLower() == term.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
 
-            if (subjectId > 0)            
-                return ViewBag.NoName = "";            
-            else           
-                return ViewBag.NoName = "Похоже никто ещё не делал обзор на это.";
-            
+            if (subjectId > 0)
+                return Json(new { correct=true }, JsonRequestBehavior.AllowGet);
+            //return ViewBag.NoName = "";            
+            else
+                return Json(new { correct = false }, JsonRequestBehavior.AllowGet);
+            //return ViewBag.NoName = "Похоже никто ещё не делал обзор на это.";
+
         }
     }
 }
