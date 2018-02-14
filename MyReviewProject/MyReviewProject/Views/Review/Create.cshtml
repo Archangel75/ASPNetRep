@@ -10,7 +10,7 @@
 
 
 @using (Html.BeginForm("Create", "Review", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
+{
         @Html.ValidationSummary(true)
 
         <div class="create-header">
@@ -106,10 +106,6 @@
             <script src="~/Scripts/Dropdowncheckboxes.js"></script>*@
             </div>
 
-
-
-
-
             <div class="linerow" style="margin-top:10px">
                 <div class="col-25"><h3>Наименование</h3></div>
                 <div class="col-50">
@@ -141,63 +137,8 @@
                 </div>
             </div>
             
-            <!-- Modal -->
-            <div class="modal" id="SubjectModal" tabindex="1" role="dialog">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>Создание нового резюме предмета</h3>
-                    <div class="col-50">
-                        <dl class="dropdownCat">
-                            <dt>
-                                <a href="#">
-                                    <span class="hidaCat">Select</span>
-                                    <p class="multiSelCat"></p>
-                                </a>
-                            </dt>
-                            <dd>
-                                <div class="mutliSelectCat">
-                                    <ul>
-                                        @foreach (var cat in Model.Categories)
-                                        {
-                                            <li>
-                                                <label><input name="Category" type="radio" id=catid value=@cat.Name /> @cat.Name</label>
-                                            </li>
-                                         }
-                                    </ul>
-                                </div>
-                            </dd>
-                        </dl>
+            @Html.Partial("ModalReview")
 
-                    </div>
-                    <div class="col-50">
-                        <dl class="dropdownSub">
-                            <dt>
-                                <a href="#">
-                                    <span class="hidaSub">Select</span>
-                                    <p class="multiSelSub"></p>
-                                </a>
-                            </dt>
-                            <dd>
-                                <div class="mutliSelectSub">
-                                    <ul>            
-                                        @if (ViewBag.selCat != "")
-                                        {
-                                            foreach (var subCat in ViewBag.subs)
-                                            {
-                                                <li>
-                                                    <label><input name="subCategory" type="radio" id=catid value=@subCat.Name /> @subCat.Name</label>
-                                                </li>
-                                            }
-                                        }
-                                    </ul>
-                                </div>
-                            </dd>
-                        </dl>
-                    </div>
-                    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-                    <script src="~/Scripts/Dropdowncheckboxes.js"></script>
-                </div>
-                </div>
                     <script>
                         var modal = document.getElementById('SubjectModal');
                         var btn = document.getElementById("CreateSubject");
@@ -309,7 +250,7 @@
                         </div>
                     </div>
 
-                </div>
+        </div>
         <div class="create-footer">
             <div class="col-25">
                 

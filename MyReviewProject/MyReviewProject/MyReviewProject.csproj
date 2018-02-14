@@ -555,6 +555,7 @@
     <Content Include="Views\Review\Review.cshtml" />
     <Content Include="Views\Review\Create.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
+    <Content Include="Views\Review\ModalReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

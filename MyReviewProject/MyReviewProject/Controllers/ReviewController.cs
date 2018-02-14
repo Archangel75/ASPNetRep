@@ -32,7 +32,7 @@ namespace MyReviewProject.Controllers
         public ActionResult Create(CreateReviewViewModel review)
         {
             review.Categories = db.Categories.ToList();
-            ViewBag.selCat = "";
+            ViewBag.subs = new List<SubCategory>(db.SubCategories.Where(s => s.CategoryId == 1));
             return View(review);
         }
 
@@ -40,9 +40,29 @@ namespace MyReviewProject.Controllers
         {
             var catId = db.Categories.Where(c => c.Name.ToLower() == catname.ToLower())
                                     .Select(c => c.Id).FirstOrDefault();
-            ViewBag.subs = db.SubCategories.Where(s => s.CategoryId == catId);
-            ViewBag.selCat = catname;
-            return View(ViewBag);
+            var subs = db.SubCategories.Where(s => s.CategoryId == catId);
+
+            string responce = "";
+            foreach (var sub in subs)
+            {
+                responce += String.Format("<li><label><input name=\"subCategory\" type=\"radio\" id=\"{0}\" value=\"{1}\" />{1}</label></li>", sub.SubCategoryId, sub.Name);
+            }
+
+            return Json(new { result = responce}, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult CreateSubject( int subcatid, string subjname)
+        {
+            //var subId = db.SubCategories.Where(s => s.Name == subcatname)
+            //                        .Select(s=>s.SubCategoryId).FirstOrDefault();
+            if (subcatid != 0)
+            {
+                db.Subjects.Add(new Subject { AverageRating = 0, Name = subjname, SubCategoryId = subcatid });
+                db.SaveChanges();
+            }
+
+            return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

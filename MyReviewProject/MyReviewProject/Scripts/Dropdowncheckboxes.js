@@ -20,7 +20,7 @@ function getSelectedCatValue(id) {
 
 $(document).bind("click", function(e) {
   var $clicked = $(e.target);
-  if (!$clicked.parents().hasClass("dropdownCat")) $(".dropdownCat dd ul").hide();
+  if (!$clicked.parents().hasClass("dropdownCat")) $(".dropdownCat dd div ul").hide();
   
 });
 
@@ -28,7 +28,9 @@ $(document).bind("click", function(e) {
 $('.mutliSelectCat input').on('click', function () {
         var title = $(this).closest('.mutliSelectCat').find('input').val(),
         title = $(this).val();
-        $.get("/Review/GetSubCategories", { catname: title }, function (data) { });
+        $.get("/Review/GetSubCategories", { catname: title }, function (data) {
+            $("#subCat").html(data.result);
+        });
         $('.multiSelCat span').remove();
         var html = '<span title="' + title + '">' + title + '</span>';
         $('.multiSelCat').append(html);
@@ -46,7 +48,7 @@ $(".dropdownSub dd ul li a").on("click", function () {
     $(".dropdownSub dd ul").hide();
 });
 //получает значение
-function getSelectedCatValue(id) {
+function getSelectedSubValue(id) {
     return $("#" + id)
         .find(".dropdownSub dt a span.value")
         .html();
@@ -54,16 +56,27 @@ function getSelectedCatValue(id) {
 //прячет когда кликаем в сторону
 $(document).bind("click", function (e) {
     var $clicked = $(e.target);
-    if (!$clicked.parents().hasClass("dropdownSub") ) $(".dropdownSub dd ul").hide();
+    if (!$clicked.parents().hasClass("dropdownSub") ) $(".dropdownSub dd div ul").hide();
 });
 
 //SubCategories
 $('.mutliSelectSub input').on('click', function () {
-    var title = $(this).closest('.mutliSelectSub').find('input').val(),
-        title = $(this).val();
+    var title2 = $(this).closest('.mutliSelectSub').find('input').val(),
+        title2 = $(this).val();
     $('.multiSelSub span').remove();
-    var html = '<span title="' + title + '">' + title + '</span>';
-    $('.multiSelSub').append(html);
+    var html2 = '<span title="' + title2 + '">' + title2 + '</span>';
+    $('.multiSelSub').append(html2);
     $(".hidaSub").hide();
 });
 
+
+
+$('#createSubject').on('click', function () {
+    var catName = document.getElementsByClassName('multiSelCat')[0];
+    var subCatName = document.getElementsByClassName('multiSelSub')[0];
+    var subjName = document.getElementById('subjName');
+    $.post("/Review/CreateSubject", { subcatId: subCatName.id, subjname: subjName }, function () {
+        var modal = document.getElementById('SubjectModal');
+        modal.style.display = "block";
+    });
+});

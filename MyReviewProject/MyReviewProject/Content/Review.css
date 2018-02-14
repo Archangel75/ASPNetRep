@@ -68,11 +68,12 @@ h1, h2, h3, h4, h5, .field-positive-label {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--darkgray);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    min-height: 500px;
     height:auto;
 }
 .close {
