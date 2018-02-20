@@ -30,6 +30,14 @@ $('.mutliSelectCat input').on('click', function () {
         title = $(this).val();
         $.get("/Review/GetSubCategories", { catname: title }, function (data) {
             $("#subCat").html(data.result);
+            $(".mutliSelectSub").delegate('input', 'click', function () {
+                var title5 = $(this).closest('.mutliSelectSub').find('input').val(),
+                    title5 = $(this).val();
+                $('.multiSelSub span').remove();
+                var html5 = '<span title="' + title5 + '">' + title5 + '</span>';
+                $('.multiSelSub').append(html5);
+                $(".hidaSub").hide();
+            });
         });
         $('.multiSelCat span').remove();
         var html = '<span title="' + title + '">' + title + '</span>';
@@ -77,6 +85,6 @@ $('#createSubject').on('click', function () {
     var subjName = document.getElementById('subjName');
     $.post("/Review/CreateSubject", { subcatId: subCatName.id, subjname: subjName }, function () {
         var modal = document.getElementById('SubjectModal');
-        modal.style.display = "block";
+        modal.style.display = "none";
     });
 });

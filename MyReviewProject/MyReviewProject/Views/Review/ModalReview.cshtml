@@ -16,11 +16,11 @@
                         <div class="mutliSelectCat">
                             <ul>
                                 @foreach (var cat in Model.Categories)
-                        {
-                            <li>
-                                <label><input name="Category" type="radio" id=catid value=@cat.Name /> @cat.Name</label>
-                            </li>
-                }
+                                {
+                                    <li>
+                                        <label><input name="Category" type="radio" id=catid value=@cat.Name /> @cat.Name</label>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </dd>
@@ -38,11 +38,11 @@
                         <div class="mutliSelectSub">
                             <ul id="subCat">
                                 @foreach (var subCat in ViewBag.subs)
-                        {
-                            <li>
-                                <label><input name="subCategory" type="radio" id=subcatid value=@subCat.Name /> @subCat.Name</label>
-                            </li>
-                }
+                                {
+                                    <li>
+                                        <label><input name="subCategory" type="radio" id=subcatid value=@subCat.Name /> @subCat.Name</label>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </dd>
