@@ -1,8 +1,4 @@
-﻿/*
-	Dropdown with Multiple checkbox select with jQuery - May 27, 2013
-	(c) 2013 @ElmahdiMahmoud
-	license: https://www.opensource.org/licenses/mit-license.php
-*/
+﻿
 //дропает
 $(".dropdownCat dt a").on("click", function() {
     $(".dropdownCat dd ul").slideToggle("fast");
@@ -77,14 +73,14 @@ $('.mutliSelectSub input').on('click', function () {
     $(".hidaSub").hide();
 });
 
-
-
-$('#createSubject').on('click', function () {
-    var catName = document.getElementsByClassName('multiSelCat')[0];
-    var subCatName = document.getElementsByClassName('multiSelSub')[0];
-    var subjName = document.getElementById('subjName');
-    $.post("/Review/CreateSubject", { subcatId: subCatName.id, subjname: subjName }, function () {
-        var modal = document.getElementById('SubjectModal');
-        modal.style.display = "none";
-    });
-});
+//$(function(){
+//    $('#createSubject').click(function () {
+//        var catName = document.getElementsByClassName('multiSelCat')[0];
+//        var subCatName = document.getElementsByClassName('multiSelSub')[0];
+//        var subjName = document.getElementById('subjName');
+//        $.post("/Review/CreateSubject", { subcatId: subCatName.id, subjname: subjName }, function () {
+//            var modal = document.getElementById('SubjectModal');
+//            modal.style.display = "none";
+//        });
+//    });
+//});

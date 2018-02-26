@@ -2,6 +2,7 @@
 @using MyReviewProject.Models
 
 @Styles.Render("~/Content/Review.css")
+
 @{
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&amp;subset=latin-ext" rel="stylesheet">
     ViewBag.Title = "Create";
@@ -11,259 +12,258 @@
 
 @using (Html.BeginForm("Create", "Review", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-        @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true)
 
-        <div class="create-header">
-            <h2 style="text-align:center; padding-right: 70px;"> Мой отзыв</h2>
-            <hr />
-            
-        </div>
-        <div class="create-content">
-            <div class="linerow-smaller" style="margin-right:40px">
-                @*   <div class="col-50">
-                <dl class="dropdownCat">
-                    <dt>
-                        <a href="#">
-                            <span class="hidaCat">Select</span>
-                            <p class="multiSelCat"></p>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="mutliSelectCat">
-                            <ul>
-                                <li>
-                                    <input name="Category" type="radio" id="Cat1" value="Cat1" />
-                                    <label for="Cat1">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="Category" type="radio" id="Cat2" value="Blackberry" />
-                                    <label for="Cat2">BlackBerry</label>
-                                </li>
-                                <li>
-                                    <input name="Category" type="radio" id="Cat3" value="HTC" />
-                                    <label for="Cat3">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="Category" type="radio" id="Cat4" value="Sony Ericson" />
-                                    <label for="Cat4">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="Category" type="radio" id="Cat5" value="Motorola" />
-                                    <label for="Cat5">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="Category" type="radio" id="Cat6" value="Nokia" />Nokia
-                                    <label for="Cat6">Apple</label>
-                                </li>
-                            </ul>
-                        </div>
-                    </dd>
-                </dl>
-            </div>
+    <div class="create-header">
+        <h2 style="text-align:center; padding-right: 70px;"> Мой отзыв</h2>
+        <hr />
 
-            <div class="col-50">
-                <dl class="dropdownSub">
-                    <dt>
-                        <a href="#">
-                            <span class="hidaSub">Select</span>
-                            <p class="multiSelSub"></p>
-                        </a>
-                    </dt>
-                    <dd>
-                        <div class="mutliSelectSub">
-                            <ul>
-                                <li>
-                                    <input name="subCategory" type="radio" id="sub1" value="Apple" />
-                                    <label for="sub1">Apple</label>
-                                </li>
-                                <li>
-                                    <input name="subCategory" type="radio" id="sub2" value="Blackberry" />
-                                    <label for="sub2">Blackberry</label>
-                                </li>
-                                <li>
-                                    <input name="subCategory" type="radio" id="sub3" value="HTC" />
-                                    <label for="sub3">HTC</label>
-                                </li>
-                                <li>
-                                    <input name="subCategory" type="radio" id="sub4" value="Sony Ericson" />
-                                    <label for="sub4">Ericson</label>
-                                </li>
-                                <li>
-                                    <input name="subCategory" type="radio" id="sub5" value="Motorola" />
-                                    <label for="sub5">Motorola</label>
-                                </li>
-                                <li>
-                                    <input name="subCategory" type="radio" id="sub6" value="Nokia" />
-                                    <label for="sub6">Nokia</label>
-                                </li>
-                            </ul>
-                        </div>
-                    </dd>
-                </dl>
+    </div>
+    <div class="create-content">
+        <div class="linerow-smaller" style="margin-right:40px">
+            @*   <div class="col-50">
+                    <dl class="dropdownCat">
+                        <dt>
+                            <a href="#">
+                                <span class="hidaCat">Select</span>
+                                <p class="multiSelCat"></p>
+                            </a>
+                        </dt>
+                        <dd>
+                            <div class="mutliSelectCat">
+                                <ul>
+                                    <li>
+                                        <input name="Category" type="radio" id="Cat1" value="Cat1" />
+                                        <label for="Cat1">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="Category" type="radio" id="Cat2" value="Blackberry" />
+                                        <label for="Cat2">BlackBerry</label>
+                                    </li>
+                                    <li>
+                                        <input name="Category" type="radio" id="Cat3" value="HTC" />
+                                        <label for="Cat3">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="Category" type="radio" id="Cat4" value="Sony Ericson" />
+                                        <label for="Cat4">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="Category" type="radio" id="Cat5" value="Motorola" />
+                                        <label for="Cat5">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="Category" type="radio" id="Cat6" value="Nokia" />Nokia
+                                        <label for="Cat6">Apple</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
 
-            </div>
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-            <script src="~/Scripts/Dropdowncheckboxes.js"></script>*@
-            </div>
-
-            <div class="linerow" style="margin-top:10px">
-                <div class="col-25"><h3>Наименование</h3></div>
                 <div class="col-50">
-                    <input id="Objectname" type="text" name="Objectname" placeholder="Название обозреваемой штуковины" data-autocomplete-source='@Url.Action("AutocompleteSearch","Review")' onblur="checkExistSubject(this)" />
-                    <script src='@Url.Content("~/Scripts/jquery-3.3.1.min.js")' type="text/javascript"></script>
-                    <script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")' type="text/javascript"></script>
-                    <script type="text/javascript">
-                        (function () {
-                            $("[data-autocomplete-source]").each(function () {
-                                var target = $(this);
-                                target.autocomplete({ source: target.attr("data-autocomplete-source") });
-                            });
-                        });
+                    <dl class="dropdownSub">
+                        <dt>
+                            <a href="#">
+                                <span class="hidaSub">Select</span>
+                                <p class="multiSelSub"></p>
+                            </a>
+                        </dt>
+                        <dd>
+                            <div class="mutliSelectSub">
+                                <ul>
+                                    <li>
+                                        <input name="subCategory" type="radio" id="sub1" value="Apple" />
+                                        <label for="sub1">Apple</label>
+                                    </li>
+                                    <li>
+                                        <input name="subCategory" type="radio" id="sub2" value="Blackberry" />
+                                        <label for="sub2">Blackberry</label>
+                                    </li>
+                                    <li>
+                                        <input name="subCategory" type="radio" id="sub3" value="HTC" />
+                                        <label for="sub3">HTC</label>
+                                    </li>
+                                    <li>
+                                        <input name="subCategory" type="radio" id="sub4" value="Sony Ericson" />
+                                        <label for="sub4">Ericson</label>
+                                    </li>
+                                    <li>
+                                        <input name="subCategory" type="radio" id="sub5" value="Motorola" />
+                                        <label for="sub5">Motorola</label>
+                                    </li>
+                                    <li>
+                                        <input name="subCategory" type="radio" id="sub6" value="Nokia" />
+                                        <label for="sub6">Nokia</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
 
-                        function checkExistSubject(obj) {
-                            $.get("/Review/CheckExistSubject", { term: obj.value }, function (data) {
-                                if (!data.correct) {
-                                    $('#buttoncreate').show();
-                                }
-                            });
-                        }
-                    </script>
                 </div>
-                <div class="col-25">
-                    <div id="buttoncreate" class="divhide">
-                        <label for="CreateSubject">@ViewBag.NoName</label>
-                        <input type="button" id="CreateSubject" value="Создать" data-toggle="modal" data-target="#examplemodal" />
-                    </div>
+                <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+                <script src="~/Scripts/Dropdowncheckboxes.js"></script>*@
+        </div>
+
+        <div class="linerow" style="margin-top:10px">
+            <div class="col-25"><h3>Наименование</h3></div>
+            <div class="col-50">
+                <input id="Objectname" type="text" name="Objectname" placeholder="Название обозреваемой штуковины" data-autocomplete-source='@Url.Action("AutocompleteSearch","Review")' onblur="checkExistSubject(this)" />
+                <script src='@Url.Content("~/Scripts/jquery-3.3.1.min.js")' type="text/javascript"></script>
+                <script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")' type="text/javascript"></script>
+                <script type="text/javascript">
+                    (function () {
+                        $("[data-autocomplete-source]").each(function () {
+                            var target = $(this);
+                            target.autocomplete({ source: target.attr("data-autocomplete-source") });
+                        });
+                    });
+
+                    function checkExistSubject(obj) {
+                        $.get("/Review/CheckExistSubject", { term: obj.value }, function (data) {
+                            if (!data.correct) {
+                                $('#buttoncreate').show();
+                            }
+                        });
+                    }
+                </script>
+            </div>
+            <div class="col-25">
+                <div id="buttoncreate" class="divhide">
+                    <label for="CreateSubject">@ViewBag.NoName</label>
+                    <input type="button" id="CreateSubject" value="Создать" data-toggle="modal" data-target="#examplemodal" />
                 </div>
             </div>
-            
-            @Html.Partial("ModalReview")
-
-                    <script>
-                        var modal = document.getElementById('SubjectModal');
-                        var btn = document.getElementById("CreateSubject");
-                        var span = document.getElementsByClassName("close")[0];
-                        btn.onclick = function () {
-                            modal.style.display = "block";
-                        }
-                        span.onclick = function () {
-                            modal.style.display = "none";
-                        }
-                        window.onclick = function (event) {
-                            if (event.target == modal) {
-                                modal.style.display = "none";
-                            }
-                        }
-                    </script>
-
-                    <div class="linerow-smaller">
-                        <div class="col-25">
-                            <h4>Общая оценка</h4>
-                        </div>
-                        <div class="col-75">
-                            <fieldset>
-                                <span class="star-cb-group">
-                                    <input type="radio" id="rating-5" name="Rating" value="5" /><label for="rating-5">5</label>
-                                    <input type="radio" id="rating-4" name="Rating" value="4" checked="checked" /><label for="rating-4">4</label>
-                                    <input type="radio" id="rating-3" name="Rating" value="3" /><label for="rating-3">3</label>
-                                    <input type="radio" id="rating-2" name="Rating" value="2" /><label for="rating-2">2</label>
-                                    <input type="radio" id="rating-1" name="Rating" value="1" /><label for="rating-1">1</label>
-                                    <input type="radio" id="rating-0" name="Rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
-                                </span>
-                            </fieldset>
-                            <script>
-                                var logID = 'log',
-                                    log = $('<div id="' + logID + '"></div>');
-                                $('body').append(log);
-                                $('[type*="radio"]').change(function () {
-                                    var me = $(this);
-                                    log.html(me.attr('value'));
-                                });
-                            </script>
-                        </div>
-                    </div>
-
-                    <div class="linerow">
-                        <div class="col-25"><h3>Опыт использования</h3></div>
-                        <div class="col-75">
-                            <div class="radio-group">
-                                <input class="radio-button__control" id="radio-exp-no" type="radio" name="Experience" value="0" />
-                                <label class="radio-button__text" for="radio-exp-no">Нет</label>
-                                <input class="radio-button__control" id="radio-exp-lessmonth" type="radio" name="Experience" value="1" />
-                                <label class="radio-button__text" for="radio-exp-lessmonth">меньше месяца</label>
-                                <input class="radio-button__control" id="radio-exp-months" type="radio" name="Experience" value="2" />
-                                <label class="radio-button__text" for="radio-exp-months">несколько месяцев</label>
-                                <input class="radio-button__control" id="radio-exp-years" type="radio" name="Experience" value="3" />
-                                <label class="radio-button__text" for="radio-exp-years">больше года</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="linerow">
-                        <div class="col-25"><h3>Порекомендовали<br />бы товар друзьям?</h3></div>
-                        <div class="col-75">
-                            <div class="radio-group">
-                                <input class="radio-button__control" id="radio-recom-yes" type="radio" name="Recomendations" value="true" />
-                                <label class="radio-button__text" for="radio-recom-yes">да</label>
-                                <input class="radio-button__control" id="radio-recom-no" type="radio" name="Recomendations" value="false" />
-                                <label class="radio-button__text" for="radio-recom-no">нет</label>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="Review-product-fields">
-                        <div class="fields-item">
-                            <div class="col-25">
-                                <label class="field-positive-label">Достоинства</label>
-                            </div>
-                            <div class="col-75">
-                                <span class="input-box">
-                                    <textarea id="Like" name="Like" placeholder="Кратко о том, что вам понравилось"></textarea>
-                                </span>
-                                <span class="input-clear"></span>
-                            </div>
-                        </div>
-                        <div class="fields-item">
-                            <div class="col-25">
-                                <label class="field-positive-label">Недостатки</label>
-                            </div>
-                            <div class="col-75">
-                                <span class="input-box">
-                                    <textarea id="Dislike" name="Dislike" placeholder="Кратко о том, что вам не понравилось"></textarea>
-                                </span>
-                                <span class="input-clear"></span>
-                            </div>
-
-                        </div>
-                        <div class="fields-item">
-                            <div class="col-25">
-                                <label class="field-positive-label">Комментарии</label>
-                            </div>
-                            <div class="col-75">
-                                <span class="input-box">
-                                    <textarea id="Comments" name="Comment" placeholder="Развёрнуто о ваших впечатлениях"></textarea>
-                                </span>
-                                <span class="input-clear"></span>
-                            </div>
-                        </div>
-                    </div>
-
         </div>
-        <div class="create-footer">
+
+        @Html.Partial("ModalReview")
+        <script>
+            var modal = document.getElementById('SubjectModal');
+            var btn = document.getElementById("CreateSubject");
+            var span = document.getElementsByClassName("close")[0];
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+        <div class="linerow-smaller">
             <div class="col-25">
-                
+                <h4>Общая оценка</h4>
             </div>
             <div class="col-75">
-                <a class='btn'>
-                    <input id="image" type="file" name="uploadImage" onchange='$("#upload-file-info").html($(this).val());' />
-                </a>
-                <span class='label label-info' id="upload-file-info"></span>
+                <fieldset>
+                    <span class="star-cb-group">
+                        <input type="radio" id="rating-5" name="Rating" value="5" /><label for="rating-5">5</label>
+                        <input type="radio" id="rating-4" name="Rating" value="4" checked="checked" /><label for="rating-4">4</label>
+                        <input type="radio" id="rating-3" name="Rating" value="3" /><label for="rating-3">3</label>
+                        <input type="radio" id="rating-2" name="Rating" value="2" /><label for="rating-2">2</label>
+                        <input type="radio" id="rating-1" name="Rating" value="1" /><label for="rating-1">1</label>
+                        <input type="radio" id="rating-0" name="Rating" value="0" class="star-cb-clear" /><label for="rating-0">0</label>
+                    </span>
+                </fieldset>
+                <script>
+                    var logID = 'log',
+                        log = $('<div id="' + logID + '"></div>');
+                    $('body').append(log);
+                    $('[type*="radio"]').change(function () {
+                        var me = $(this);
+                        log.html(me.attr('value'));
+                    });
+                </script>
             </div>
-
-            <br />
-            <input type="submit" value="Опубликовать" />
         </div>
+
+        <div class="linerow">
+            <div class="col-25"><h3>Опыт использования</h3></div>
+            <div class="col-75">
+                <div class="radio-group">
+                    <input class="radio-button__control" id="radio-exp-no" type="radio" name="Experience" value="0" />
+                    <label class="radio-button__text" for="radio-exp-no">Нет</label>
+                    <input class="radio-button__control" id="radio-exp-lessmonth" type="radio" name="Experience" value="1" />
+                    <label class="radio-button__text" for="radio-exp-lessmonth">меньше месяца</label>
+                    <input class="radio-button__control" id="radio-exp-months" type="radio" name="Experience" value="2" />
+                    <label class="radio-button__text" for="radio-exp-months">несколько месяцев</label>
+                    <input class="radio-button__control" id="radio-exp-years" type="radio" name="Experience" value="3" />
+                    <label class="radio-button__text" for="radio-exp-years">больше года</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="linerow">
+            <div class="col-25"><h3>Порекомендовали<br />бы товар друзьям?</h3></div>
+            <div class="col-75">
+                <div class="radio-group">
+                    <input class="radio-button__control" id="radio-recom-yes" type="radio" name="Recomendations" value="true" />
+                    <label class="radio-button__text" for="radio-recom-yes">да</label>
+                    <input class="radio-button__control" id="radio-recom-no" type="radio" name="Recomendations" value="false" />
+                    <label class="radio-button__text" for="radio-recom-no">нет</label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="Review-product-fields">
+            <div class="fields-item">
+                <div class="col-25">
+                    <label class="field-positive-label">Достоинства</label>
+                </div>
+                <div class="col-75">
+                    <span class="input-box">
+                        <textarea id="Like" name="Like" placeholder="Кратко о том, что вам понравилось"></textarea>
+                    </span>
+                    <span class="input-clear"></span>
+                </div>
+            </div>
+            <div class="fields-item">
+                <div class="col-25">
+                    <label class="field-positive-label">Недостатки</label>
+                </div>
+                <div class="col-75">
+                    <span class="input-box">
+                        <textarea id="Dislike" name="Dislike" placeholder="Кратко о том, что вам не понравилось"></textarea>
+                    </span>
+                    <span class="input-clear"></span>
+                </div>
+
+            </div>
+            <div class="fields-item">
+                <div class="col-25">
+                    <label class="field-positive-label">Комментарии</label>
+                </div>
+                <div class="col-75">
+                    <span class="input-box">
+                        <textarea id="Comments" name="Comment" placeholder="Развёрнуто о ваших впечатлениях"></textarea>
+                    </span>
+                    <span class="input-clear"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="create-footer">
+        <div class="col-25">
+
+        </div>
+        <div class="col-75">
+            <a class='btn'>
+                <input id="image" type="file" name="uploadImage" onchange='$("#upload-file-info").html($(this).val());' />
+            </a>
+            <span class='label label-info' id="upload-file-info"></span>
+        </div>
+
+        <br />
+        <input type="submit" value="Опубликовать" />
+    </div>
 }
 
