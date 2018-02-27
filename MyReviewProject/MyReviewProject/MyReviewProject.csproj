@@ -404,6 +404,10 @@
     <Content Include="Content\Colors.css" />
     <Content Include="Content\Content.css" />
     <Content Include="Content\Dropdowncheckboxes.css" />
+    <Content Include="Content\hint.base.css" />
+    <Content Include="Content\hint.base.min.css" />
+    <Content Include="Content\hint.css" />
+    <Content Include="Content\hint.min.css" />
     <Content Include="Content\Images\2.png" />
     <Content Include="Content\Images\background-site.jpg" />
     <Content Include="Content\Images\login.jpg" />

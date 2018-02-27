@@ -16,8 +16,7 @@ function getSelectedCatValue(id) {
 
 $(document).bind("click", function(e) {
   var $clicked = $(e.target);
-  if (!$clicked.parents().hasClass("dropdownCat")) $(".dropdownCat dd div ul").hide();
-  
+  if (!$clicked.parents().hasClass("dropdownCat")) $(".dropdownCat dd div ul").hide();  
 });
 
 //Categories
