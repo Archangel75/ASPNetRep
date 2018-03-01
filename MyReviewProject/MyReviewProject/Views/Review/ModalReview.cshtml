@@ -60,12 +60,14 @@
         <div class="linerow-smaller">
             <div class="col-25"><input type="button" id="createNewSubject" value="Сохранить" /></div>
             <script>
-                $("#createNewSubject").click(function() {
-                        modal.style.display = "none";
+                $("#createNewSubject").click(function() {                        
                         var subCatName = document.getElementsByClassName('multiSelSub')[0];
                         var subjName = document.getElementById('subjName');
                         $.post("/Review/CreateSubject", { subcatname: subCatName.textContent, subjname: subjName.value }, function () {
                             var modal = document.getElementById('SubjectModal');
+                            var inputtext = document.getElementById('Objectname');
+                            modal.style.display = "none";
+                            inputtext.value = subjName.value;
                         });
                 });
             </script>

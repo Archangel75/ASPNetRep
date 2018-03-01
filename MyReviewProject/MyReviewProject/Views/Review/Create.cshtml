@@ -3,6 +3,7 @@
 
 @Styles.Render("~/Content/Review.css")
 
+
 @{
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&amp;subset=latin-ext" rel="stylesheet">
     ViewBag.Title = "Create";
@@ -37,6 +38,9 @@
                         $.get("/Review/CheckExistSubject", { term: obj.value }, function (data) {
                             if (!data.correct) {
                                 $('#buttoncreate').show();
+                                $('#Objectname').addClass("hint--top");
+                                $('#Objectname').attr("aria-label", "Похоже, что никто до вас не создавал опрос на это. Пожалуйста, создайте страницу продукта.");
+                                
                             }
                         });
                     }

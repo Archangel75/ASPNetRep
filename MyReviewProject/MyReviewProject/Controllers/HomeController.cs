@@ -11,14 +11,9 @@ namespace MyReviewProject.Controllers
 {
     
     public class HomeController : Controller
-    { 
-        
-        
-        public ActionResult Index(ApplicationDbContext context)
-        {
-            var users = context.Users.ToList();
-            
-            ViewBag.users = context.Users.ToList();
+    {         
+        public ActionResult Index()
+        {            
             return View();
         }
 

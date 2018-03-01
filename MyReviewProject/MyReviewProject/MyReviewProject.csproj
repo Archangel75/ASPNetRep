@@ -410,6 +410,8 @@
     <Content Include="Content\hint.min.css" />
     <Content Include="Content\Images\2.png" />
     <Content Include="Content\Images\background-site.jpg" />
+    <Content Include="Content\Images\check1.png" />
+    <Content Include="Content\Images\check2.png" />
     <Content Include="Content\Images\login.jpg" />
     <Content Include="Content\Images\Menu-512.png" />
     <Content Include="Content\Images\test\862478.jpg" />

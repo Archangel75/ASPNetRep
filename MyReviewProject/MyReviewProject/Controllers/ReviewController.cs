@@ -57,22 +57,25 @@ namespace MyReviewProject.Controllers
         [HttpPost]
         public ActionResult CreateSubject( string subcatname, string subjname)
         {
-            subCatId = db.SubCategories.Where(s => s.Name == subcatname)
-                                   .Select(s=>s.SubCategoryId).FirstOrDefault();
-            if (subCatId != 0)
+            var checkexist = db.Subjects.Where(sub => sub.Name.ToLower() == subjname.ToLower());
+            if (checkexist == null)
             {
-                db.Subjects.Add(new Subject { AverageRating = 0, Name = subjname, SubCategoryId = subCatId });
-                db.SaveChanges();
-                subjectId = db.Subjects.Last().SubjectId;
+                subCatId = db.SubCategories.Where(s => s.Name == subcatname)
+                                       .Select(s => s.SubCategoryId).FirstOrDefault();
+                if (subCatId != 0)
+                {
+                    db.Subjects.Add(new Subject { AverageRating = 0, Name = subjname, SubCategoryId = subCatId });
+                    db.SaveChanges();
+                    subjectId = db.Subjects.Where(s => s.Name == subjname).Select(s => s.SubjectId).FirstOrDefault();
+                }
             }
-
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public async Task<ActionResult> Create(CreateReviewViewModel content, Review review, HttpPostedFileBase uploadImage)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //var catId = db.Categories.Where(c => c.Name.ToLower() == content.Category.ToLower())
                 //                         .Select(c => c.Id).FirstOrDefault(0);
