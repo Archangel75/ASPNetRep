@@ -1,0 +1,4 @@
+site>reviews>create
+	1. Make the check picture background in inputs work.
+	2. Figure why hints dont work and try to fix it.
+	
