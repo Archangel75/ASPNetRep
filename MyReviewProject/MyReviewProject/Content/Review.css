@@ -141,6 +141,7 @@ input[type=text] {
     font-family: 'Gabriela', serif;
     font-size: 15px;
     padding: 12px;
+    padding-left:40px;
     border: 2px solid var(--plumy);
     border-radius: 4px;
     box-sizing: border-box;
@@ -148,18 +149,32 @@ input[type=text] {
     max-width: none;
 }
 
-    input[type=text]:valid {
-        background: url(Images/check1.jpg);
+    /*input[type=text]:valid {
+        background: url('Images/check1 (1).png');
+        padding-left:40px;
+        background-color:white;
         background-size: 20px;
         background-repeat: no-repeat;
-        background-position: 20px 20px;
+        background-position: 12px 12px;
     }
     input[type=text]:invalid:not(:focus):not(:placeholder-shown) {
         background: pink;
     }
     input[type=text]:invalid:focus:not(:placeholder-shown) {
         background: var(--lightgray);
-    }
+    }*/
+.valid {
+    background: url('Images/check.jpg');
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+}
+.invalid {
+    background: url('Images/nocheck.jpg');
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: 6px 7px;
+}
 
 
 textarea:focus, input[type=text]:focus {

@@ -1,6 +1,7 @@
 ﻿@model MyReviewProject.Models.CreateReviewViewModel
 @using MyReviewProject.Models
 
+@Styles.Render("~/Content/hint.css")
 @Styles.Render("~/Content/Review.css")
 
 
@@ -30,7 +31,6 @@
                         $("[data-autocomplete-source]").each(function () {
                             var target = $(this);
                             target.autocomplete({ source: target.attr("data-autocomplete-source") });
-                            target.addClass("valid");
                         });
                     });
 
@@ -38,9 +38,15 @@
                         $.get("/Review/CheckExistSubject", { term: obj.value }, function (data) {
                             if (!data.correct) {
                                 $('#buttoncreate').show();
-                                $('#Objectname').addClass("hint--top");
+                                $('#Objectname').addClass("invalid");
                                 $('#Objectname').attr("aria-label", "Похоже, что никто до вас не создавал опрос на это. Пожалуйста, создайте страницу продукта.");
-                                
+
+                            }
+                            else {
+                                if ($('#Objectname').hasClass("invalid")) {
+                                    $('#Objectname').removeClass("invalid");
+                                }
+                                $('#Objectname').addClass("valid");
                             }
                         });
                     }
@@ -61,8 +67,10 @@
             var modal = document.getElementById('SubjectModal');
             var btn = document.getElementById("CreateSubject");
             var span = document.getElementsByClassName("close")[0];
+            var txtbx = document.getElementById("subjName");
             btn.onclick = function () {
                 modal.style.display = "block";
+                txtbx.value = document.getElementById("Objectname").value;
             }
             span.onclick = function () {
                 modal.style.display = "none";

@@ -57,7 +57,7 @@ namespace MyReviewProject.Controllers
         [HttpPost]
         public ActionResult CreateSubject( string subcatname, string subjname)
         {
-            var checkexist = db.Subjects.Where(sub => sub.Name.ToLower() == subjname.ToLower());
+            var checkexist = db.Subjects.Where(sub => sub.Name.ToLower() == subjname.ToLower()).FirstOrDefault();
             if (checkexist == null)
             {
                 subCatId = db.SubCategories.Where(s => s.Name == subcatname)
@@ -88,11 +88,21 @@ namespace MyReviewProject.Controllers
                 {
                     subjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
                 }
+                review.SubjectId = subjectId;
+                review.Rating = content.Rating;
+
+                Subject subject = db.Subjects.Where(su => su.SubjectId == subjectId).FirstOrDefault();
+                if (subject.AverageRating == 0)
+                {
+                    subject.AverageRating = content.Rating;
+                }
+                else
+                {
+                    var rating = db.Reviews.Where(r => r.SubjectId == subjectId).Select(r => r.Rating);
+                    subject.AverageRating = (rating.Sum() + content.Rating) / rating.Count();
+                }
                 
 
-                review.SubjectId = subjectId;
-
-                review.Rating = content.Rating;
                 review.Recommend = content.Recomendations ? 1 : 0;
                 review.Exp = content.Experience;
                 review.Like = content.Like;
