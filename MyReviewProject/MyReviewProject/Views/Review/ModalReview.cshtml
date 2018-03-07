@@ -1,4 +1,4 @@
-﻿<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+﻿
 <!-- Modal -->
 <div class="modal" id="SubjectModal" tabindex="1" role="dialog">
     <div class="modal-content">
@@ -59,22 +59,6 @@
         <hr />
         <div class="linerow-smaller">
             <div class="col-25"><input type="button" id="createNewSubject" value="Сохранить" /></div>
-            <script>
-                $("#createNewSubject").click(function() {                        
-                        var subCatName = document.getElementsByClassName('multiSelSub')[0];
-                        var subjName = document.getElementById('subjName');
-                        $.post("/Review/CreateSubject", { subcatname: subCatName.textContent, subjname: subjName.value }, function () {
-                            var modal = document.getElementById('SubjectModal');                         
-                            modal.style.display = "none";
-                            $('#Objectname').value = subjName.value;
-                            $('#Objectname').removeClass('invalid');
-                            $('#Objectname').addClass('valid');
-
-                        });
-                });
-            </script>
-        </div>
-        
-        <script src="~/Scripts/Dropdowncheckboxes.js"></script>
+        </div>        
     </div>
 </div>

@@ -15,7 +15,15 @@ namespace MyReviewProject.Models
 
         public string Content { get; set; }
 
-        public int Rating { get; set; }
+        public int Rating {
+            get { return Rating; }
+            set {
+                if (value < 1 || value > 5)
+                    value = 4;
+                Rating = value;
+                    
+            }
+        }
 
         public int Recommend { get; set; }
 

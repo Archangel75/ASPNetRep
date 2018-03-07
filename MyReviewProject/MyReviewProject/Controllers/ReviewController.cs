@@ -67,27 +67,28 @@ namespace MyReviewProject.Controllers
                     db.Subjects.Add(new Subject { AverageRating = 0, Name = subjname, SubCategoryId = subCatId });
                     db.SaveChanges();
                     subjectId = db.Subjects.Where(s => s.Name == subjname).Select(s => s.SubjectId).FirstOrDefault();
+                    subCatId = db.Subjects.Where(s => s.SubjectId == subjectId).Select(s => s.SubCategoryId).FirstOrDefault();
                 }
             }
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateReviewViewModel content, Review review, HttpPostedFileBase uploadImage)
+        public async Task<ActionResult> Create(CreateReviewViewModel content,  HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
-                //var catId = db.Categories.Where(c => c.Name.ToLower() == content.Category.ToLower())
-                //                         .Select(c => c.Id).FirstOrDefault(0);
-                if (subCatId == 0)
-                {
-                    subCatId = db.SubCategories.Where(s => s.Name == content.subCategory.ToLower())
-                                            .Select(s => s.SubCategoryId).FirstOrDefault();                    
-                }    
+                Review review = new Models.Review();
+
                 if (subjectId == 0)
                 {
                     subjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
                 }
+                if (subCatId == 0)
+                {
+                    subCatId = db.Subjects.Where(s=> s.SubjectId == subjectId).Select(s=> s.SubCategoryId).FirstOrDefault();                    
+                }    
+                
                 review.SubjectId = subjectId;
                 review.Rating = content.Rating;
 
@@ -153,7 +154,7 @@ namespace MyReviewProject.Controllers
             subjectId = db.Subjects.Where(s => s.Name.ToLower() == term.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
 
             if (subjectId > 0)
-                return Json(new { correct=true }, JsonRequestBehavior.AllowGet);
+                return Json(new { correct = true }, JsonRequestBehavior.AllowGet);
             //return ViewBag.NoName = "";            
             else
                 return Json(new { correct = false }, JsonRequestBehavior.AllowGet);

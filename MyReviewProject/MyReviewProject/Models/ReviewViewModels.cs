@@ -8,11 +8,11 @@ namespace MyReviewProject.Models
 {
     public class IndexReviewViewModel
     {
-        public ReviewContext Review { get; set; }
+        //public ReviewContext Review { get; set; }
 
-        public List<Category> Categories { get; set; }
+        //public List<Category> Categories { get; set; }
 
-        public List<SubCategory> subCategories { get; set; }
+        //public List<SubCategory> subCategories { get; set; }
 
 
     }
@@ -26,9 +26,9 @@ namespace MyReviewProject.Models
         [Required]
         public string Objectname { get; set; }
 
-        [Required]
+        
         public string Category { get; set; }
-        [Required]
+        
         public string subCategory { get; set; }
 
         [Required]

@@ -72,14 +72,15 @@ $('.mutliSelectSub input').on('click', function () {
     $(".hidaSub").hide();
 });
 
-//$(function(){
-//    $('#createSubject').click(function () {
-//        var catName = document.getElementsByClassName('multiSelCat')[0];
-//        var subCatName = document.getElementsByClassName('multiSelSub')[0];
-//        var subjName = document.getElementById('subjName');
-//        $.post("/Review/CreateSubject", { subcatId: subCatName.id, subjname: subjName }, function () {
-//            var modal = document.getElementById('SubjectModal');
-//            modal.style.display = "none";
-//        });
-//    });
-//});
+$("#createNewSubject").click(function () {
+    var subCatName = document.getElementsByClassName('multiSelSub')[0];
+    var subjName = document.getElementById('subjName');
+    $.post("/Review/CreateSubject", { subcatname: subCatName.textContent, subjname: subjName.value }, function () {
+        var modal = document.getElementById('SubjectModal');
+        modal.style.display = "none";
+        $('#Objectname').value = subjName.value;
+        $('#Objectname').removeClass('invalid');
+        $('#Objectname').addClass('valid');
+
+    });
+});

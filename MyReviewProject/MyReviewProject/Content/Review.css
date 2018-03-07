@@ -1,8 +1,8 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Gabriela|Raleway:500,700&subset=latin-ext');
 @import 'StarRating.css';
 @import 'Dropdowncheckboxes.css';
-@import "Colors.css";
-@import "hint.css";
+@import 'Colors.css';
+@import 'hint.css';
 
 .fields-item {
     display: table;
