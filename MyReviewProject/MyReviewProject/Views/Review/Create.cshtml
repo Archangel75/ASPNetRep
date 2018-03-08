@@ -24,6 +24,14 @@
             <div class="col-25"><h3>Наименование</h3></div>
             <div class="col-50">
                 <input required id="Objectname" type="text" name="Objectname" placeholder="Название обозреваемой штуковины" data-autocomplete-source='@Url.Action("AutocompleteSearch","Review")' onblur="checkExistSubject(this)" />                
+                <script>
+                    (function () {
+                        $("[data-autocomplete-source]").each(function () {
+                            var target = $(this);
+                            target.autocomplete({ source: target.attr("data-autocomplete-source") });
+                        });
+                    });
+                </script>
             </div>
             <div class="col-25">
                 <div id="buttoncreate" class="divhide">

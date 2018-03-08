@@ -15,12 +15,13 @@ namespace MyReviewProject.Models
 
         public string Content { get; set; }
 
-        public int Rating {
-            get { return Rating; }
+        private double _rating;
+        public double Rating {
+            get { return _rating; }
             set {
                 if (value < 1 || value > 5)
                     value = 4;
-                Rating = value;
+                _rating = value;
                     
             }
         }

@@ -1,11 +1,11 @@
 
 //for autocomplete and for checking the proper input in text input id=Objectname.
-(function () {
-    $("[data-autocomplete-source]").each(function () {
-    var target = $(this);
-    target.autocomplete({ source: target.attr("data-autocomplete-source") });
-    });
-});
+//(function () {
+//    $("[data-autocomplete-source]").each(function () {
+//        var target = $(this);
+//        target.autocomplete({ source: target.attr("data-autocomplete-source") });
+//    });
+//});
 
 function checkExistSubject(obj) {
     $.get("/Review/CheckExistSubject", { term: obj.value }, function (data) {

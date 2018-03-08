@@ -5,31 +5,21 @@ using System.Linq;
 using System.Web;
 
 namespace MyReviewProject.Models
-{
-    public class IndexReviewViewModel
-    {
-        //public ReviewContext Review { get; set; }
-
-        //public List<Category> Categories { get; set; }
-
-        //public List<SubCategory> subCategories { get; set; }
-
-
-    }
+{  
 
     public class CreateReviewViewModel
     {
+        public Subject reviewSubject { get; set; }
+
         public List<Category> Categories { get; set; }
 
         public List<SubCategory> subCategories { get; set; }
 
         [Required]
         public string Objectname { get; set; }
-
         
-        public string Category { get; set; }
-        
-        public string subCategory { get; set; }
+        public int subCategoryId { get; set; }
+        public int subjectId { get; set; }
 
         [Required]
         public int Rating { get; set; }

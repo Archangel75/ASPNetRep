@@ -14,9 +14,6 @@ namespace MyReviewProject.Controllers
     {
         ReviewContext db = new ReviewContext();
 
-        protected int subCatId = 0;
-        protected int subjectId = 0;
-
         public ActionResult Index()
         {
             return View();
@@ -60,14 +57,12 @@ namespace MyReviewProject.Controllers
             var checkexist = db.Subjects.Where(sub => sub.Name.ToLower() == subjname.ToLower()).FirstOrDefault();
             if (checkexist == null)
             {
-                subCatId = db.SubCategories.Where(s => s.Name == subcatname)
+                var subCatId = db.SubCategories.Where(s => s.Name == subcatname)
                                        .Select(s => s.SubCategoryId).FirstOrDefault();
                 if (subCatId != 0)
                 {
                     db.Subjects.Add(new Subject { AverageRating = 0, Name = subjname, SubCategoryId = subCatId });
                     db.SaveChanges();
-                    subjectId = db.Subjects.Where(s => s.Name == subjname).Select(s => s.SubjectId).FirstOrDefault();
-                    subCatId = db.Subjects.Where(s => s.SubjectId == subjectId).Select(s => s.SubCategoryId).FirstOrDefault();
                 }
             }
             return Json(new { }, JsonRequestBehavior.AllowGet);
@@ -78,29 +73,20 @@ namespace MyReviewProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                Review review = new Models.Review();
+                Review review = new Review();
 
-                if (subjectId == 0)
-                {
-                    subjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
-                }
-                if (subCatId == 0)
-                {
-                    subCatId = db.Subjects.Where(s=> s.SubjectId == subjectId).Select(s=> s.SubCategoryId).FirstOrDefault();                    
-                }    
-                
-                review.SubjectId = subjectId;
+                review.SubjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
                 review.Rating = content.Rating;
 
-                Subject subject = db.Subjects.Where(su => su.SubjectId == subjectId).FirstOrDefault();
+                Subject subject = db.Subjects.Where(su => su.SubjectId == review.SubjectId).FirstOrDefault();
                 if (subject.AverageRating == 0)
                 {
-                    subject.AverageRating = content.Rating;
+                    subject.AverageRating = (double)content.Rating;
                 }
                 else
                 {
-                    var rating = db.Reviews.Where(r => r.SubjectId == subjectId).Select(r => r.Rating);
-                    subject.AverageRating = (rating.Sum() + content.Rating) / rating.Count();
+                    double[] rating = db.Reviews.Where(r => r.SubjectId == review.SubjectId).Select(r => r.Rating).ToArray();
+                    subject.AverageRating = (rating.Sum() + content.Rating) / rating.Count()+1;
                 }
                 
 
@@ -109,7 +95,6 @@ namespace MyReviewProject.Controllers
                 review.Like = content.Like;
                 review.Dislike = content.Dislike;
                 review.Content = content.Comment;
-
 
 
                 if (uploadImage != null)
@@ -130,10 +115,10 @@ namespace MyReviewProject.Controllers
 
                 db.Reviews.Add(review);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("~Home/Index");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("~Home/Index");
         }
 
 
@@ -143,15 +128,13 @@ namespace MyReviewProject.Controllers
             var models = db.Subjects.Where(a => a.Name.Contains(term))
                             .Select(a => new { value = a.Name, id = a.SubjectId, subcat = a.SubCategoryId })
                             .Distinct();
-            subjectId = Convert.ToInt32(models.GetType().GetProperty("id"));
-            subCatId = Convert.ToInt32(models.GetType().GetProperty("subcat"));
 
             return Json(Convert.ToString(models.GetType().GetProperty("value")), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult CheckExistSubject(string term)
         {
-            subjectId = db.Subjects.Where(s => s.Name.ToLower() == term.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
+            var subjectId = db.Subjects.Where(s => s.Name.ToLower() == term.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
 
             if (subjectId > 0)
                 return Json(new { correct = true }, JsonRequestBehavior.AllowGet);
