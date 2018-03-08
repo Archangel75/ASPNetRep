@@ -1,12 +1,13 @@
 site>reviews>create
 	1. Make the check picture background in inputs work. //done
 	2. Figure why hints dont work and try to fix it.
-	3. Move all the fucking scripts in one file.
+	3. Move all the fucking scripts in one file. //done
+	4. Figure how to make all db changes in one session. 
+	5. Figure why the autocomplete not work any more.
 site>login>register/login
 	1. Remake it to modal.
 	2. Add the check validation in inputs.
-	3. Make the userpage.
-	
+	3. Make the userpage.	
 site>reviews
 	1.Make a create button
 	2.Make a list of reviews
