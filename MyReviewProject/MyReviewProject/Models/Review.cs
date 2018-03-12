@@ -37,6 +37,10 @@ namespace MyReviewProject.Models
         public int ImageId { get; set; }
 
         public byte[] Image { get; set; }
+
+        public string AuthorId { get; set; }
+
+        public ApplicationUser User { get; private set; }
         
     }
 }

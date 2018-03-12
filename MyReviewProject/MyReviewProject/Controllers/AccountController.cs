@@ -133,7 +133,6 @@ namespace MyReviewProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                //создали сессию
                 var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 //создали юзера
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -142,6 +141,7 @@ namespace MyReviewProject.Controllers
                 {
                     if (RoleManager.FindByName("User") != null)
                         await UserManager.AddToRoleAsync(user.Id, "User");
+
                     return RedirectToAction("Login", "Account");
                 }
                 else

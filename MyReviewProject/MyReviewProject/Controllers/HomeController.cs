@@ -11,10 +11,22 @@ namespace MyReviewProject.Controllers
 {
     
     public class HomeController : Controller
-    {         
-        public ActionResult Index()
-        {            
-            return View();
+    {
+        ReviewContext db = new ReviewContext();
+
+        [HttpGet]
+        public ActionResult Index(IndexReviewViewModel content)
+        {
+            //how to do this????
+            var list = (from r in db.Reviews
+                        (r.AuthorId == null ? join au in db.Users on r.AuthorId equals au.Id : join u in db.AspUsers on r.AuthorId equals u.Id)
+                        join u in db.Users on r.AuthorId equals u.Id
+                        orderby r.DateCreate
+                        select new CustomReview { Content=r.Content, Dislike=r.Dislike, Exp=r.Exp, Like=r.Like, Rating=r.Rating, Image=r.Image, Recommend=r.Recommend, Username=r.User.UserName }).ToList();            
+
+            content.Reviews = list;
+
+            return View(content);
         }
 
         [Authorize(Roles = "Users")]

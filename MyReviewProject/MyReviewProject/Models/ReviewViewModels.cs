@@ -6,6 +6,17 @@ using System.Web;
 
 namespace MyReviewProject.Models
 {  
+    
+    public class CustomReview: Review
+    {
+        public string Username { get; set; }
+    }
+    public class IndexReviewViewModel
+    {
+        //public IEnumerable<Review> Reviews { get; set; }
+        
+        public List<CustomReview> Reviews { get; set; }
+    }
 
     public class CreateReviewViewModel
     {
