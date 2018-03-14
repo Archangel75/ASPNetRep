@@ -8,28 +8,28 @@
     display: block;
     position: center;
 }
-h1{
-    margin-bottom:10px;
-    font-size:30px;
-    display:block;
+.errorclass h1 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    display: block;
     color: var(--brhardtonotice);
 }
-h4{
-    font-size:15px;
-    color:var(--whitetext)
+.errorclass h4 {
+        font-size: 15px;
+        color: var(--whitetext)
+    }
+.errorclass p {
+    font-size: 14px;
+    color: var(--brhardtonotice);
 }
-p{    
-    font-size:14px;
-    color:var(--brhardtonotice);
-}
-a {
-    color: #f36;
-}
-    a:link {
+.errorclass a {
+        color: #f36;
+    }
+.errorclass a:link {
         color: #f36;
         text-decoration: none;
     }
-    a:hover {
+.errorclass a:hover {
         color: var(--brorange);
         text-decoration: none;
     }
