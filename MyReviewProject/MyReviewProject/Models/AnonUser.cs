@@ -9,9 +9,10 @@ namespace MyReviewProject.Models
     {
         public long Id { get; set; }
 
-        public string AspNetId { get; set; }
+        public string UserName { get; set; }
+        //public string AspNetId { get; set; }
 
-        public int AnonUserId { get; set; }
+        //public int AnonUserId { get; set; }
     }
 
     public class AnonUser

@@ -6,22 +6,53 @@
     @Styles.Render("~/Content/Content.css")
 </head>
 <body>
-    @foreach (var review in Model.Reviews)
-    {
-        <div class="row">
-            <a href="" class="col-sm-4" style="background:url(); background-size:cover; background-position:center">
-                <div id="Header"><h3>@review.Like</h3></div>
-                <p>@review.Content</p>
-                <div id="Footer">@review.</div>
-            </a>
-        </div>
-    }
+    @*@for (int i = 1; i < 3; i++)
+     {
+        
+         <div class="row">
+                @for (int j = 0 ; j < 3; j++)
+                {
+                    var review = Model.Reviews[j];
+                }
+         </div>
+     }*@
 
-    <div>
+
+    <div class="row">
+        @for (int i = 0; i < 3; i++)
+        {
+            var review = Model.Reviews.ElementAt(i);
+        <a href="~/Review/Review/'review.ReviewId'" class="col-sm-4" style="background:url(); background-size:cover; background-position:center">
+            <div id="Header"><h3>@review.Like</h3></div>
+            @if (review.Content.Length > 160)
+            {<p>@review.Content.Substring(0, 160)</p>}
+            else
+            { <p>@review.Content</p>}
+            <div id="Footer">@review.Username</div>
+        </a>
+        }
+    </div>
+
+    <div class="row">
+        @for (int j = 3; j < 6; j++)
+        {
+            var review = Model.Reviews.ElementAt(j);
+        <a href="~/Review/Review/'review.ReviewId'" class="col-sm-4" style="background:url(); background-size:cover; background-position:center">
+            <div id="Header"><h3>@review.Like</h3></div>
+            @if (review.Content.Length > 160)
+            {<p>@review.Content.Substring(0, 160)</p>}
+            else
+            {   <p>@review.Content</p>}
+            <div id="Footer">@review.Username</div>
+        </a>
+        }
+    </div>
+
+    @*<div>
         <a href="">
             <div></div>
             <p></p>
             <div></div>
         </a>
-    </div>
+    </div>*@
 </body>

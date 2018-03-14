@@ -58,7 +58,7 @@
 
 .login {
     padding: 17px 0 5px 0;
-    position: fixed;
+    position: absolute;
     right: 50px;
     display: inline-block;   
 }

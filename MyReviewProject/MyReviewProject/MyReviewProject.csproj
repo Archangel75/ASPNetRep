@@ -357,6 +357,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
@@ -405,6 +406,7 @@
     <Content Include="Content\Colors.css" />
     <Content Include="Content\Content.css" />
     <Content Include="Content\Dropdowncheckboxes.css" />
+    <Content Include="Content\ErrorStyle.css" />
     <Content Include="Content\hint.base.css" />
     <Content Include="Content\hint.base.min.css" />
     <Content Include="Content\hint.css" />
@@ -557,6 +559,8 @@
     <Content Include="Views\Review\Review.cshtml" />
     <Content Include="Views\Review\Create.cshtml" />
     <Content Include="Views\Review\ModalReview.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

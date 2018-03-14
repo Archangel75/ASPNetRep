@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace MyReviewProject.Models
 {
     public class Review
     {
+        [Key]
         public int ReviewId { get; set; }
 
         public int SubjectId { get; set; }        
@@ -26,9 +28,9 @@ namespace MyReviewProject.Models
             }
         }
 
-        public int Recommend { get; set; }
+        public byte Recommend { get; set; }
 
-        public int Exp { get; set; }
+        public byte Exp { get; set; }
 
         public string Like { get; set; }
 
@@ -40,7 +42,7 @@ namespace MyReviewProject.Models
 
         public string AuthorId { get; set; }
 
-        public ApplicationUser User { get; private set; }
+        //public ApplicationUser User { get; private set; }
         
     }
 }

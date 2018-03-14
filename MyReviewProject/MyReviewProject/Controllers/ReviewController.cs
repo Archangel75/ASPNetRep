@@ -90,8 +90,8 @@ namespace MyReviewProject.Controllers
                 }
                 
 
-                review.Recommend = content.Recomendations ? 1 : 0;
-                review.Exp = content.Experience;
+                review.Recommend = Convert.ToByte(content.Recomendations ? 1 : 0);
+                review.Exp = Convert.ToByte(content.Experience);
                 review.Like = content.Like;
                 review.Dislike = content.Dislike;
                 review.Content = content.Comment;

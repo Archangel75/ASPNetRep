@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -16,16 +18,27 @@ namespace MyReviewProject.Models
 
         public DbSet<SubCategory> SubCategories { get; set; }
 
-        public DbSet<ApplicationUser> AspUsers { get; set; }
+        //public DbSet<ApplicationUser> AspUsers { get; set; }
 
-        public DbSet<AnonUser> AnonUsers { get; set; }
+        //public DbSet<AnonUser> AnonUsers { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
         protected override void Dispose(bool disposing)
         {            
             base.Dispose(disposing);
         }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+        //    modelBuilder.Entity<User>().ToTable("AspUsers");
+        //}
+
+        //public DbQuery<T> Query<T>() where T : class
+        //{
+        //    return Set<T>().AsNoTracking();
+        //}
     }
 
     

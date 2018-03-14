@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace MyReviewProject.Models
 {  
-    
+    [NotMapped]
     public class CustomReview: Review
     {
         public string Username { get; set; }
     }
     public class IndexReviewViewModel
     {
-        //public IEnumerable<Review> Reviews { get; set; }
         
-        public List<CustomReview> Reviews { get; set; }
+        public IEnumerable<CustomReview> Reviews { get; set; }
     }
 
     public class CreateReviewViewModel

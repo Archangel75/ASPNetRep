@@ -12,17 +12,25 @@ namespace MyReviewProject.Controllers
     
     public class HomeController : Controller
     {
+        ApplicationDbContext dbc = new ApplicationDbContext();
         ReviewContext db = new ReviewContext();
 
         [HttpGet]
         public ActionResult Index(IndexReviewViewModel content)
         {
-            //how to do this????
             var list = (from r in db.Reviews
-                        (r.AuthorId == null ? join au in db.Users on r.AuthorId equals au.Id : join u in db.AspUsers on r.AuthorId equals u.Id)
-                        join u in db.Users on r.AuthorId equals u.Id
                         orderby r.DateCreate
-                        select new CustomReview { Content=r.Content, Dislike=r.Dislike, Exp=r.Exp, Like=r.Like, Rating=r.Rating, Image=r.Image, Recommend=r.Recommend, Username=r.User.UserName }).ToList();            
+                        select new { ReviewId = r.ReviewId, Content = r.Content, Dislike = r.Dislike, Exp = r.Exp, Like = r.Like, Rating = r.Rating, Image = r.Image, Recommend = r.Recommend, AuthorId = r.AuthorId }).ToList()
+                        .Select(c => new CustomReview {ReviewId = c.ReviewId, Content = c.Content, Dislike = c.Dislike, Exp = c.Exp, Like = c.Like, Rating = c.Rating, Image = c.Image, Recommend = c.Recommend, AuthorId = c.AuthorId });
+            
+
+            //foreach (var r in list)
+            //{
+            //    if (r.AuthorId != null)
+            //    {
+            //        r.Username = dbc.Users.Where(u => u.Id == r.AuthorId).Select(u => u.UserName).FirstOrDefault();
+            //    }
+            //}
 
             content.Reviews = list;
 
