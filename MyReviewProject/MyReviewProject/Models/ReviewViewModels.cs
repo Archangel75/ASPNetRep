@@ -8,14 +8,37 @@ using System.Web;
 namespace MyReviewProject.Models
 {  
     [NotMapped]
-    public class CustomReview: Review
+    public class CustomReviewDTO
     {
+        public int ReviewId { get; set; }
+
+        public int SubjectId { get; set; }
+
+        public DateTime DateCreate { get; set; }
+
+        public string Content { get; set; }
+        
+        public double Rating { get; set;}
+
+        public byte Recommend { get; set; }
+
+        public byte Exp { get; set; }
+
+        public string Like { get; set; }
+
+        public string Dislike { get; set; }
+
+        public byte[] Image { get; set; }
+
+        public string AuthorId { get; set; }
+
         public string Username { get; set; }
     }
+
     public class IndexReviewViewModel
     {
         
-        public IEnumerable<CustomReview> Reviews { get; set; }
+        public IEnumerable<CustomReviewDTO> Reviews { get; set; }
     }
 
     public class CreateReviewViewModel

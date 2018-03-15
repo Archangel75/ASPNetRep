@@ -12,7 +12,7 @@ namespace MyReviewProject.Controllers
 {
     public class ReviewController : Controller
     {
-        ReviewContext db = new ReviewContext();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
         {

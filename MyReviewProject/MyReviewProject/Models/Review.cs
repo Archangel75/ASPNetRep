@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -39,10 +40,10 @@ namespace MyReviewProject.Models
         public int ImageId { get; set; }
 
         public byte[] Image { get; set; }
-
+        
         public string AuthorId { get; set; }
-
-        //public ApplicationUser User { get; private set; }
+        
+        public ApplicationUser User { get; private set; }
         
     }
 }

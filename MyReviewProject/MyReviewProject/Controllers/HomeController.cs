@@ -3,7 +3,9 @@ using Microsoft.AspNet.Identity;
 using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,29 +14,52 @@ namespace MyReviewProject.Controllers
     
     public class HomeController : Controller
     {
-        ApplicationDbContext dbc = new ApplicationDbContext();
-        ReviewContext db = new ReviewContext();
+
+        ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
-        public ActionResult Index(IndexReviewViewModel content)
-        {
-            var list = (from r in db.Reviews
+        public async Task<ActionResult> Index()
+        {            
+            var query = from r in db.Reviews
+                        join u in db.Users on r.AuthorId equals u.Id into lj
+                        from u in lj.DefaultIfEmpty()
                         orderby r.DateCreate
-                        select new { ReviewId = r.ReviewId, Content = r.Content, Dislike = r.Dislike, Exp = r.Exp, Like = r.Like, Rating = r.Rating, Image = r.Image, Recommend = r.Recommend, AuthorId = r.AuthorId }).ToList()
-                        .Select(c => new CustomReview {ReviewId = c.ReviewId, Content = c.Content, Dislike = c.Dislike, Exp = c.Exp, Like = c.Like, Rating = c.Rating, Image = c.Image, Recommend = c.Recommend, AuthorId = c.AuthorId });
-            
+                        select new CustomReviewDTO
+                        {
+                            ReviewId = r.ReviewId,
+                            Content = r.Content,
+                            Dislike = r.Dislike,
+                            Exp = r.Exp,
+                            Like = r.Like,
+                            Rating = r.Rating,
+                            Image = r.Image,
+                            Recommend = r.Recommend,
+                            AuthorId = r.AuthorId
+                        };
 
-            //foreach (var r in list)
-            //{
-            //    if (r.AuthorId != null)
-            //    {
-            //        r.Username = dbc.Users.Where(u => u.Id == r.AuthorId).Select(u => u.UserName).FirstOrDefault();
-            //    }
-            //}
-
-            content.Reviews = list;
+            var reviews = await query.ToListAsync();
+            var content = new IndexReviewViewModel
+            {
+                Reviews = reviews
+            };
 
             return View(content);
+
+            //var list = (from r in db.Reviews
+            //            orderby r.DateCreate
+            //            select new { ReviewId = r.ReviewId, Content = r.Content, Dislike = r.Dislike, Exp = r.Exp, Like = r.Like, Rating = r.Rating, Image = r.Image, Recommend = r.Recommend, AuthorId = r.AuthorId }).ToList()
+            //            .Select(c => new CustomReview {ReviewId = c.ReviewId, Content = c.Content, Dislike = c.Dislike, Exp = c.Exp, Like = c.Like, Rating = c.Rating, Image = c.Image, Recommend = c.Recommend, AuthorId = c.AuthorId });
+
+
+            ////foreach (var r in list)
+            ////{
+            ////    if (r.AuthorId != null)
+            ////    {
+            ////        r.Username = dbc.Users.Where(u => u.Id == r.AuthorId).Select(u => u.UserName).FirstOrDefault();
+            ////    }
+            ////}
+
+            //content.Reviews = list;
         }
 
         [Authorize(Roles = "Users")]

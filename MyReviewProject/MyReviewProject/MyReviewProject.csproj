@@ -383,7 +383,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\ReviewContext.cs" />
     <Compile Include="Models\ReviewViewModels.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Subject.cs" />
