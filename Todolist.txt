@@ -1,14 +1,18 @@
+site> 
+1. Check ALLLLLL css and figure which of them can break other styles. Probably need to edit almost all selectors.
 site>reviews>create
 	1. Make the check picture background in inputs work. //done
 	2. Figure why hints dont work and try to fix it.
 	3. Move all the fucking scripts in one file. //done
 	4. Figure how to make all db changes in one session. 
 	5. Figure why the autocomplete not work any more.
+	6. Edit the like dislike inputs or add the "Name of the review".
 site>login>register/login
-	1. Remake it to modal.
+	1. Remake it to modal. 
 	2. Add the check validation in inputs.
 	3. Make the userpage.	
 site>reviews
 	1.Make a create button
-	2.Make a list of reviews
+	2.Make a list of reviews //done.
+	3.Add the Author name and stars.
 	
