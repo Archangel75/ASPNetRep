@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using MyReviewProject.Controllers;
 using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace MyReviewProject.Controllers
 {
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
 
         private ApplicationUserManager _userManager;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 
 namespace MyReviewProject.Models
@@ -11,8 +12,6 @@ namespace MyReviewProject.Models
     public class CustomReviewDTO
     {
         public int ReviewId { get; set; }
-
-        public int SubjectId { get; set; }
 
         public DateTime DateCreate { get; set; }
 
@@ -30,15 +29,39 @@ namespace MyReviewProject.Models
 
         public byte[] Image { get; set; }
 
-        public string AuthorId { get; set; }
-
         public string Username { get; set; }
+
+        public string Subjectname { get; set; }
     }
 
     public class IndexReviewViewModel
-    {
-        
+    {        
         public IEnumerable<CustomReviewDTO> Reviews { get; set; }
+    }
+
+    public class ShowReviewViewModel
+    {
+        public int ReviewId { get; set; }
+
+        public DateTime DateCreate { get; set; }
+
+        public string Content { get; set; }
+
+        public double Rating { get; set; }
+
+        public byte Recommend { get; set; }
+
+        public byte Exp { get; set; }
+
+        public string Like { get; set; }
+
+        public string Dislike { get; set; }
+
+        public byte[] Image { get; set; }
+
+        public string Username { get; set; }
+
+        public string Subjectname { get; set; }
     }
 
     public class CreateReviewViewModel

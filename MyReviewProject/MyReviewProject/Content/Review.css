@@ -149,20 +149,6 @@ input[type=text] {
     max-width: none;
 }
 
-    /*input[type=text]:valid {
-        background: url('Images/check1 (1).png');
-        padding-left:40px;
-        background-color:white;
-        background-size: 20px;
-        background-repeat: no-repeat;
-        background-position: 12px 12px;
-    }
-    input[type=text]:invalid:not(:focus):not(:placeholder-shown) {
-        background: pink;
-    }
-    input[type=text]:invalid:focus:not(:placeholder-shown) {
-        background: var(--lightgray);
-    }*/
 .valid {
     background: url('Images/check.jpg');
     background-color: white;

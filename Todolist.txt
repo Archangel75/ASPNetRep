@@ -1,5 +1,6 @@
 site> 
 1. Check ALLLLLL css and figure which of them can break other styles. Probably need to edit almost all selectors.
+
 site>reviews>create
 	1. Make the check picture background in inputs work. //done
 	2. Figure why hints dont work and try to fix it.
@@ -15,4 +16,29 @@ site>reviews
 	1.Make a create button
 	2.Make a list of reviews //done.
 	3.Add the Author name and stars.
+	
+site>Web.config
+		1. Dont forget to put back Custom errors when done.
+		<system.webServer>
+			<modules></modules>
+			<httpErrors errorMode="Custom" existingResponse="Replace">
+			  <error statusCode="400" path="/Error/NotFound" responseMode="ExecuteURL"/>
+			  <error statusCode="401" path="/Error/Unauthorized" responseMode="ExecuteURL"/>
+			  <error statusCode="403" path="/Error/Forbidden" responseMode="ExecuteURL"/>
+			  <error statusCode="404" path="/Error/NotFound" responseMode="ExecuteURL"/>		  
+			</httpErrors>
+			
+			<customErrors mode="On" defaultRedirect="~Error/Index">
+			  <error statusCode="400" redirect="/Error/NotFound"/>
+			  <error statusCode="401" redirect="/Error/Unauthorized"/>
+			  <error statusCode="403" redirect="/Error/Forbidden" />
+			  <error statusCode="404" redirect="/Error/NotFound" />
+			  <error statusCode="500" redirect="/Error/ServerError"/>
+			  <error statusCode="501" redirect="/Error/ServerError"/>
+			  <error statusCode="502" redirect="/Error/ServerError"/>
+			  <error statusCode="503" redirect="/Error/ServerError"/>
+			  <error statusCode="504" redirect="/Error/ServerError"/>
+			</customErrors>
+		2. Remake whole error system(override the OnException method)	
+	
 	

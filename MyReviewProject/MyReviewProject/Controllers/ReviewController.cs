@@ -1,6 +1,8 @@
-﻿using MyReviewProject.Models;
+﻿using MyReviewProject.Controllers;
+using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
@@ -10,7 +12,7 @@ using System.Web.Mvc;
 
 namespace MyReviewProject.Controllers
 {
-    public class ReviewController : Controller
+    public class ReviewController : BaseController
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
@@ -19,12 +21,29 @@ namespace MyReviewProject.Controllers
             return View();
         }
 
-        public ActionResult Review(int Id)
+        [HttpGet]
+        public async Task<ActionResult> Review(int Id)
         {
-            var reviews = db.Reviews;
-            ViewBag.Review = reviews;
-            ViewBag.ReviewId = Id;
-            return View(db.Reviews);
+            var query = from r in db.Reviews
+                        where r.ReviewId == Id
+                        join u in db.Users on r.AuthorId equals u.Id into lj
+                        from u in lj.DefaultIfEmpty()
+                        join s in db.Subjects on r.SubjectId equals s.SubjectId                                     
+                        select new ShowReviewViewModel
+                        {
+                            Content = r.Content,
+                            Dislike = r.Dislike,
+                            Exp = r.Exp,
+                            Like = r.Like,
+                            Rating = r.Rating,
+                            Image = r.Image,
+                            Recommend = r.Recommend,
+                            Username = u.UserName,
+                            Subjectname = s.Name
+                        };
+
+            var review = await query.FirstAsync();
+            return View(review);
         }
 
 
@@ -73,10 +92,11 @@ namespace MyReviewProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                Review review = new Review();
-
-                review.SubjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
-                review.Rating = content.Rating;
+                Review review = new Review
+                {
+                    SubjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault(),
+                    Rating = content.Rating
+                };
 
                 Subject subject = db.Subjects.Where(su => su.SubjectId == review.SubjectId).FirstOrDefault();
                 if (subject.AverageRating == 0)
@@ -114,7 +134,7 @@ namespace MyReviewProject.Controllers
                 review.DateCreate = DateTime.Now;
 
                 db.Reviews.Add(review);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("~Home/Index");
             }
 

@@ -13,7 +13,7 @@ using MyReviewProject.Models;
 namespace MyReviewProject.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         public AccountController()
         {

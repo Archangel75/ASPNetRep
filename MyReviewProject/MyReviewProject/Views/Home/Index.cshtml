@@ -6,24 +6,20 @@
     @Styles.Render("~/Content/Content.css")
 </head>
 <body>
-    @*@for (int i = 1; i < 3; i++)
-     {
-        
-         <div class="row">
-                @for (int j = 0 ; j < 3; j++)
-                {
-                    var review = Model.Reviews[j];
-                }
-         </div>
-     }*@
-
-
     <div class="row">
         @for (int i = 0; i < 3; i++)
         {
             var review = Model.Reviews.ElementAt(i);
-        <a href="~/Review/Review/'review.ReviewId'" class="col-sm-4" style="background:url(); background-size:cover; background-position:center">
-            <div id="Header"><h3>@review.Like</h3></div>
+        <a href="~/Review/Review/@review.ReviewId" class="col-sm-4" style="background:@review.Image; background-size:cover; background-position:center">
+            <div id="Header">            
+                <div style="flex:70%; max-width:70%"><h3>@review.Subjectname</h3></div>
+                <div style="flex:30%; max-width:30%;">
+                    <div id="MainpageRating">
+                        ★
+                        <label>@review.Rating</label>
+                    </div>                    
+                </div>            
+            </div>
             @if (review.Content.Length > 160)
             {<p>@review.Content.Substring(0, 160)</p>}
             else
@@ -37,22 +33,22 @@
         @for (int j = 3; j < 6; j++)
         {
             var review = Model.Reviews.ElementAt(j);
-        <a href="~/Review/Review/'review.ReviewId'" class="col-sm-4" style="background:url(); background-size:cover; background-position:center">
-            <div id="Header"><h3>@review.Like</h3></div>
+        <a href="~/Review/Review/@review.ReviewId" class="col-sm-4" style="background:@review.Image; background-size:cover; background-position:center">
+            <div id="Header">
+                <div style="flex:70%; max-width:70%"><h3>@review.Subjectname</h3></div>
+                <div style="flex:30%; max-width:30%;">
+                    <div id="MainpageRating">
+                        ★
+                        <label>@review.Rating</label>
+                    </div>
+                </div>
+            </div>
             @if (review.Content.Length > 160)
             {<p>@review.Content.Substring(0, 160)</p>}
             else
-            {   <p>@review.Content</p>}
+            { <p>@review.Content</p>}
             <div id="Footer">@review.Username</div>
         </a>
         }
     </div>
-
-    @*<div>
-        <a href="">
-            <div></div>
-            <p></p>
-            <div></div>
-        </a>
-    </div>*@
 </body>

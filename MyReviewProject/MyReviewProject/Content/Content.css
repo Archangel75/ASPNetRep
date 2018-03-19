@@ -60,6 +60,7 @@ a.Review {
     top:0;
     height:400px;
     width:100px;
+    max-height:100px;
     text-decoration: none;
     z-index: 99;
     overflow: unset;
@@ -67,16 +68,46 @@ a.Review {
 
 #Header {
     width: 100%;
-    background-color: var(--hovertext);
+    background-color: var(--darkorange);
     min-height: 30px;
+    max-height:30px;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
-#Footer {
+
+#Header h3{
+    text-align:left;
+}
+
+#MainpageRating {
     position:relative;
-    width: 100%;
-    background-color: var(--peachy);
-    bottom: 0;
-    min-height: 30px;
+    max-height:30px;
+    font-size: 35px;
+    vertical-align:10px;
+    text-align:center;
+    top:-10px;
+    color: var(--peachy);
+    text-shadow: 0 0 1px #333;
+    z-index:10;
 }
+
+    #MainpageRating label {
+        width: .5em;
+        margin-left: -1.4em;
+        margin-top: 1em;
+        font-size:20px;
+        color:var(--brhardtonotice);
+        z-index:3;        
+    }
+
+#Footer {
+        position: relative;
+        width: 100%;
+        background-color: var(--brhardtonotice);
+        bottom: 0;
+        min-height: 30px;
+    }
 
 
 #picture img{

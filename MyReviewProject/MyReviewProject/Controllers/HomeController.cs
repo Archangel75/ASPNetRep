@@ -1,5 +1,6 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.AspNet.Identity;
+using MyReviewProject.Controllers;
 using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Web.Mvc;
 namespace MyReviewProject.Controllers
 {
     
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
 
         ApplicationDbContext db = new ApplicationDbContext();
@@ -23,6 +24,7 @@ namespace MyReviewProject.Controllers
             var query = from r in db.Reviews
                         join u in db.Users on r.AuthorId equals u.Id into lj
                         from u in lj.DefaultIfEmpty()
+                        join s in db.Subjects on r.SubjectId equals s.SubjectId
                         orderby r.DateCreate
                         select new CustomReviewDTO
                         {
@@ -34,7 +36,8 @@ namespace MyReviewProject.Controllers
                             Rating = r.Rating,
                             Image = r.Image,
                             Recommend = r.Recommend,
-                            AuthorId = r.AuthorId
+                            Username = u.UserName,
+                            Subjectname = s.Name
                         };
 
             var reviews = await query.ToListAsync();
@@ -44,22 +47,6 @@ namespace MyReviewProject.Controllers
             };
 
             return View(content);
-
-            //var list = (from r in db.Reviews
-            //            orderby r.DateCreate
-            //            select new { ReviewId = r.ReviewId, Content = r.Content, Dislike = r.Dislike, Exp = r.Exp, Like = r.Like, Rating = r.Rating, Image = r.Image, Recommend = r.Recommend, AuthorId = r.AuthorId }).ToList()
-            //            .Select(c => new CustomReview {ReviewId = c.ReviewId, Content = c.Content, Dislike = c.Dislike, Exp = c.Exp, Like = c.Like, Rating = c.Rating, Image = c.Image, Recommend = c.Recommend, AuthorId = c.AuthorId });
-
-
-            ////foreach (var r in list)
-            ////{
-            ////    if (r.AuthorId != null)
-            ////    {
-            ////        r.Username = dbc.Users.Where(u => u.Id == r.AuthorId).Select(u => u.UserName).FirstOrDefault();
-            ////    }
-            ////}
-
-            //content.Reviews = list;
         }
 
         [Authorize(Roles = "Users")]

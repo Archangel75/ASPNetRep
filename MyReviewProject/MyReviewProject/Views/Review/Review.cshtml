@@ -1,6 +1,8 @@
-﻿@model IEnumerable<MyReviewProject.Models.Review>
+﻿@model MyReviewProject.Models.ShowReviewViewModel
+@Styles.Render("~/Content/ReviewPage.css")
 
 @{
+
     ViewBag.Title = "Review";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,26 +11,52 @@
 
 </head>
 <body>
-    @*<div>
-        <h3>Отзывы</h3>
-        <p>@ViewBag.ReviewId</p>
-        <table>
-            <tr>
-                <td><p>Автор</p></td>
-                <td><p>Дата</p></td>
-                <td><p>Отзыв</p></td>
-            </tr>
-            @foreach (MyReviewProject.Models.Review r in Model)
+    <div class="Review">
+        <div class="Header">
+            <h3>@Model.Subjectname</h3>
+        </div>
+        <div class="Content">
+            <div class="top">
+                <div class="left">
+                    <div class="Like">
+                        <span>Достоинства:</span> 
+                        @Model.Like
+                    </div>
+                    <div class="Dislike">
+                        <span>Недостатки:</span> 
+                        @Model.Dislike
+                    </div>
+                    <div class="Rating">
+                        @Model.Rating
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="Image">
+                        @Model.Image
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="Text">
+                    <span>Подробно:</span><br />
+                    @Model.Content
+                </div>
+            </div>
+        </div>
+        <div class="Footer">
+
+            @if (@Model.Username != null)
             {
-            <tr>
-                <td><p></p></td>
-                <td><p>@r.DateCreate</p></td>
-                <td><p>@r.Content</p></td>
-            </tr>
+                <div><span>By :</span> @Model.Username</div>
             }
-        </table>
-        
-    </div>*@
+            else
+            {
+                <div><span>By :</span> Unknown</div>
+            }
+            From @Model.DateCreate.Year
+        </div>
+    </div>
+    <div class="Comments">
 
-
+    </div>
 </body>

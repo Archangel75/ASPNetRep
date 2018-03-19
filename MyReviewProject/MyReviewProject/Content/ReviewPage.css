@@ -1,0 +1,62 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Gabriela|Raleway:500,700&subset=latin-ext');
+@import "Colors.css";
+
+span{
+    font-size:20px;
+    color:var(--errorpagelink);
+}
+
+.Review {
+    font-family: 'Gabriela', serif;
+    position: center;
+}
+
+    .Review div {
+        border-radius: 5px;
+        background-color: var(--darkgray);
+    }
+
+.Content {
+    margin: 5px;  
+    
+}
+
+.top {
+    display: flex;
+    color:var(--whitetext);
+}
+
+.left{
+    float:left;
+    width:40%;
+    text-align:center;
+    padding: 10px;
+}
+
+.right {
+    float: left;
+    width: 60%;
+}
+
+.bottom {
+    text-align: center;
+    padding: 10px;
+    color: var(--whitetext);
+}
+
+.Header{
+    margin:5px;
+    color:var(--errorpagelink);
+    text-align:center;
+    font-size:30px;
+
+}
+
+.Footer {
+    margin: 5px;    
+    color: var(--whitetext);
+}
+
+.Comments{
+
+}
