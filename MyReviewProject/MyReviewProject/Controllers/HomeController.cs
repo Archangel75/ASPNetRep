@@ -5,6 +5,8 @@ using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -20,12 +22,12 @@ namespace MyReviewProject.Controllers
 
         [HttpGet]
         public async Task<ActionResult> Index()
-        {            
+        {
             var query = from r in db.Reviews
                         join u in db.Users on r.AuthorId equals u.Id into lj
                         from u in lj.DefaultIfEmpty()
                         join s in db.Subjects on r.SubjectId equals s.SubjectId
-                        orderby r.DateCreate
+                        orderby r.DateCreate descending
                         select new CustomReviewDTO
                         {
                             ReviewId = r.ReviewId,
@@ -41,6 +43,14 @@ namespace MyReviewProject.Controllers
                         };
 
             var reviews = await query.ToListAsync();
+            //foreach (var review in reviews)
+            //{
+            //    if (review.imagebytes != null)
+            //    {
+            //        MemoryStream MS = new MemoryStream(review.imagebytes);
+            //        review.Image = Image.FromStream(MS);
+            //    }
+            //}
             var content = new IndexReviewViewModel
             {
                 Reviews = reviews
@@ -57,13 +67,14 @@ namespace MyReviewProject.Controllers
 
         private Dictionary<string, object> GetData(string actionName)
         {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-
-            dict.Add("Action", actionName);
-            dict.Add("Пользователь", HttpContext.User.Identity.Name);
-            dict.Add("Аутентифицирован?", HttpContext.User.Identity.IsAuthenticated);
-            dict.Add("Тип аутентификации", HttpContext.User.Identity.AuthenticationType);
-            dict.Add("В роли Users?", HttpContext.User.IsInRole("Users"));
+            Dictionary<string, object> dict = new Dictionary<string, object>
+            {
+                { "Action", actionName },
+                { "Пользователь", HttpContext.User.Identity.Name },
+                { "Аутентифицирован?", HttpContext.User.Identity.IsAuthenticated },
+                { "Тип аутентификации", HttpContext.User.Identity.AuthenticationType },
+                { "В роли Users?", HttpContext.User.IsInRole("Users") }
+            };
 
             return dict;
         }

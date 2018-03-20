@@ -10,23 +10,23 @@
         @for (int i = 0; i < 3; i++)
         {
             var review = Model.Reviews.ElementAt(i);
-        <a href="~/Review/Review/@review.ReviewId" class="col-sm-4" style="background:@review.Image; background-size:cover; background-position:center">
-            <div id="Header">            
-                <div style="flex:70%; max-width:70%"><h3>@review.Subjectname</h3></div>
-                <div style="flex:30%; max-width:30%;">
-                    <div id="MainpageRating">
-                        ★
-                        <label>@review.Rating</label>
-                    </div>                    
-                </div>            
-            </div>
-            @if (review.Content.Length > 160)
-            {<p>@review.Content.Substring(0, 160)</p>}
-            else
-            { <p>@review.Content</p>}
-            <div id="Footer">@review.Username</div>
-        </a>
-        }
+            <a href="~/Review/Review/@review.ReviewId" class="col-sm-4" style="background:@review.Image; background-size:cover; background-position:center">            
+                <div id="Header">
+                    <div style="flex:70%; max-width:70%"><h3>@review.Subjectname</h3></div>
+                    <div style="flex:30%; max-width:30%;">
+                        <div id="MainpageRating">
+                            ★
+                            <label>@review.Rating</label>
+                        </div>
+                    </div>
+                </div>
+                @if (review.Content.Length > 160)
+                {<p>@review.Content.Substring(0, 160)</p>}
+                else
+                { <p>@review.Content</p>}
+                <div id="Footer">@review.Username</div>
+            </a>
+            }
     </div>
 
     <div class="row">
@@ -50,5 +50,8 @@
             <div id="Footer">@review.Username</div>
         </a>
         }
+    </div>
+    <div>
+        <a class="newreview" href="~/Review/Create">+</a>
     </div>
 </body>

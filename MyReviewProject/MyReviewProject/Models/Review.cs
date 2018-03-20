@@ -43,7 +43,5 @@ namespace MyReviewProject.Models
         
         public string AuthorId { get; set; }
         
-        public ApplicationUser User { get; private set; }
-        
     }
 }

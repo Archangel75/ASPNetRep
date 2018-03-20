@@ -1,4 +1,5 @@
-﻿using MyReviewProject.Controllers;
+﻿using Microsoft.AspNet.Identity.Owin;
+using MyReviewProject.Controllers;
 using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
@@ -95,8 +96,13 @@ namespace MyReviewProject.Controllers
                 Review review = new Review
                 {
                     SubjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault(),
-                    Rating = content.Rating
-                };
+                    Rating = content.Rating,
+                    Recommend = Convert.ToByte(content.Recomendations ? 1 : 0),
+                    Exp = Convert.ToByte(content.Experience),
+                    Like = content.Like,
+                    Dislike = content.Dislike,
+                    Content = content.Comment
+            };
 
                 Subject subject = db.Subjects.Where(su => su.SubjectId == review.SubjectId).FirstOrDefault();
                 if (subject.AverageRating == 0)
@@ -108,14 +114,13 @@ namespace MyReviewProject.Controllers
                     double[] rating = db.Reviews.Where(r => r.SubjectId == review.SubjectId).Select(r => r.Rating).ToArray();
                     subject.AverageRating = (rating.Sum() + content.Rating) / rating.Count()+1;
                 }
-                
 
-                review.Recommend = Convert.ToByte(content.Recomendations ? 1 : 0);
-                review.Exp = Convert.ToByte(content.Experience);
-                review.Like = content.Like;
-                review.Dislike = content.Dislike;
-                review.Content = content.Comment;
-
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    ApplicationUserManager manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                    ApplicationUser user = await manager.FindByNameAsync(HttpContext.User.Identity.Name);
+                    review.AuthorId = user.Id;
+                }
 
                 if (uploadImage != null)
                 {
@@ -134,11 +139,13 @@ namespace MyReviewProject.Controllers
                 review.DateCreate = DateTime.Now;
 
                 db.Reviews.Add(review);
-                await db.SaveChangesAsync();
-                return RedirectToAction("~Home/Index");
+                db.SaveChanges();
+                
+                
+                return RedirectToAction("Index","Home");
             }
 
-            return RedirectToAction("~Home/Index");
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -163,6 +170,6 @@ namespace MyReviewProject.Controllers
                 return Json(new { correct = false }, JsonRequestBehavior.AllowGet);
             //return ViewBag.NoName = "Похоже никто ещё не делал обзор на это.";
 
-        }
+        }        
     }
 }

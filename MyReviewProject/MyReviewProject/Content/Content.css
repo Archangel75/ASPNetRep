@@ -109,10 +109,29 @@ a.Review {
         min-height: 30px;
     }
 
-
 #picture img{
     width:100%;
     height:100%;
+}
+
+.newreview {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 70px;
+    height: 70px;
+    font-size: 120px;
+    text-align:center;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    color: var(--brhardtonotice);
+    text-decoration: none;
+    background-color: var(--darkorange);
+    border-radius: 32px;
+    box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.6);
+    z-index:9999;
+}
+.newreview + text{
+
 }
 
 @media (min-width: 576px) {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Web;
@@ -28,6 +29,8 @@ namespace MyReviewProject.Models
         public string Dislike { get; set; }
 
         public byte[] Image { get; set; }
+
+        //public Image Image { get; set; }
 
         public string Username { get; set; }
 
@@ -66,17 +69,17 @@ namespace MyReviewProject.Models
 
     public class CreateReviewViewModel
     {
-        public Subject reviewSubject { get; set; }
+        public Subject ReviewSubject { get; set; }
 
         public List<Category> Categories { get; set; }
 
-        public List<SubCategory> subCategories { get; set; }
+        public List<SubCategory> SubCategories { get; set; }
 
         [Required]
         public string Objectname { get; set; }
         
-        public int subCategoryId { get; set; }
-        public int subjectId { get; set; }
+        public int SubCategoryId { get; set; }
+        public int SubjectId { get; set; }
 
         [Required]
         public int Rating { get; set; }

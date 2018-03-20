@@ -14,6 +14,8 @@ namespace MyReviewProject.Models
         public string Source { get; set; }
 
         public string Trace { get; set; }
+
+        public string AddStuff { get; set; }
         
     }
 }
