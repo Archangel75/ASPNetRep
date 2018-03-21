@@ -5,6 +5,9 @@
 
     ViewBag.Title = "Review";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var imgSrc = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.Image));
+    var rating = 100 / 5 * Model.Rating;
 }
 
 <head>
@@ -18,27 +21,51 @@
         <div class="Content">
             <div class="top">
                 <div class="left">
+                    <h2>Кратко</h2>
                     <div class="Like">
-                        <span>Достоинства:</span> 
+                        <span>Достоинства:</span>
                         @Model.Like
                     </div>
+                    <hr style="border:1px solid var(--brhardtonotice)">
                     <div class="Dislike">
-                        <span>Недостатки:</span> 
+                        <span>Недостатки:</span>
                         @Model.Dislike
                     </div>
+                    <hr style="border:1px solid var(--brhardtonotice)">
                     <div class="Rating">
-                        @Model.Rating
+                        <span>Оценка:</span>
+                        <div class="RatingRow" style="width:@rating%">
+                            <div class="RatingImage" style='background:url("../../Content/Images/stars.png"); background-size:cover'></div>
+                        </div>
                     </div>
                 </div>
                 <div class="right">
                     <div class="Image">
-                        @Model.Image
+                        <img id="myImg" src="@imgSrc" />
+                        <div id="myModal" class="modal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="img01">
+                            <script>
+                                var modal = document.getElementById('myModal');
+                                var img = document.getElementById('myImg');
+                                var modalImg = document.getElementById("img01");
+                                img.onclick = function () {
+                                    modal.style.display = "block";
+                                    modalImg.src = this.src;
+                                }
+                                var span = document.getElementsByClassName("close")[0];
+                                span.onclick = function () {
+                                    modal.style.display = "none";
+                                }
+                            </script>
+                        </div>
+
                     </div>
                 </div>
             </div>
             <div class="bottom">
                 <div class="Text">
-                    <span>Подробно:</span><br />
+                    <h2>Подробно:</h2>
                     @Model.Content
                 </div>
             </div>
@@ -46,17 +73,100 @@
         <div class="Footer">
 
             @if (@Model.Username != null)
-            {
-                <div><span>By :</span> @Model.Username</div>
-            }
-            else
-            {
-                <div><span>By :</span> Unknown</div>
-            }
+        {
+            <div><span>By :</span> @Model.Username</div>
+    }
+    else
+    {
+        <div><span>By :</span> Unknown</div>
+}
             From @Model.DateCreate.Year
         </div>
-    </div>
-    <div class="Comments">
 
+        <details class="Comments">
+            <summary>Показать комментарии</summary>
+            <div class="comments-container">
+                @*<h1>Comentarios <a href="http://creaticode.com">creaticode.com</a></h1>*@
+
+                <ul id="comments-list" class="comments-list">
+                    <li>
+                        <div class="comment-main-level">
+                            <!-- Avatar -->
+                            <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                            <!-- Contenedor del Comentario -->
+                            <div class="comment-box">
+                                <div class="comment-head">
+                                    <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+                                    <span>hace 20 minutos</span>
+                                    <i class="fa fa-reply"></i>
+                                    <i class="fa fa-heart"></i>
+                                </div>
+                                <div class="comment-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Respuestas de los comentarios -->
+                        <ul class="comments-list reply-list">
+                            <li>
+                                <!-- Avatar -->
+                                <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+                                <!-- Contenedor del Comentario -->
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
+                                        <span>hace 10 minutos</span>
+                                        <i class="fa fa-reply"></i>
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                    <div class="comment-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <!-- Avatar -->
+                                <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                                <!-- Contenedor del Comentario -->
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+                                        <span>hace 10 minutos</span>
+                                        <i class="fa fa-reply"></i>
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                    <div class="comment-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <div class="comment-main-level">
+                            <!-- Avatar -->
+                            <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+                            <!-- Contenedor del Comentario -->
+                            <div class="comment-box">
+                                <div class="comment-head">
+                                    <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
+                                    <span>hace 10 minutos</span>
+                                    <i class="fa fa-reply"></i>
+                                    <i class="fa fa-heart"></i>
+                                </div>
+                                <div class="comment-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </details>
     </div>
+
+
+    
 </body>

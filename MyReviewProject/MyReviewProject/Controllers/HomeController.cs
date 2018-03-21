@@ -43,14 +43,6 @@ namespace MyReviewProject.Controllers
                         };
 
             var reviews = await query.ToListAsync();
-            //foreach (var review in reviews)
-            //{
-            //    if (review.imagebytes != null)
-            //    {
-            //        MemoryStream MS = new MemoryStream(review.imagebytes);
-            //        review.Image = Image.FromStream(MS);
-            //    }
-            //}
             var content = new IndexReviewViewModel
             {
                 Reviews = reviews

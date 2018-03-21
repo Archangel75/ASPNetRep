@@ -418,6 +418,7 @@
     <Content Include="Content\Images\login.jpg" />
     <Content Include="Content\Images\Menu-512.png" />
     <Content Include="Content\Images\nocheck.jpg" />
+    <Content Include="Content\Images\stars.png" />
     <Content Include="Content\Images\test\862478.jpg" />
     <Content Include="Content\Images\test\mercy_overwatch_fan_art.jpg" />
     <Content Include="Content\Images\test\overwatch_tracer_blizzard_entertainment_109504_2560x1080.jpg" />

@@ -132,7 +132,7 @@ textarea{
     word-wrap: break-word;
     resize: none;
     height: 107px;
-    max-width: none;
+    overflow-y:scroll;
 }
 
 input[type=text] {

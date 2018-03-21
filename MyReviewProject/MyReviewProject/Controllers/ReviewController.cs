@@ -148,7 +148,6 @@ namespace MyReviewProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
         public  ActionResult AutocompleteSearch(string term)
         {
 
