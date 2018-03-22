@@ -11,6 +11,8 @@ function checkExistSubject(obj) {
     $.get("/Review/CheckExistSubject", { term: obj.value }, function (data) {
         if (!data.correct) {
             $('#buttoncreate').show();
+            if ($('#Objectname').hasClass("valid")) {
+                $('#Objectname').removeClass("valid");
             $('#Objectname').addClass("invalid");
             $('#Objectname').attr("aria-label", "Похоже, что никто до вас не создавал опрос на это. Пожалуйста, создайте страницу продукта.");
 

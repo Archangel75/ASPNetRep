@@ -3,7 +3,10 @@ using MyReviewProject.Controllers;
 using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
@@ -45,6 +48,32 @@ namespace MyReviewProject.Controllers
 
             var review = await query.FirstAsync();
             return View(review);
+        }
+
+        public async Task<ActionResult> GetComments()
+        {
+            var query = from c in db.Comments
+                        join u in db.Users on c.AuthorId equals u.Id
+                        orderby c.CreateTime descending
+                        select new CommentsDTO
+                        {
+                            Id = c.Id,
+                            Comment = c.Content,
+                            Author = new UserDTO
+                            {
+                                Id = u.Id,
+                                UserName = u.UserName
+                            },
+                            CreateTime = c.CreateTime
+                        };
+
+            var commentList = await query.ToListAsync();
+            var comments = new CommentsReviewViewModel
+            {
+                Comments = commentList
+            };
+
+            return View("CommentsView", comments);
         }
 
 
@@ -124,11 +153,7 @@ namespace MyReviewProject.Controllers
 
                 if (uploadImage != null)
                 {
-                    byte[] imageData = null;
-                    if (uploadImage.ContentType != "image")
-                    {
-                        ModelState.AddModelError("Прикреплённый файл не является картинкой!", "Ошибка");
-                    }
+                    byte[] imageData = null;                    
                     using (var binaryReader = new BinaryReader(uploadImage.InputStream))
                     {
                         imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
@@ -170,5 +195,6 @@ namespace MyReviewProject.Controllers
             //return ViewBag.NoName = "Похоже никто ещё не делал обзор на это.";
 
         }        
+
     }
 }

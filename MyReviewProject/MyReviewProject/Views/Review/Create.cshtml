@@ -132,9 +132,9 @@
 
         </div>
         <div class="col-75">
-            <a class='btn'>
-                <input id="image" type="file" name="uploadImage" onchange='$("#upload-file-info").html($(this).val());' />
-            </a>
+            <div class='btn'>
+                <input id="@Html.IdFor(x => x.Image)" type="file" name="@Html.NameFor(x => x.Image)" onchange='$("#upload-file-info").html($(this).val());' />
+            </div>
             <span class='label label-info' id="upload-file-info"></span>
         </div>
 
