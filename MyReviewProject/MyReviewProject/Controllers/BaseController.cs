@@ -1,4 +1,5 @@
-﻿using MyReviewProject.Models;
+﻿using Microsoft.AspNet.Identity.Owin;
+using MyReviewProject.Models;
 using System;
 using System.Net;
 using System.Web;
@@ -8,6 +9,41 @@ namespace MyReviewProject.Controllers
 {
     public class BaseController : Controller
     {
+        public BaseController()
+        {
+
+        }
+
+        public BaseController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            protected set
+            {
+                _userManager = value;
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && _userManager != null)
+            {
+                _userManager.Dispose();
+                _userManager = null;
+            }
+
+            base.Dispose(disposing);
+        }
+
         protected override void OnException(ExceptionContext error)
         {
             error.ExceptionHandled = true;

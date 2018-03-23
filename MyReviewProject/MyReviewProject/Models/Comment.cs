@@ -19,5 +19,8 @@ namespace MyReviewProject.Models
 
         public int ReplyToId { get; set; }
 
+        public int Likes { get; set; }
+
+        public int ReviewId { get; set; }
     }
 }

@@ -48,6 +48,10 @@ namespace MyReviewProject.Models
 
         public int ReplyToId { get; set; }
 
+        public int Likes { get; set; }
+
+        public int ReviewId { get; set; }
+
         public UserDTO Author { get; set; }
     }
 
@@ -62,10 +66,12 @@ namespace MyReviewProject.Models
     public class IndexReviewViewModel
     {        
         public IEnumerable<CustomReviewDTO> Reviews { get; set; }
+
     }
 
     public class ShowReviewViewModel
     {
+
         public int ReviewId { get; set; }
 
         public DateTime DateCreate { get; set; }
@@ -87,12 +93,14 @@ namespace MyReviewProject.Models
         public string Username { get; set; }
 
         public string Subjectname { get; set; }
-    }
 
-    public class CommentsReviewViewModel
-    {
         public List<CommentsDTO> Comments { get; set; }
     }
+
+    //public class CommentsReviewViewModel
+    //{
+    //    public List<CommentsDTO> Comments { get; set; }
+    //}
 
     public class CreateReviewViewModel
     {

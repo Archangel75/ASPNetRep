@@ -18,6 +18,7 @@ namespace MyReviewProject.Controllers
 {
     public class ReviewController : BaseController
     {
+
         ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
@@ -28,52 +29,103 @@ namespace MyReviewProject.Controllers
         [HttpGet]
         public async Task<ActionResult> Review(int Id)
         {
-            var query = from r in db.Reviews
-                        where r.ReviewId == Id
-                        join u in db.Users on r.AuthorId equals u.Id into lj
-                        from u in lj.DefaultIfEmpty()
-                        join s in db.Subjects on r.SubjectId equals s.SubjectId                                     
-                        select new ShowReviewViewModel
-                        {
-                            Content = r.Content,
-                            Dislike = r.Dislike,
-                            Exp = r.Exp,
-                            Like = r.Like,
-                            Rating = r.Rating,
-                            Image = r.Image,
-                            Recommend = r.Recommend,
-                            Username = u.UserName,
-                            Subjectname = s.Name
-                        };
+            if (Id != null && Id != 0)
+            {
+                var query = from r in db.Reviews
+                            where r.ReviewId == Id
+                            join u in db.Users on r.AuthorId equals u.Id into lj
+                            from u in lj.DefaultIfEmpty()
+                            join s in db.Subjects on r.SubjectId equals s.SubjectId
+                            select new ShowReviewViewModel
+                            {
+                                ReviewId = r.ReviewId,
+                                Content = r.Content,
+                                Dislike = r.Dislike,
+                                Exp = r.Exp,
+                                Like = r.Like,
+                                Rating = r.Rating,
+                                Image = r.Image,
+                                Recommend = r.Recommend,
+                                Username = u.UserName,
+                                Subjectname = s.Name
+                            };
+                var review = await query.FirstAsync();
+                review.Comments = await GetComments(Id);
+                return View(review);
+            }
+            return RedirectToAction("Index", "Home");
 
-            var review = await query.FirstAsync();
-            return View(review);
         }
 
-        public async Task<ActionResult> GetComments()
+        public async Task<List<CommentsDTO>> GetComments(int ReviewId)
         {
-            var query = from c in db.Comments
-                        join u in db.Users on c.AuthorId equals u.Id
-                        orderby c.CreateTime descending
-                        select new CommentsDTO
-                        {
-                            Id = c.Id,
-                            Comment = c.Content,
-                            Author = new UserDTO
-                            {
-                                Id = u.Id,
-                                UserName = u.UserName
-                            },
-                            CreateTime = c.CreateTime
-                        };
-
-            var commentList = await query.ToListAsync();
-            var comments = new CommentsReviewViewModel
+            if (ReviewId > -1)
             {
-                Comments = commentList
-            };
+                var query = from c in db.Comments
+                            join u in db.Users on c.AuthorId equals u.Id
+                            where c.ReviewId == ReviewId
+                            orderby c.CreateTime descending
+                            select new CommentsDTO
+                            {
+                                Id = c.Id,
+                                Comment = c.Content,
+                                Author = new UserDTO
+                                {
+                                    Id = u.Id,
+                                    UserName = u.UserName
+                                },
+                                CreateTime = c.CreateTime,
+                                Likes = c.Likes
+                            };
 
-            return View("CommentsView", comments);
+                var commentList = await query.ToListAsync();
+                return commentList;
+            }
+            return new List<CommentsDTO>();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostComment(string comment, int id, int ReviewId)
+        {
+            if (comment != "" && ReviewId > 0)
+            {
+                ApplicationUser user = null;
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    user = await UserManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                }
+                var model = new Comment()
+                {
+                    Content = comment,
+                    CreateTime = DateTime.Now,
+                    ReplyToId = id,
+                    AuthorId = user.Id,
+                    Likes = 0,
+                    ReviewId = ReviewId
+                };
+                db.Comments.Add(model);
+                await db.SaveChangesAsync();
+            }
+
+            return Json(new { }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]        
+        public async Task<ActionResult> PostLike(int id)
+        {
+            if (id != -1)
+            {
+                var query = from c in db.Comments
+                            where c.Id == id
+                            select c;
+
+                var comment = await query.FirstAsync();
+                comment.Likes++;
+                db.Entry(comment).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }            
+
+            return Json(new { }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -144,10 +196,10 @@ namespace MyReviewProject.Controllers
                     subject.AverageRating = (rating.Sum() + content.Rating) / rating.Count()+1;
                 }
 
+                ApplicationUser user = null;
                 if (HttpContext.User.Identity.IsAuthenticated)
                 {
-                    ApplicationUserManager manager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                    ApplicationUser user = await manager.FindByNameAsync(HttpContext.User.Identity.Name);
+                    user = await UserManager.FindByNameAsync(HttpContext.User.Identity.Name);
                     review.AuthorId = user.Id;
                 }
 
@@ -164,7 +216,7 @@ namespace MyReviewProject.Controllers
                 review.DateCreate = DateTime.Now;
 
                 db.Reviews.Add(review);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 
                 
                 return RedirectToAction("Index","Home");

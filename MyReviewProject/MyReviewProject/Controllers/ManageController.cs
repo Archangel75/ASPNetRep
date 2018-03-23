@@ -16,13 +16,12 @@ namespace MyReviewProject.Controllers
     public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+
         public ManageController()
         {
         }
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationSignInManager signInManager)
         {
-            UserManager = userManager;
             SignInManager = signInManager;
         }
 
@@ -36,19 +35,7 @@ namespace MyReviewProject.Controllers
             { 
                 _signInManager = value; 
             }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
+        }        
 
         //
         // GET: /Manage/Index
@@ -217,16 +204,7 @@ namespace MyReviewProject.Controllers
         }        
         
     */
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-                _userManager = null;
-            }
-
-            base.Dispose(disposing);
-        }
+        
 
 #region Вспомогательные приложения
         // Используется для защиты от XSRF-атак при добавлении внешних имен входа
