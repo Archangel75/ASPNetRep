@@ -80,7 +80,7 @@ namespace MyReviewProject.Controllers
         [HttpPost]
         public async Task<ActionResult> PostComment(string comment, int id, int ReviewId)
         {
-            int success = 0;
+            int success = 1;
             if (comment != "" && ReviewId > 0)
             {
                 ApplicationUser user = null;
@@ -98,7 +98,8 @@ namespace MyReviewProject.Controllers
                     ReviewId = ReviewId
                 };
                 Db.Comments.Add(model);
-                success = await Db.SaveChangesAsync();
+                Db.SaveChanges();
+                return Json(new { success }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new { success }, JsonRequestBehavior.AllowGet);

@@ -13,7 +13,7 @@ namespace MyReviewProject.Controllers
         {
 
         }
-
+        
         public BaseController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
@@ -24,12 +24,18 @@ namespace MyReviewProject.Controllers
         {
             get
             {
-                return _db ?? ApplicationDbContext.Create();
+                return _db ?? GetNewContext();
             }
             set
             {
                 _db = value;
             }        
+        }
+
+        private ApplicationDbContext GetNewContext()
+        {
+            _db = ApplicationDbContext.Create();
+            return _db;
         }
 
         private ApplicationUserManager _userManager;
@@ -52,7 +58,7 @@ namespace MyReviewProject.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set
+            protected set
             {
                 _signInManager = value;
             }

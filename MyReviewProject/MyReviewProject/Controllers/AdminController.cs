@@ -24,26 +24,12 @@ namespace MyReviewProject.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }       
+        }  
 
        
-        public ActionResult Index(ApplicationDbContext context)
+        public ActionResult Index()
         {
-            var users = context.Users;
-
-
+            var users = Db.Users;
             return View(UserManager.Users);
         }
 

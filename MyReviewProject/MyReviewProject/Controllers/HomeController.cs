@@ -17,16 +17,13 @@ namespace MyReviewProject.Controllers
     
     public class HomeController : BaseController
     {
-
-        ApplicationDbContext db = new ApplicationDbContext();
-
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var query = from r in db.Reviews
-                        join u in db.Users on r.AuthorId equals u.Id into lj
+            var query = from r in Db.Reviews
+                        join u in Db.Users on r.AuthorId equals u.Id into lj
                         from u in lj.DefaultIfEmpty()
-                        join s in db.Subjects on r.SubjectId equals s.SubjectId
+                        join s in Db.Subjects on r.SubjectId equals s.SubjectId
                         orderby r.DateCreate descending
                         select new CustomReviewDTO
                         {
