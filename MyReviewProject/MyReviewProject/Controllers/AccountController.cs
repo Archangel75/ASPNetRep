@@ -15,30 +15,16 @@ namespace MyReviewProject.Controllers
     [Authorize]
     public class AccountController : BaseController
     {
-        private ApplicationSignInManager _signInManager;
-
-        public AccountController(ApplicationSignInManager signInManager) 
+        public AccountController()
         {
-            SignInManager = signInManager;
-        }
+
+        }        
 
         private ApplicationRoleManager RoleManager
         {
             get
             {
                 return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
-            }
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
             }
         }
 

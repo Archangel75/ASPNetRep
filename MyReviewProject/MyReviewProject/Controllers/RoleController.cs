@@ -13,9 +13,6 @@ namespace MyReviewProject.Controllers
 {
     public class RoleController : BaseController
     {
-
-        private ApplicationUserManager _userManager;
-
         private ApplicationRoleManager RoleManager
         {
             get
@@ -23,15 +20,6 @@ namespace MyReviewProject.Controllers
                 return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             }
         }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
-
         public ActionResult Index()
         {
             
@@ -54,7 +42,6 @@ namespace MyReviewProject.Controllers
 
             return View(RoleManager.Roles);
         }
-
         
         public ActionResult Create()
         {

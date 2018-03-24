@@ -19,23 +19,16 @@ namespace MyReviewProject.Controllers
     public class ReviewController : BaseController
     {
 
-        ApplicationDbContext db = new ApplicationDbContext();
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
         public async Task<ActionResult> Review(int Id)
         {
             if (Id != null && Id != 0)
             {
-                var query = from r in db.Reviews
+                var query = from r in Db.Reviews
                             where r.ReviewId == Id
-                            join u in db.Users on r.AuthorId equals u.Id into lj
+                            join u in Db.Users on r.AuthorId equals u.Id into lj
                             from u in lj.DefaultIfEmpty()
-                            join s in db.Subjects on r.SubjectId equals s.SubjectId
+                            join s in Db.Subjects on r.SubjectId equals s.SubjectId
                             select new ShowReviewViewModel
                             {
                                 ReviewId = r.ReviewId,
@@ -61,8 +54,8 @@ namespace MyReviewProject.Controllers
         {
             if (ReviewId > -1)
             {
-                var query = from c in db.Comments
-                            join u in db.Users on c.AuthorId equals u.Id
+                var query = from c in Db.Comments
+                            join u in Db.Users on c.AuthorId equals u.Id
                             where c.ReviewId == ReviewId
                             orderby c.CreateTime descending
                             select new CommentsDTO
@@ -87,6 +80,7 @@ namespace MyReviewProject.Controllers
         [HttpPost]
         public async Task<ActionResult> PostComment(string comment, int id, int ReviewId)
         {
+            int success = 0;
             if (comment != "" && ReviewId > 0)
             {
                 ApplicationUser user = null;
@@ -99,30 +93,30 @@ namespace MyReviewProject.Controllers
                     Content = comment,
                     CreateTime = DateTime.Now,
                     ReplyToId = id,
-                    AuthorId = user.Id,
+                    AuthorId = user.Id ?? "",
                     Likes = 0,
                     ReviewId = ReviewId
                 };
-                db.Comments.Add(model);
-                await db.SaveChangesAsync();
+                Db.Comments.Add(model);
+                success = await Db.SaveChangesAsync();
             }
 
-            return Json(new { }, JsonRequestBehavior.AllowGet);
+            return Json(new { success }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]        
-        public async Task<ActionResult> PostLike(int id)
+        public async Task<ActionResult> PostLike(int id, int ReviewId)
         {
             if (id != -1)
             {
-                var query = from c in db.Comments
-                            where c.Id == id
+                var query = from c in Db.Comments
+                            where c.Id == id && c.ReviewId == ReviewId
                             select c;
 
                 var comment = await query.FirstAsync();
                 comment.Likes++;
-                db.Entry(comment).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                Db.Entry(comment).State = EntityState.Modified;
+                await Db.SaveChangesAsync();
             }            
 
             return Json(new { }, JsonRequestBehavior.AllowGet);
@@ -132,16 +126,16 @@ namespace MyReviewProject.Controllers
         [HttpGet]
         public ActionResult Create(CreateReviewViewModel review)
         {
-            review.Categories = db.Categories.ToList();
-            ViewBag.subs = new List<SubCategory>(db.SubCategories.Where(s => s.CategoryId == 1));
+            review.Categories = Db.Categories.ToList();
+            ViewBag.subs = new List<SubCategory>(Db.SubCategories.Where(s => s.CategoryId == 1));
             return View(review);
         }
 
         public ActionResult GetSubCategories(string catname)
         {
-            var catId = db.Categories.Where(c => c.Name.ToLower() == catname.ToLower())
+            var catId = Db.Categories.Where(c => c.Name.ToLower() == catname.ToLower())
                                     .Select(c => c.Id).FirstOrDefault();
-            var subs = db.SubCategories.Where(s => s.CategoryId == catId);
+            var subs = Db.SubCategories.Where(s => s.CategoryId == catId);
 
             string responce = "";
             foreach (var sub in subs)
@@ -155,15 +149,15 @@ namespace MyReviewProject.Controllers
         [HttpPost]
         public ActionResult CreateSubject( string subcatname, string subjname)
         {
-            var checkexist = db.Subjects.Where(sub => sub.Name.ToLower() == subjname.ToLower()).FirstOrDefault();
+            var checkexist = Db.Subjects.Where(sub => sub.Name.ToLower() == subjname.ToLower()).FirstOrDefault();
             if (checkexist == null)
             {
-                var subCatId = db.SubCategories.Where(s => s.Name == subcatname)
+                var subCatId = Db.SubCategories.Where(s => s.Name == subcatname)
                                        .Select(s => s.SubCategoryId).FirstOrDefault();
                 if (subCatId != 0)
                 {
-                    db.Subjects.Add(new Subject { AverageRating = 0, Name = subjname, SubCategoryId = subCatId });
-                    db.SaveChanges();
+                    Db.Subjects.Add(new Subject { AverageRating = 0, Name = subjname, SubCategoryId = subCatId });
+                    Db.SaveChanges();
                 }
             }
             return Json(new { }, JsonRequestBehavior.AllowGet);
@@ -176,7 +170,7 @@ namespace MyReviewProject.Controllers
             {
                 Review review = new Review
                 {
-                    SubjectId = db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault(),
+                    SubjectId = Db.Subjects.Where(s => s.Name.ToLower() == content.Objectname.ToLower()).Select(s => s.SubjectId).FirstOrDefault(),
                     Rating = content.Rating,
                     Recommend = Convert.ToByte(content.Recomendations ? 1 : 0),
                     Exp = Convert.ToByte(content.Experience),
@@ -185,14 +179,14 @@ namespace MyReviewProject.Controllers
                     Content = content.Comment
             };
 
-                Subject subject = db.Subjects.Where(su => su.SubjectId == review.SubjectId).FirstOrDefault();
+                Subject subject = Db.Subjects.Where(su => su.SubjectId == review.SubjectId).FirstOrDefault();
                 if (subject.AverageRating == 0)
                 {
                     subject.AverageRating = (double)content.Rating;
                 }
                 else
                 {
-                    double[] rating = db.Reviews.Where(r => r.SubjectId == review.SubjectId).Select(r => r.Rating).ToArray();
+                    double[] rating = Db.Reviews.Where(r => r.SubjectId == review.SubjectId).Select(r => r.Rating).ToArray();
                     subject.AverageRating = (rating.Sum() + content.Rating) / rating.Count()+1;
                 }
 
@@ -215,8 +209,8 @@ namespace MyReviewProject.Controllers
 
                 review.DateCreate = DateTime.Now;
 
-                db.Reviews.Add(review);
-                await db.SaveChangesAsync();
+                Db.Reviews.Add(review);
+                await Db.SaveChangesAsync();
                 
                 
                 return RedirectToAction("Index","Home");
@@ -228,7 +222,7 @@ namespace MyReviewProject.Controllers
         public  ActionResult AutocompleteSearch(string term)
         {
 
-            var models = db.Subjects.Where(a => a.Name.Contains(term))
+            var models = Db.Subjects.Where(a => a.Name.Contains(term))
                             .Select(a => new { value = a.Name, id = a.SubjectId, subcat = a.SubCategoryId })
                             .Distinct();
 
@@ -237,7 +231,7 @@ namespace MyReviewProject.Controllers
 
         public ActionResult CheckExistSubject(string term)
         {
-            var subjectId = db.Subjects.Where(s => s.Name.ToLower() == term.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
+            var subjectId = Db.Subjects.Where(s => s.Name.ToLower() == term.ToLower()).Select(s => s.SubjectId).FirstOrDefault();
 
             if (subjectId > 0)
                 return Json(new { correct = true }, JsonRequestBehavior.AllowGet);

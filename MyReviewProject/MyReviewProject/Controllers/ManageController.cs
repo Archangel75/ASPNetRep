@@ -15,27 +15,10 @@ namespace MyReviewProject.Controllers
     [Authorize(Roles = "Users")]
     public class ManageController : BaseController
     {
-        private ApplicationSignInManager _signInManager;
-
         public ManageController()
         {
-        }
-        public ManageController(ApplicationSignInManager signInManager)
-        {
-            SignInManager = signInManager;
-        }
 
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set 
-            { 
-                _signInManager = value; 
-            }
-        }        
+        }       
 
         //
         // GET: /Manage/Index

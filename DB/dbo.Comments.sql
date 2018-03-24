@@ -1,7 +1,7 @@
 USE [ReviewStorage]
 GO
 
-/****** Объект: Table [dbo].[Comments] Дата скрипта: 22.03.2018 15:06:35 ******/
+/****** Объект: Table [dbo].[Comments] Дата скрипта: 23.03.2018 18:46:47 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,7 +18,8 @@ CREATE TABLE [dbo].[Comments] (
     [Content]    NVARCHAR (MAX) NOT NULL,
     [CreateTime] DATETIME       NOT NULL,
     [EditTime]   DATETIME       NULL,
-    [ReptyToId]  INT            NULL
+    [ReptyToId]  INT            NULL,
+    [Likes]      INT            NULL,
+    [ReviewId]   INT            NULL
 );
-
 

@@ -8,11 +8,14 @@ $(".submitcomment").click(function () {
         if ($("#wrongcomment").css("display") == "block")
             $("#wrongcomment").css("display", "none");
         var id = $("#answerto").text();
-        if (typeof id == 'undefined')
+        if (typeof id == 'undefined' || id == "")
             id = -1;
         var revId = $("#hidId").val();
-        $.post("/Review/PostComment", { comment: comment, id : id, ReviewId : revId  }, function () {
-
+        $.post("/Review/PostComment", { comment: comment, id: id, ReviewId: revId }, function (success) {
+            if (success > 0) {
+                $(".leavecomment").text() = "";
+            }
+            
         });
     }
     else {
