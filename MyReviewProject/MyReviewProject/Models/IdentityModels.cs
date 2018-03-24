@@ -49,8 +49,8 @@ namespace MyReviewProject.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
         }
 
     }

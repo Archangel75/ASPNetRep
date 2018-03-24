@@ -60,7 +60,7 @@ namespace MyReviewProject.Controllers
                             orderby c.CreateTime descending
                             select new CommentsDTO
                             {
-                                Id = c.Id,
+                                Id = c.CommentId,
                                 Comment = c.Content,
                                 Author = new UserDTO
                                 {
@@ -98,7 +98,15 @@ namespace MyReviewProject.Controllers
                     ReviewId = ReviewId
                 };
                 Db.Comments.Add(model);
-                Db.SaveChanges();
+                try
+                {
+                    Db.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    OnException(new ExceptionContext {Exception = ex  });
+                }
+                
                 return Json(new { success }, JsonRequestBehavior.AllowGet);
             }
 
@@ -106,12 +114,12 @@ namespace MyReviewProject.Controllers
         }
 
         [HttpPost]        
-        public async Task<ActionResult> PostLike(int id, int ReviewId)
+        public async Task<ActionResult> PostLike(int id)
         {
             if (id != -1)
             {
                 var query = from c in Db.Comments
-                            where c.Id == id && c.ReviewId == ReviewId
+                            where c.CommentId == id
                             select c;
 
                 var comment = await query.FirstAsync();
