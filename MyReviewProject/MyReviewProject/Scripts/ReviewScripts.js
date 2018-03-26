@@ -24,20 +24,19 @@ $(".submitcomment").click(function () {
 });
 
 $("i").click(function () {
-    var id = $(this).attr('id');
-    $(this).css("color", "var(--errorpagelink)");
-    if ($("i").attr("class") == "fa fa-reply") {
+    var ElemId = $(this).attr('id');    
+    if ($(this).attr("class") == "fa fa-reply") {
         if ($(".leavecomment").html().indexOf("<blockquote>") < 0) {
-            var quote = $("#mydiv" + id).text();
-            var user = $("#box" + id).find("a").text();
+            $(this).css("color", "var(--errorpagelink)");
+            var quote = $("#mydiv" + ElemId).text();
+            var user = $("#box" + ElemId).find("a").text();
             quote = $.parseHTML("<blockquote><a>"+ user + "</a>" + quote + "</blockquote> <br>");
             $(".leavecomment").append(quote);
-            $("#answerto").append(id);
+            $("#answerto").append(ElemId);
         }        
     }
     else {
-        $(this).css("color", "var(--errorpagelink)");
-        $.post("/Review/PostLike", id, function () {
+        $.post("/Review/PostLike", { id: ElemId }, function () {
             $(this).css("color", "var(--errorpagelink)");
         });
     }

@@ -19,6 +19,8 @@ namespace MyReviewProject.Controllers
             UserManager = userManager;
         }
 
+        protected DateTime DefaultDatetime = new DateTime(1753, 01, 01);
+
         private ApplicationDbContext _db;
         public ApplicationDbContext Db
         {

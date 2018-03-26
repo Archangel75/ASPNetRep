@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
+using MyReviewProject.App_Start;
 using MyReviewProject.Controllers;
 using MyReviewProject.Models;
 using System;
@@ -18,7 +19,6 @@ namespace MyReviewProject.Controllers
 {
     public class ReviewController : BaseController
     {
-
         [HttpGet]
         public async Task<ActionResult> Review(int Id)
         {
@@ -92,20 +92,15 @@ namespace MyReviewProject.Controllers
                 {
                     Content = comment,
                     CreateTime = DateTime.Now,
+                    EditTime = DefaultDatetime,
                     ReplyToId = id,
                     AuthorId = user.Id ?? "",
                     Likes = 0,
                     ReviewId = ReviewId
                 };
-                Db.Comments.Add(model);
-                try
-                {
-                    Db.SaveChanges();
-                }
-                catch(Exception ex)
-                {
-                    OnException(new ExceptionContext {Exception = ex  });
-                }
+                Db.Comments.Add(model);                
+                
+                success = await Db.SaveChangesAsync();                
                 
                 return Json(new { success }, JsonRequestBehavior.AllowGet);
             }
@@ -116,19 +111,22 @@ namespace MyReviewProject.Controllers
         [HttpPost]        
         public async Task<ActionResult> PostLike(int id)
         {
+            var success = 0;
             if (id != -1)
             {
                 var query = from c in Db.Comments
                             where c.CommentId == id
                             select c;
-
-                var comment = await query.FirstAsync();
-                comment.Likes++;
-                Db.Entry(comment).State = EntityState.Modified;
-                await Db.SaveChangesAsync();
+                var comment = await query.FirstOrDefaultAsync();
+                if (comment != null)
+                {
+                    comment.Likes++;
+                    Db.Entry(comment).State = EntityState.Modified;
+                    success = await Db.SaveChangesAsync();
+                }
             }            
 
-            return Json(new { }, JsonRequestBehavior.AllowGet);
+            return Json(new { success }, JsonRequestBehavior.AllowGet);
         }
 
 

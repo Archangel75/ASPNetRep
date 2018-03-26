@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using MyReviewProject.App_Start;
 
 namespace MyReviewProject.Models
 {
@@ -43,7 +44,12 @@ namespace MyReviewProject.Models
 
         public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+            ApplicationDbContext Db = new ApplicationDbContext();
+            //Feature to catch queries from Entity.
+#if DEBUG
+            Db.Database.Log = s => DebugTextWriter.Write("EFApp", s);
+#endif
+            return Db;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
