@@ -56,6 +56,10 @@ namespace MyReviewProject.Controllers
             {
                 var query = from c in Db.Comments
                             join u in Db.Users on c.AuthorId equals u.Id
+                            join c2 in Db.Comments on c.ReplyToId equals c2.CommentId into replyCom
+                            from c2 in replyCom.DefaultIfEmpty()
+                            join u2 in Db.Users on c2.AuthorId equals u2.Id into replyUser
+                            from u2 in replyUser.DefaultIfEmpty()
                             where c.ReviewId == ReviewId
                             orderby c.CreateTime descending
                             select new CommentsDTO
@@ -68,7 +72,12 @@ namespace MyReviewProject.Controllers
                                     UserName = u.UserName
                                 },
                                 CreateTime = c.CreateTime,
-                                Likes = c.Likes
+                                Likes = c.Likes,
+                                Reply = c2 != null ? new AnswerDTO
+                                {
+                                    ReplyToId = c2.CommentId,
+                                    UserName = u2.UserName
+                                } : null
                             };
 
                 var commentList = await query.ToListAsync();
@@ -77,10 +86,10 @@ namespace MyReviewProject.Controllers
             return new List<CommentsDTO>();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public async Task<ActionResult> PostComment(string comment, int id, int ReviewId)
         {
-            int success = 1;
+            int success = 0;
             if (comment != "" && ReviewId > 0)
             {
                 ApplicationUser user = null;

@@ -53,6 +53,8 @@ namespace MyReviewProject.Models
         public int ReviewId { get; set; }
 
         public UserDTO Author { get; set; }
+
+        public AnswerDTO Reply { get; set; }
     }
 
     public class UserDTO
@@ -62,6 +64,14 @@ namespace MyReviewProject.Models
         public string Id { get; set; }
         
     }
+
+    public class AnswerDTO
+    {
+        public string UserName { get; set; }
+
+        public int ReplyToId { get; set; }
+    }
+
 
     public class IndexReviewViewModel
     {        

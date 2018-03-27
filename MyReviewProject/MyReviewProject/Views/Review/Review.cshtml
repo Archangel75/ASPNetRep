@@ -7,9 +7,10 @@
     ViewBag.Title = "Review";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+
     <script src='@Url.Content("~/Scripts/jquery-3.3.1.min.js")' type="text/javascript"></script>
     <script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")' type="text/javascript"></script>
-
+    <script src='@Url.Content("~/Scripts/ReviewScripts.js")' type="text/javascript"></script>
     var imgSrc = "";
     if (Model.Image != null)
     {
@@ -98,7 +99,7 @@
             @{Html.RenderPartial("CommentsView");}
         </details>
 
-        @*<script src='@Url.Content("~/Scripts/ReviewScripts.js")' type="text/javascript"></script>*@
+
     </div>
     @*$("#Resultaatsgebied").append(' <li>@Html.TextBoxFor(item => Model.RG1)<ul id="Concretisering" class="subList"><li>@Html.TextBoxFor(item => Model.RG1sub1)</li></ul>@Html.ActionLink("+", "index", null, new { id = "addConcretisering" })</li>'); }
         $("#Resultaatsgebied").append(' <li>@(Html.TextBoxFor(item => Model.RG1))<ul id="Concretisering" class="subList"><li>@(Html.TextBoxFor(item => Model.RG1sub1))</li></ul>@(Html.ActionLink("+", "index", null, new { id = "addConcretisering" }))</li>');*@
