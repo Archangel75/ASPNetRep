@@ -14,7 +14,7 @@ namespace MyReviewProject
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<ReviewContext>(null);
+            Database.SetInitializer<ApplicationDbContext>(null);
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

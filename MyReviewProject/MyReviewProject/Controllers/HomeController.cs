@@ -1,49 +1,51 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.AspNet.Identity;
+using MyReviewProject.Controllers;
 using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using TestForVacancyProject;
 
 namespace MyReviewProject.Controllers
-{   
 
-    public class HomeController : Controller
+{       
+    public class HomeController : BaseController
     {
-        RoundAreaCounter counter = new RoundAreaCounter(5);
-        
-        public ActionResult Index(ApplicationDbContext context)
+        [HttpGet]
+        public async Task<ActionResult> Index()
         {
-            var a = counter.Area();
-            ViewBag.Area = a;
+            var query = from r in Db.Reviews
+                        join u in Db.Users on r.AuthorId equals u.Id into lj
+                        from u in lj.DefaultIfEmpty()
+                        join s in Db.Subjects on r.SubjectId equals s.SubjectId
+                        orderby r.DateCreate descending
+                        select new CustomReviewDTO
+                        {
+                            ReviewId = r.ReviewId,
+                            Content = r.Content,
+                            Dislike = r.Dislike,
+                            Exp = r.Exp,
+                            Like = r.Like,
+                            Rating = r.Rating,
+                            Image = r.Image,
+                            Recommend = r.Recommend,
+                            Username = u.UserName,
+                            Subjectname = s.Name
+                        };
 
+            var reviews = await query.ToListAsync();
+            var content = new IndexReviewViewModel
+            {
+                Reviews = reviews
+            };
 
-            var users = context.Users.ToList();
-            
-            ViewBag.users = context.Users.ToList();
-            return View();
-        }
-
-        [Authorize(Roles = "Users")]
-        public ActionResult OtherAction()
-        {
-            return View("Index", GetData("OtherAction"));
-        }
-
-        private Dictionary<string, object> GetData(string actionName)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-
-            dict.Add("Action", actionName);
-            dict.Add("Пользователь", HttpContext.User.Identity.Name);
-            dict.Add("Аутентифицирован?", HttpContext.User.Identity.IsAuthenticated);
-            dict.Add("Тип аутентификации", HttpContext.User.Identity.AuthenticationType);
-            dict.Add("В роли Users?", HttpContext.User.IsInRole("Users"));
-
-            return dict;
+            return View(content);
         }
     }
 }

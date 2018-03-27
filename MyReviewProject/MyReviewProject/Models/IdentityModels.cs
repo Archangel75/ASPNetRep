@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using MyReviewProject.App_Start;
 
 namespace MyReviewProject.Models
 {
@@ -26,11 +29,35 @@ namespace MyReviewProject.Models
         public ApplicationDbContext()
             : base("ReviewContext", throwIfV1Schema: false)
         {
+
         }
+
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<Subject> Subjects { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<SubCategory> SubCategories { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
 
         public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+            ApplicationDbContext Db = new ApplicationDbContext();
+            //Feature to catch queries from Entity.
+#if DEBUG
+            Db.Database.Log = s => DebugTextWriter.Write("EFApp", s);
+#endif
+            return Db;
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        }
+
     }
 }

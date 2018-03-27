@@ -1,14 +1,18 @@
+@import "Colors.css";
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+
+
 .sidebar {
-	width:20%;
-	height:100%;
-	position:fixed;
+    width: 20%;
+    height: 100%;
+    position: absolute;
     padding: 20px;
-	margin:84px 5px 0px 5px;	
-    max-width:230px;
-  border: 5px solid #f1f1f1;
-  background: #fff;
-  border-radius: 5px;
+    margin: 84px 5px 0px 5px;
+    max-width: 230px;
+    border: 5px solid var(--nocolor);
+    background: var(--darkgray);
+    border-radius: 5px;
+    box-shadow: 5px 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .sidebar h3 {
@@ -16,17 +20,38 @@
   text-align: center;
   font-size: 24px;
   font-weight: normal;
-  color:  #424949;
+  color:  var(--text);
 }
+
 .sidebar ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  width: 250px;
+  width: 100%;
 }
 .sidebar li {
-  padding-bottom: 15px;
+  padding-bottom: 7px;
+  padding-top:7px;
 }
+
+/*#sidebar li {
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+#sidebar li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}*/
+
 .sidebar li:last-child {
   border-bottom: none;
   margin-bottom: 0;
@@ -38,23 +63,36 @@
     font-family: 'Ubuntu Condensed', sans-serif;
     letter-spacing: 2px;
     position: relative;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    padding-top:10px;
     margin: 0 34px 0 30px;
     font-size: 17px;
     text-transform: uppercase;
     display: inline-block;
-    transition: color .2s;
+    transition: color .1s;
 }
 
 .sidebar a, .sidebar a:visited {
-  color: #9d999d;
+  color: var(--text);
 }
 
-.sidebar a.current, .sidebar a:hover {
-   color: #feb386;
+.sidebar a:hover {
+  color: var(--hovertext);
 }
 
-.sidebar a:before,
+.sidebar hr {
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
+    height: 1px;
+    background-color: var(--brhardtonotice);
+}
+
+/*.sidebar a.current, .sidebar a:hover {
+   color:  var(--hovertext);
+}*/
+
+/*.sidebar a:before,
 .sidebar a:after {
            content: "";
             position: absolute;
@@ -63,8 +101,8 @@
             right: 50%;
             bottom: -5px;
             left: 50%;
-            background: #feb386;
-            transition: .8s;
+            background: var(--hovertext);
+            transition: .3s;
         }
 
 .sidebar a:hover:before, .sidebar .current:before {
@@ -73,7 +111,8 @@
 
 .sidebar a:hover:after, .sidebar .current:after {
     right: 0;
-}  
+}*/  
+
 .sidebar li:before {
   font-family: FontAwesome;
   font-size: 20px;

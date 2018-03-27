@@ -13,7 +13,17 @@ namespace MyReviewProject.Models
 
         public int SubCategoryId { get; set; }
 
-        public int AverageRating { get; set; }
+        private double _averageRating;
+        public double AverageRating {
+            get { return _averageRating; }
+            set
+            {
+                if (value < 1 || value > 5)
+                    value = 4;
+                _averageRating = value;
+
+            }
+        }
 
 
     }

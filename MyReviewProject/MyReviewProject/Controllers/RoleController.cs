@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using MyReviewProject.Controllers;
 using MyReviewProject.Models;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,8 @@ using System.Web.Mvc;
 
 namespace MyReviewProject.Controllers
 {
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
-
-        private ApplicationUserManager _userManager;
-
         private ApplicationRoleManager RoleManager
         {
             get
@@ -22,15 +20,6 @@ namespace MyReviewProject.Controllers
                 return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             }
         }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
-
         public ActionResult Index()
         {
             
@@ -53,7 +42,6 @@ namespace MyReviewProject.Controllers
 
             return View(RoleManager.Roles);
         }
-
         
         public ActionResult Create()
         {
