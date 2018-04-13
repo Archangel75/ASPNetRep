@@ -24,5 +24,7 @@ namespace MyReviewProject.Models
         public int Likes { get; set; }
 
         public int ReviewId { get; set; }
-    }
+
+        public string UserLiked { get; set; }
+    }    
 }

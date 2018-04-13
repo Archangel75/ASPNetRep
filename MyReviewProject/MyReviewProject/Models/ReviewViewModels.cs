@@ -55,6 +55,8 @@ namespace MyReviewProject.Models
         public UserDTO Author { get; set; }
 
         public AnswerDTO Reply { get; set; }
+
+        public bool Liked { get; set; }
     }
 
     public class UserDTO

@@ -41,8 +41,17 @@ $("i").click(function () {
         }        
     }
     else {
-        $.post("/Review/PostLike", { id: ElemId }, function () {
+        var id = "isLiked" + ElemId.toString()
+        var isLiked = $("#" + id).val()
+        if (!isLiked) {
             $(this).css("color", "var(--errorpagelink)");
-        });
+            $.post("/Review/PostLike", { id: ElemId }, function (success) {
+            });
+        }
+        else {
+            $(this).css("color", "var(--darkazure)");
+            $.post("/Review/RemoveLike", { id: ElemId }, function (success) {
+            });
+        }
     }
 });

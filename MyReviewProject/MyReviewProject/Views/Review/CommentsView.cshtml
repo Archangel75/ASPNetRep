@@ -2,73 +2,14 @@
 
 
 <div class="comments-container">
-    @*<h1>Comentarios <a href="http://creaticode.com">creaticode.com</a></h1>*@    
-    <ul id="comments-list" class="comments-list">
-        @*<li>
-            <div class="comment-main-level">
-                <div class="comment-box">
-                    <div class="comment-head">
-                        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                        <span>hace 20 minutos</span>
-                        <i class="fa fa-reply"></i>
-                        <i class="fa fa-heart"></i>
-                    </div>
-                    <div class="comment-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="comment-main-level">
-                <div class="comment-box">
-                    <div class="comment-head">
-                        <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                        <span>hace 10 minutos</span>
-                        <i class="fa fa-reply"></i>
-                        <i class="fa fa-heart"></i>
-                    </div>
-                    <div class="comment-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="comment-main-level">
-                <div class="comment-box">
-                    <div class="comment-head">
-                        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                        <span>hace 10 minutos</span>
-                        <i class="fa fa-reply"></i>
-                        <i class="fa fa-heart"></i>
-                    </div>
-                    <div class="comment-content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="comment-main-level">
-                <div class="comment-box" id="box4">
-                    <div class="comment-head">
-                        <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                        <span>hace 10 minutos</span>
-                        <i class="fa fa-reply" id="4"></i>
-                        <i class="fa fa-heart" id="4"></i>
-                    </div>
-                    <div class="comment-content" id="mydiv4">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                    </div>
-                </div>
-            </div>
-        </li>*@
+    <ul id="comments-list" class="comments-list">       
 
        @foreach (var comment in Model.Comments)
        {
+           var theid = "isLiked" + @comment.Id;
            var boxid = "box" + @comment.Id;
            var mydivId = "mydiv" + @comment.Id;
+           var isLiked = @comment.Liked;
         <li>
             <div class="comment-main-level">
                 <div class="comment-box" id="@boxid">
@@ -78,12 +19,20 @@
                             Posted at: @comment.CreateTime
                         </span>
                         @if (comment.Reply != null)
-                        {
-                            <span>  Answer to: <a href="/Review/Review/@Model.ReviewId#@comment.Reply.ReplyToId">@comment.Reply.UserName</a></span>
-                        }
+    {
+                    <span>  Answer to: <a href="/Review/Review/@Model.ReviewId#@comment.Reply.ReplyToId">@comment.Reply.UserName</a></span>
+}
 
                         <i class="fa fa-reply" id=@comment.Id></i>
-                        <i class="fa fa-heart" id=@comment.Id>@comment.Likes</i>
+                        @if (isLiked)
+                        {
+                    <input type="hidden" name="Liked" id="@theid"+@theid value=@isLiked />
+                    <i class="fa fa-heart" id=@comment.Id style="color:var(--errorpagelink)">@comment.Likes</i>
+}
+else
+{
+                    <i class="fa fa-heart" id=@comment.Id>@comment.Likes</i>
+}
                     </div>
                     <div class="comment-content" id="@mydivId">
                         @comment.Comment

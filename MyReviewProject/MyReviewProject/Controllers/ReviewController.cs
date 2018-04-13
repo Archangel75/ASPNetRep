@@ -54,6 +54,14 @@ namespace MyReviewProject.Controllers
         {
             if (ReviewId > -1)
             {
+                ApplicationUser user = null;
+                var userId = "";
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    user = await UserManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                    userId = user.Id;
+                }
+
                 var query = from c in Db.Comments
                             join u in Db.Users on c.AuthorId equals u.Id
                             join c2 in Db.Comments on c.ReplyToId equals c2.CommentId into replyCom
@@ -77,7 +85,8 @@ namespace MyReviewProject.Controllers
                                 {
                                     ReplyToId = c2.CommentId,
                                     UserName = u2.UserName
-                                } : null
+                                } : null,
+                                Liked = userId != null && !String.IsNullOrEmpty(userId) ? c.UserLiked != null && !String.IsNullOrEmpty(c.UserLiked) ?  c.UserLiked.Contains(userId) ? true : false : false : false
                             };
 
                 var commentList = await query.ToListAsync();
@@ -123,6 +132,18 @@ namespace MyReviewProject.Controllers
             var success = 0;
             if (id != -1)
             {
+                ApplicationUser user = null;
+                var userId = "";
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    user = await UserManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                    userId = user.Id + ",";
+                }
+                if (userId == "")
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
                 var query = from c in Db.Comments
                             where c.CommentId == id
                             select c;
@@ -130,11 +151,62 @@ namespace MyReviewProject.Controllers
                 if (comment != null)
                 {
                     comment.Likes++;
+                    
+                    if (!String.IsNullOrEmpty(comment.UserLiked))
+                    {
+                        if (!comment.UserLiked.Contains(user.Id))
+                            comment.UserLiked += userId;
+                    }
+                    else
+                    {
+                        comment.UserLiked = userId;
+                    }
+                        
                     Db.Entry(comment).State = EntityState.Modified;
-                    success = await Db.SaveChangesAsync();
                 }
-            }            
+            }
+            
+            success = await Db.SaveChangesAsync();
 
+            return Json(new { success }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RemoveLike(int id)
+        {
+            var success = 0;
+            if (id != -1)
+            {
+                ApplicationUser user = null;
+                var userId = "";
+                if (HttpContext.User.Identity.IsAuthenticated)
+                {
+                    user = await UserManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                    userId = user.Id + ",";
+                }
+                if (userId == "")
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                var query = from c in Db.Comments
+                            where c.CommentId == id
+                            select c;
+                var comment = await query.FirstOrDefaultAsync();
+                if (comment != null)
+                {
+                    comment.Likes--;
+                    if (!String.IsNullOrEmpty(comment.UserLiked))
+                    {
+                        if (comment.UserLiked.Contains(userId))
+                        {
+                            comment.UserLiked = comment.UserLiked.Remove(comment.UserLiked.IndexOf(userId), userId.Length);
+                        }                            
+                    }
+                    Db.Entry(comment).State = EntityState.Modified;
+                }
+            }
+            success = await Db.SaveChangesAsync();
             return Json(new { success }, JsonRequestBehavior.AllowGet);
         }
 
