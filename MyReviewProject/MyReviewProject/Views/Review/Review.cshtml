@@ -1,7 +1,5 @@
 ﻿@model MyReviewProject.Models.ShowReviewViewModel
 @using MyReviewProject.Models
-
-@Styles.Render("~/Content/ReviewPage.css")
 @{
 
     ViewBag.Title = "Review";
@@ -101,7 +99,6 @@
 
 
     </div>
-    @*$("#Resultaatsgebied").append(' <li>@Html.TextBoxFor(item => Model.RG1)<ul id="Concretisering" class="subList"><li>@Html.TextBoxFor(item => Model.RG1sub1)</li></ul>@Html.ActionLink("+", "index", null, new { id = "addConcretisering" })</li>'); }
-        $("#Resultaatsgebied").append(' <li>@(Html.TextBoxFor(item => Model.RG1))<ul id="Concretisering" class="subList"><li>@(Html.TextBoxFor(item => Model.RG1sub1))</li></ul>@(Html.ActionLink("+", "index", null, new { id = "addConcretisering" }))</li>');*@
-
+    @Styles.Render("~/Content/ReviewPage.css")
 </body>
+

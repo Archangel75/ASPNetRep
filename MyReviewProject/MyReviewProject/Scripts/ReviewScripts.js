@@ -1,11 +1,17 @@
 ﻿$(document).ready(function () {
 });
 
-function unescapedHTML(id, escapedHTML) {
-    var a = escapedHTML.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-    a = $.parseHTML(a);
-    return $("#" + id).html(a);
+window.onload = function () {
+    $(".comment-content").each(function () {
+        if (this.id != "undefined" && this.id != "") {
+            var id = this.id;
+            var text = $("#" + id).text();
+            var parsedtext = $.parseHTML(text);
+            $("#" + id).html(parsedtext);
+        }
+    });
 }
+
 
 $(".submitcomment").click(function () {
     var comment = $(".leavecomment").html();
@@ -28,17 +34,17 @@ $(".submitcomment").click(function () {
 });
 
 $("i").click(function () {
-    var ElemId = $(this).attr('id');    
+    var ElemId = $(this).attr('id');
     if ($(this).attr("class") == "fa fa-reply") {
         if ($(".leavecomment").html().indexOf("<blockquote>") < 0) {
             $(this).css("color", "var(--errorpagelink)");
             var quote = $("#mydiv" + ElemId).text();
             var user = $("#box" + ElemId).find("a").text();
-            quote = $.parseHTML("<blockquote><a>" + user + "</a>" + quote + "</blockquote> <br>");
-            $("#answerto").append(ElemId);            
+            quote = $.parseHTML("<div class='blockquote' id='quote" + ElemId + "'><a>" + user + "</a>" + quote + "</div> <br>");
+            $("#answerto").append(ElemId);
             $(".leavecomment").append(quote);
-            $(".leavecomment").append("<br>");          
-        }        
+            $(".leavecomment").append("<br>");
+        }
     }
     else {
         var id = "isLiked" + ElemId.toString()
