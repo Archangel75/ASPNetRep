@@ -421,8 +421,10 @@
     <Content Include="Content\Images\background-site.jpg" />
     <Content Include="Content\Images\check.jpg" />
     <Content Include="Content\Images\login.jpg" />
+    <Content Include="Content\Images\logo.jpg" />
     <Content Include="Content\Images\Menu-512.png" />
     <Content Include="Content\Images\nocheck.jpg" />
+    <Content Include="Content\Images\search.png" />
     <Content Include="Content\Images\stars.png" />
     <Content Include="Content\Images\test\862478.jpg" />
     <Content Include="Content\Images\test\mercy_overwatch_fan_art.jpg" />

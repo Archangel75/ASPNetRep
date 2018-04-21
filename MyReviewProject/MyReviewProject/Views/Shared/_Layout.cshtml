@@ -19,7 +19,15 @@
         </ul>
     </div>
     <div class="menu-cat">
-        <div class="dropmenudown">
+        <div class="logo">
+            <a href="~/Home/Index"></a>
+        </div>
+
+        <div class="search">
+            <input type="search" />
+            <a href=""></a>
+        </div>
+        @*<div class="dropmenudown">
             <button onclick="myFunction()" class="dropmenubtn"></button>
             <div id="myDropdown" class="dropmenudown-content">
                 <a href="#home">Boopers</a>
@@ -28,7 +36,7 @@
                 <a href="#contact">Contacts</a>
 
             </div>
-        </div>
+        </div>*@
 
         <div class="login">
             @if (Request.IsAuthenticated)
